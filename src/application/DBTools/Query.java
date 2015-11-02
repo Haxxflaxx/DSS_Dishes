@@ -1,4 +1,4 @@
-package application.DBTools;
+package application.dbTools;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
