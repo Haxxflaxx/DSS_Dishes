@@ -41,13 +41,17 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader();
 
         Pane mainPane = (Pane) loader.load(
-                getClass().getResourceAsStream("/application/view/mainView.fxml")
+                getClass().getResourceAsStream(
+                        VistaNavigator.MAIN
+                )
         );
 
         MainController mainController = loader.getController();
 
         VistaNavigator.setMainController(mainController);
-        VistaNavigator.loadVista("/application/view/welcomeVista.fxml");
+        VistaNavigator.loadVista(
+                VistaNavigator.WELCOME
+        );
 
         return mainPane;
     }
