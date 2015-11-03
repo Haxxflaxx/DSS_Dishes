@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Connection {
 
     /**
-     * Opens SQLite connection to cookbook.db
+     * Opens SQLite connection to Dishes.db
      * @return c SQLite connection
      */
     private static java.sql.Connection open()
@@ -20,7 +20,7 @@ public class Connection {
         java.sql.Connection c = null;
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:cookbook.db");
+            c = DriverManager.getConnection("jdbc:sqlite:Dishes.db");
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
