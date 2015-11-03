@@ -23,11 +23,15 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         updateRecipList();
+        recipList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            VistaNavigator.loadVista(
+                    VistaNavigator.RECIPE
+            );
+        });
     }
 
     /** Holder of a switchable vista. */
-    @FXML
-    private StackPane vistaHolder;
+    @FXML private StackPane vistaHolder;
 
     /**
      * Replaces the vista displayed in the vista holder with a new vista.
@@ -39,8 +43,7 @@ public class MainController implements Initializable {
     }
 
     /** List holding the recipe names from the DB. */
-    @FXML
-    private ListView recipList;
+    @FXML protected ListView recipList;
 
     public void updateRecipList(){
         ArrayList<ArrayList<String>> dataSet;
@@ -56,6 +59,12 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
         recipList.setItems(itemList);
+    }
+
+    public void openWelcome(){
+        VistaNavigator.loadVista(
+                VistaNavigator.WELCOME
+        );
     }
 
 

@@ -37,6 +37,15 @@ public class VistaNavigator {
     }
 
     /**
+     * Returns the main controller.
+     *
+     * @return MainController the main application layout controller.
+     */
+    public static MainController getMainController(){
+        return mainController;
+    }
+
+    /**
      * Loads the vista specified by the fxml file into the
      * vistaHolder pane of the main application layout.
      *
