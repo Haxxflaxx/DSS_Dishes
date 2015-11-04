@@ -3,22 +3,27 @@ package application.controller;
 import application.dbTools.Query;
 import javafx.fxml.FXML;
 
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 /**
  * Created by haxxflaxx on 2015-11-03.
  */
-public class RecipeController {
+public class RecipeController implements Initializable {
+
+
 
     MainController mainController;
 
 
-    @FXML    private Label recipeID;
+    @FXML    public  Label recipeID;
     @FXML    private Label recipeName;
     @FXML    private Label recipeType;
     @FXML    private Label recipeCuisine;
@@ -36,22 +41,34 @@ public class RecipeController {
      * Get controller for main view.
      * Run update.
      */
-    public RecipeController(){
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         mainController = VistaNavigator.getMainController();
         updateContent();
     }
+
 
     /**
      * Fetches data from the database based on selected item in
      * MainController.recipList and puts the data into the fields for the view.
      */
     private void updateContent(){
-        String condition = "'Name=" + mainController.recipList.getSelectionModel().getSelectedItems() + "'";
+        ArrayList<ArrayList<String>> dataSet;
+        String recipeChoice = mainController.recipList.getSelectionModel().getSelectedItems().toString();
+
+        recipeChoice = recipeChoice.substring(1, recipeChoice.length() - 1);
+
+        String condition = "Name= '" + recipeChoice + "'";
+        System.out.println(condition);
+
         try {
-            ArrayList<ArrayList<String>> dataSet = Query.fetchData("recipes", "*", condition);
+            dataSet = Query.fetchData("recipes", "*", condition);
 
             System.out.println(mainController.recipList.getSelectionModel().getSelectedItems().toString());
             //TODO: Move data from dataSet into view fields
+            System.out.println(dataSet.get(0).get(1));
+
             recipeID.setText(dataSet.get(0).get(0));
             recipeName.setText(dataSet.get(0).get(1));
             recipeType.setText(dataSet.get(0).get(2));
@@ -60,6 +77,7 @@ public class RecipeController {
             recipeTIme.setText(dataSet.get(0).get(7));
             recipeDiet.setText(dataSet.get(0).get(6));
             recipeDescription.setText(dataSet.get(0).get(9));
+
             //recipeIngredients.setAccessibleText(dataSet.get(0).get(0));
 
 
