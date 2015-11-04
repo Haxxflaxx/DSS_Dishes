@@ -41,7 +41,7 @@ public class Connection {
 
     /**
      * Executes update to the DB.
-     * @param sql application.DBTools.Query to be run in the update.
+     * @param sql application.dbTools.Query to be run in the update.
      * @exception SQLException if a database access error occurs.
      */
     public static void runUpdate(String sql) throws SQLException {
