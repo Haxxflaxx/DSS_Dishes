@@ -3,7 +3,10 @@ package application.controller;
 import application.dbTools.Query;
 import javafx.fxml.FXML;
 
-import java.awt.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -15,14 +18,15 @@ public class RecipeController {
     MainController mainController;
 
 
-@FXML    public  Label recipeID;
-@FXML    private Label recipeName;
-@FXML    private Label recipeType;
-@FXML    private Label recipeCuisine;
-@FXML    private Label recipeDifficulty;
-@FXML    private Label recipeTIme;
-@FXML    private Label recipeDiet;
-
+    @FXML    private Label recipeID;
+    @FXML    private Label recipeName;
+    @FXML    private Label recipeType;
+    @FXML    private Label recipeCuisine;
+    @FXML    private Label recipeDifficulty;
+    @FXML    private Label recipeTIme;
+    @FXML    private Label recipeDiet;
+    @FXML    private TextArea recipeDescription;
+    @FXML    private ListView recipeIngredients;
 
 
     //TODO: Add control id for items in view.
@@ -55,6 +59,8 @@ public class RecipeController {
             recipeDifficulty.setText(dataSet.get(4).get(4));
             recipeTIme.setText(dataSet.get(7).get(7));
             recipeDiet.setText(dataSet.get(6).get(6));
+            recipeDescription.setText(dataSet.get(9).get(9));
+            //recipeIngredients.setAccessibleText(dataSet.get(0).get(0));
 
 
         } catch (SQLException e) {
