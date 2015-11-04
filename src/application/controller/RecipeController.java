@@ -1,7 +1,9 @@
 package application.controller;
 
 import application.dbTools.Query;
+import javafx.fxml.FXML;
 
+import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -11,6 +13,18 @@ import java.util.ArrayList;
 public class RecipeController {
 
     MainController mainController;
+
+
+@FXML    public Label recipeID;
+@FXML    public Label recipeName;
+@FXML    public Label recipeType;
+@FXML    public Label recipeCuisine;
+@FXML    public Label recipeDifficulty;
+@FXML    public Label recipeTIme;
+@FXML    public Label recipeDiet;
+
+
+
     //TODO: Add control id for items in view.
 
     /**

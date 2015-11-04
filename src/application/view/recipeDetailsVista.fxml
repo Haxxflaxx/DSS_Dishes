@@ -52,9 +52,9 @@
             </HBox>
             <HBox spacing="10.0">
                <children>
-                  <Label text="Complexity" />
+                  <Label text="Difficulty" />
                   <Region HBox.hgrow="ALWAYS" />
-                  <Label fx:id="recipeComplexity" text="#" />
+                  <Label fx:id="recipeDifficulty" text="#" />
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
