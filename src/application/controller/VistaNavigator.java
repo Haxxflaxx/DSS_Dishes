@@ -65,6 +65,7 @@ public class VistaNavigator {
     public static void loadVista(String fxml) {
         try {
             mainController.setVista(
+
                     FXMLLoader.load(
                             VistaNavigator.class.getResource(
                                     fxml
