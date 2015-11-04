@@ -53,13 +53,13 @@ public class RecipeController {
             System.out.println(mainController.recipList.getSelectionModel().getSelectedItems().toString());
             //TODO: Move data from dataSet into view fields
             recipeID.setText(dataSet.get(0).get(0));
-            recipeName.setText(dataSet.get(1).get(1));
-            recipeType.setText(dataSet.get(2).get(2));
-            recipeCuisine.setText(dataSet.get(3).get(3));
-            recipeDifficulty.setText(dataSet.get(4).get(4));
-            recipeTIme.setText(dataSet.get(7).get(7));
-            recipeDiet.setText(dataSet.get(6).get(6));
-            recipeDescription.setText(dataSet.get(9).get(9));
+            recipeName.setText(dataSet.get(0).get(1));
+            recipeType.setText(dataSet.get(0).get(2));
+            recipeCuisine.setText(dataSet.get(0).get(3));
+            recipeDifficulty.setText(dataSet.get(0).get(4));
+            recipeTIme.setText(dataSet.get(0).get(7));
+            recipeDiet.setText(dataSet.get(0).get(6));
+            recipeDescription.setText(dataSet.get(0).get(9));
             //recipeIngredients.setAccessibleText(dataSet.get(0).get(0));
 
 
