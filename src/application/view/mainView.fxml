@@ -43,17 +43,10 @@
             <HBox>
                <children>
                   <TextField fx:id="recipSearch" HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" text="Search" />
+                  <Button mnemonicParsing="false" onAction="#search" text="Search" />
                </children>
             </HBox>
             <ListView fx:id="recipList" VBox.vgrow="ALWAYS" />
-            <HBox>
-               <children>
-                  <Region HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" text="Add" />
-                  <Button mnemonicParsing="false" text="Del" />
-               </children>
-            </HBox>
          </children>
       </VBox>
    </left>

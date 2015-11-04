@@ -17,6 +17,13 @@ import java.io.IOException;
  */
 public class VistaNavigator {
 
+    /**
+     * Constants holding path and name for views.
+     */
+    public static final String MAIN = "/application/view/mainView.fxml";
+    public static final String RECIPE = "/application/view/recipeDetailsVista.fxml";
+    public static final String WELCOME = "/application/view/welcomeVista.fxml";
+
     /** The main application layout controller. */
     private static MainController mainController;
 
@@ -27,6 +34,15 @@ public class VistaNavigator {
      */
     public static void setMainController(MainController mainController) {
         VistaNavigator.mainController = mainController;
+    }
+
+    /**
+     * Returns the main controller.
+     *
+     * @return MainController the main application layout controller.
+     */
+    public static MainController getMainController(){
+        return mainController;
     }
 
     /**
