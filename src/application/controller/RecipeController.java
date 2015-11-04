@@ -16,7 +16,7 @@ public class RecipeController {
     MainController mainController;
 
 
-@FXML    public  Label recipeID;
+@FXML    private  Label recipeID;
 @FXML    private Label recipeName;
 @FXML    private Label recipeType;
 @FXML    private Label recipeCuisine;
