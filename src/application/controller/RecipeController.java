@@ -3,7 +3,8 @@ package application.controller;
 import application.dbTools.Query;
 import javafx.fxml.FXML;
 
-import java.awt.*;
+import javafx.scene.control.Label;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
