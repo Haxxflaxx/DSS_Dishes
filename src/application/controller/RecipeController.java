@@ -15,13 +15,13 @@ public class RecipeController {
     MainController mainController;
 
 
-@FXML    public Label recipeID;
-@FXML    public Label recipeName;
-@FXML    public Label recipeType;
-@FXML    public Label recipeCuisine;
-@FXML    public Label recipeDifficulty;
-@FXML    public Label recipeTIme;
-@FXML    public Label recipeDiet;
+@FXML    private Label recipeID;
+@FXML    private Label recipeName;
+@FXML    private Label recipeType;
+@FXML    private Label recipeCuisine;
+@FXML    private Label recipeDifficulty;
+@FXML    private Label recipeTIme;
+@FXML    private Label recipeDiet;
 
 
 
@@ -48,6 +48,14 @@ public class RecipeController {
 
             System.out.println(mainController.recipList.getSelectionModel().getSelectedItems().toString());
             //TODO: Move data from dataSet into view fields
+            recipeID.setText(dataSet.get(0).get(0));
+            recipeName.setText(dataSet.get(1).get(1));
+            recipeType.setText(dataSet.get(2).get(2));
+            recipeCuisine.setText(dataSet.get(3).get(3));
+            recipeDifficulty.setText(dataSet.get(4).get(4));
+            recipeTIme.setText(dataSet.get(7).get(7));
+            recipeDiet.setText(dataSet.get(6).get(6));
+
 
         } catch (SQLException e) {
             e.printStackTrace();
