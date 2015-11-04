@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
@@ -12,26 +13,27 @@
          <children>
             <VBox>
                <children>
-                  <HBox spacing="10.0">
+                  <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="ID" />
-                        <Region HBox.hgrow="ALWAYS" />
-                        <Label fx:id="recipeID" text="#" />
+                        <Label fx:id="recipeName" text="Name">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="95.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                      </children>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
                   </HBox>
-                  <HBox spacing="10.0">
-                     <children>
-                        <Label text="Name" />
-                        <Region HBox.hgrow="ALWAYS" />
-                        <Label fx:id="recipeName" text="#" />
-                     </children>
-                     <padding>
+                  <TextArea fx:id="recipeDescription" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </HBox>
+                     </VBox.margin>
+                  </TextArea>
+               </children>
+            </VBox>
+            <VBox>
+               <children>
                   <HBox spacing="10.0">
                      <children>
                         <Label text="Type" />
@@ -85,7 +87,6 @@
                   <ListView fx:id="recipeIngredients" />
                </children>
             </VBox>
-            <TextArea fx:id="recipeDescription" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
    </children>

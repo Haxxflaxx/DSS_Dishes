@@ -23,7 +23,7 @@ public class RecipeController implements Initializable {
     MainController mainController;
 
 
-    @FXML    public  Label recipeID;
+    @FXML    private Label recipeID;
     @FXML    private Label recipeName;
     @FXML    private Label recipeType;
     @FXML    private Label recipeCuisine;
@@ -31,7 +31,7 @@ public class RecipeController implements Initializable {
     @FXML    private Label recipeTIme;
     @FXML    private Label recipeDiet;
     @FXML    private TextArea recipeDescription;
-    @FXML    private ListView recipeIngredients;
+    //@FXML    private ListView recipeIngredients;
 
 
     //TODO: Add control id for items in view.
@@ -69,7 +69,7 @@ public class RecipeController implements Initializable {
             //TODO: Move data from dataSet into view fields
             System.out.println(dataSet.get(0).get(1));
 
-            recipeID.setText(dataSet.get(0).get(0));
+           // recipeID.setText(dataSet.get(0).get(0));
             recipeName.setText(dataSet.get(0).get(1));
             recipeType.setText(dataSet.get(0).get(2));
             recipeCuisine.setText(dataSet.get(0).get(3));
