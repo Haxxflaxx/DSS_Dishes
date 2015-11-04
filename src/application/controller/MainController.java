@@ -102,6 +102,12 @@ public class MainController implements Initializable {
         updateRecipList(recipSearch.getText());
     }
 
+    public void openAdvSearch(){
+        VistaNavigator.loadVista(
+                VistaNavigator.SEARCH
+        );
+    }
+
 
 }
 
