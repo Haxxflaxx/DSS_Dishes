@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.ListView;
@@ -21,6 +22,7 @@ import java.util.ResourceBundle;
  */
 public class MainController implements Initializable {
 
+    @FXML    private Button recipeAdd;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         updateRecipList();
