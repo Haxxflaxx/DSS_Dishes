@@ -77,7 +77,7 @@ public class MainController implements Initializable {
     public void updateRecipList(String search){
         ArrayList<ArrayList<String>> dataSet;
         ObservableList<String> itemList = FXCollections.observableArrayList();
-        String condition = "Name LIKE '" + search + "%'";
+        String condition = "Name LIKE '" +"%" + search + "%'";
         System.out.println(condition);
 
         try {

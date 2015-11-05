@@ -1,6 +1,8 @@
 package application.controller;
 
 import application.dbTools.Query;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
 import javafx.fxml.Initializable;
@@ -18,12 +20,10 @@ import java.util.ResourceBundle;
  */
 public class RecipeController implements Initializable {
 
-
-
     MainController mainController;
+    private String recipeID;
 
 
-    @FXML    private Label recipeID;
     @FXML    private Label recipeName;
     @FXML    private Label recipeType;
     @FXML    private Label recipeCuisine;
@@ -31,7 +31,7 @@ public class RecipeController implements Initializable {
     @FXML    private Label recipeTIme;
     @FXML    private Label recipeDiet;
     @FXML    private TextArea recipeDescription;
-    //@FXML    private ListView recipeIngredients;
+    @FXML    private ListView recipeIngredients;
 
 
     //TODO: Add control id for items in view.
@@ -46,6 +46,7 @@ public class RecipeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         mainController = VistaNavigator.getMainController();
         updateContent();
+        updateIngredientList();
     }
 
 
@@ -57,10 +58,12 @@ public class RecipeController implements Initializable {
         ArrayList<ArrayList<String>> dataSet;
         String recipeChoice = mainController.recipList.getSelectionModel().getSelectedItems().toString();
 
+
         recipeChoice = recipeChoice.substring(1, recipeChoice.length() - 1);
 
         String condition = "Name= '" + recipeChoice + "'";
         System.out.println(condition);
+        recipeChoice = mainController.recipList.getSelectionModel().getSelectedItems().toString();
 
         try {
             dataSet = Query.fetchData("recipes", "*", condition);
@@ -69,7 +72,7 @@ public class RecipeController implements Initializable {
             //TODO: Move data from dataSet into view fields
             System.out.println(dataSet.get(0).get(1));
 
-           // recipeID.setText(dataSet.get(0).get(0));
+            recipeID = dataSet.get(0).get(0);
             recipeName.setText(dataSet.get(0).get(1));
             recipeType.setText(dataSet.get(0).get(2));
             recipeCuisine.setText(dataSet.get(0).get(3));
@@ -78,11 +81,26 @@ public class RecipeController implements Initializable {
             recipeDiet.setText(dataSet.get(0).get(6));
             recipeDescription.setText(dataSet.get(0).get(9));
 
-            //recipeIngredients.setAccessibleText(dataSet.get(0).get(0));
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private void updateIngredientList() {
+        ArrayList<ArrayList<String>> dataSet;
+        String condition = "RUI.IID = ingredients.ID AND RID = '" + recipeID + "'";
+        ObservableList<String> itemList = FXCollections.observableArrayList();
+
+        try {
+            dataSet = Query.fetchData("RUI, ingredients", "Name, Quantity, Unit", condition);
+
+            for (ArrayList<String> element : dataSet){
+                itemList.add(element.get(0)+ "  " + element.get(1)+ "  " + element.get(2));
+                }
+            recipeIngredients.setItems(itemList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
