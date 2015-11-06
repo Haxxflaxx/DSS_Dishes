@@ -51,6 +51,10 @@ public class MainController implements Initializable {
         vistaHolder.getChildren().setAll(node);
     }
 
+    public String getSearch(){
+        return recipSearch.getText();
+    }
+
 
     /**
      * Loads the name of all recipes and puts them into recipList.
@@ -98,15 +102,11 @@ public class MainController implements Initializable {
      * Run search recipe based on name.
      */
     public void search(){
-        System.out.println(recipSearch.getText());
-        updateRecipList(recipSearch.getText());
-    }
-
-    public void openAdvSearch(){
         VistaNavigator.loadVista(
                 VistaNavigator.SEARCH
         );
     }
+
 
 
 }
