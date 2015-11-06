@@ -42,6 +42,9 @@ public class MainController implements Initializable {
     /** Field for entering search criteria. */
     @FXML private TextField recipSearch;
 
+    /** Holder of Login view */
+    @FXML private StackPane loginHolder;
+
     /**
      * Replaces the vista displayed in the vista holder with a new vista.
      *
@@ -100,6 +103,10 @@ public class MainController implements Initializable {
     public void search(){
         System.out.println(recipSearch.getText());
         updateRecipList(recipSearch.getText());
+    }
+
+    public void setLogin(){
+
     }
 
 
