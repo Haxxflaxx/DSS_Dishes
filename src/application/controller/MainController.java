@@ -22,7 +22,8 @@ import java.util.ResourceBundle;
  */
 public class MainController implements Initializable {
 
-    @FXML    private Button recipeAdd;
+    @FXML    private Button recipeEdit;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         updateRecipList();
@@ -102,6 +103,10 @@ public class MainController implements Initializable {
         updateRecipList(recipSearch.getText());
     }
 
+    public void handleButtonClick(){
+        VistaNavigator.loadVista(
+                VistaNavigator.EDITRECIPES);
+    }
 
 }
 

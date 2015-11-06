@@ -9,7 +9,7 @@
       <VBox BorderPane.alignment="CENTER">
          <children>
             <MenuBar>
-              <menus>
+               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
                     <MenuItem mnemonicParsing="false" text="Close" />
@@ -46,7 +46,7 @@
                </children>
             </HBox>
             <ListView fx:id="recipList" VBox.vgrow="ALWAYS" />
-            <Button fx:id="recipeAdd" mnemonicParsing="false" text="+" />
+            <Button fx:id="recipeEdit" mnemonicParsing="false" onAction="#handleButtonClick" text="+" />
          </children>
       </VBox>
    </left>
