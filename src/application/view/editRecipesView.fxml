@@ -6,42 +6,21 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.EditRecipesController">
     <top>
-        <VBox BorderPane.alignment="CENTER">
-            <children>
-                <MenuBar>
-                    <menus>
-                        <Menu mnemonicParsing="false" text="File">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Close" />
-                            </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="Edit">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Delete" />
-                            </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="Help">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="About" />
-                            </items>
-                        </Menu>
-                    </menus>
-                </MenuBar>
-            </children>
-        </VBox>
+        <VBox BorderPane.alignment="CENTER" />
     </top>
     <center>
         <Pane>
             <children>
                 <StackPane fx:id="vistaHolder" BorderPane.alignment="CENTER" />
-            <TextField layoutX="14.0" layoutY="29.0" promptText="Recipe Name" />
-            <TextField layoutX="14.0" layoutY="64.0" promptText="Type of Dish" />
-            <TextField layoutX="14.0" layoutY="100.0" promptText="Cuisine" />
-            <TextField layoutX="14.0" layoutY="140.0" promptText="Difficulty" />
-            <TextField layoutX="14.0" layoutY="186.0" promptText="Diet" />
-            <TextField layoutX="14.0" layoutY="229.0" promptText="Time to make" />
-            <TextArea layoutX="194.0" layoutY="29.0" prefHeight="200.0" prefWidth="200.0" promptText="Description" />
-            <ListView layoutX="394.0" layoutY="29.0" prefHeight="200.0" prefWidth="200.0" />
+            <TextField fx:id="recipeName" layoutX="14.0" layoutY="29.0" promptText="Recipe Name" />
+            <TextField fx:id="recipeType" layoutX="14.0" layoutY="64.0" promptText="Type of Dish" />
+            <TextField fx:id="recipeCuisine" layoutX="14.0" layoutY="100.0" promptText="Cuisine" />
+            <TextField fx:id="recipeDifficulty" layoutX="14.0" layoutY="140.0" promptText="Difficulty" />
+            <TextField fx:id="recipeDiet" layoutX="14.0" layoutY="186.0" promptText="Diet" />
+            <TextField fx:id="recipeTime" layoutX="14.0" layoutY="229.0" promptText="Time to make" />
+            <TextArea fx:id="recipeDescription" layoutX="194.0" layoutY="29.0" prefHeight="200.0" prefWidth="200.0" promptText="Description" />
+            <ListView fx:id="recipeIngredients" layoutX="394.0" layoutY="29.0" prefHeight="200.0" prefWidth="200.0" />
+            <Button fx:id="recipeSubmit" layoutX="494.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleButton" text="Submit" />
             </children>
         </Pane>
     </center>

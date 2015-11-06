@@ -2,15 +2,16 @@ package application.controller;
 
 import application.dbTools.Query;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+
 import javafx.scene.control.*;
 
-import java.net.URL;
+
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+
+import static application.dbTools.Query.insertInto;
+import static application.dbTools.Query.updateData;
+
 
 /**
  * Created by haxxflaxx on 2015-11-03.
@@ -19,27 +20,42 @@ public class EditRecipesController  {
 
 
     @FXML
-    TextField recipeName;
+    private TextField recipeName;
     @FXML
-    TextField recipeType;
+    private TextField recipeType;
     @FXML
-    TextField recipeCuisine;
+    private   TextField recipeCuisine;
     @FXML
-    TextField recipeDifficulty;
+    private  TextField recipeDifficulty;
     @FXML
-    TextField recipeDiet;
+    private TextField recipeDiet;
     @FXML
-    TextField recipeTime;
+    private TextField recipeTime;
     @FXML
-    TextField recipeDescription;
+    private TextField recipeDescription;
     @FXML
-    TextField recipeIngredients;
+    private TextField recipeIngredients;
+    @FXML
+    private Button recipeSubmit;
 
 
 
 
-    private void addIngredients() {
-    
+   private void handleButton(){
+
+            try {
+
+                insertInto("Recipes", "Name", recipeName.toString());
+                insertInto("Recipes", "Type", recipeType.toString());
+                insertInto("Recipes", "Cuisine", recipeCuisine.toString());
+                insertInto("Recipes", "Difficulty", recipeDifficulty.toString());
+                insertInto("Recipes", "Diet", recipeDiet.toString());
+                insertInto("Recipes", "Time", recipeTime.toString());
+                insertInto("Recipes", "Description", recipeDescription.toString());
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
     }
 }
