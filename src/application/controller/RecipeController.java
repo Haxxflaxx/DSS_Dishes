@@ -63,7 +63,7 @@ public class RecipeController implements Initializable {
 
         String condition = "Name= '" + recipeChoice + "'";
         System.out.println(condition);
-        recipeChoice = mainController.recipList.getSelectionModel().getSelectedItems().toString();
+
 
         try {
             dataSet = Query.fetchData("recipes", "*", condition);
@@ -104,7 +104,5 @@ public class RecipeController implements Initializable {
 
     }
 
-    private void addIngredients() {
 
-    }
 }

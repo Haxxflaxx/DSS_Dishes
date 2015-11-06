@@ -17,6 +17,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import static application.dbTools.Query.insertInto;
+
 /**
  * Main controller class for the layout.
  */
@@ -104,8 +106,18 @@ public class MainController implements Initializable {
     }
 
     public void handleButtonClick(){
-        VistaNavigator.loadVista(
-                VistaNavigator.EDITRECIPES);
+        try {
+            insertInto("Recipes", "Name", "'--New--'");
+
+            recipList.getSelectionModel().select("--New--");
+
+            VistaNavigator.loadVista(
+                    VistaNavigator.EDITRECIPES);
+
+        }
+     catch (SQLException e) {
+        e.printStackTrace();
+    }
     }
 
 }

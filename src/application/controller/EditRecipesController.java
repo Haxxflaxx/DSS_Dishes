@@ -18,40 +18,42 @@ import static application.dbTools.Query.updateData;
  */
 public class EditRecipesController  {
 
+    MainController mainController;
 
     @FXML
     private TextField recipeName;
     @FXML
     private TextField recipeType;
     @FXML
-    private   TextField recipeCuisine;
+    private TextField recipeCuisine;
     @FXML
-    private  TextField recipeDifficulty;
+    private TextField recipeDifficulty;
     @FXML
     private TextField recipeDiet;
     @FXML
     private TextField recipeTime;
     @FXML
-    private TextField recipeDescription;
+    private TextArea recipeDescription;
     @FXML
-    private TextField recipeIngredients;
+    private ListView recipeIngredients;
     @FXML
     private Button recipeSubmit;
 
 
 
 
-   private void handleButton(){
+   public void handleButton(){
+      String newRecipe = mainController.recipList.getSelectionModel().getSelectedItems().toString();
+       String[] columns = {"Name", "Type", "Cuisine", "Difficulty", "Diet", "Time", "Description"};
+       String[] values = {recipeName.toString(), recipeType.toString(), recipeCuisine.toString(), recipeDifficulty.toString(),
+               recipeDiet.toString(), recipeTime.toString(), recipeDescription.toString()};
 
             try {
+                String condition = "ID='"+ Query.fetchData("Recipes", "ID", "Name ='" + newRecipe + "'") +"'";
 
-                insertInto("Recipes", "Name", recipeName.toString());
-                insertInto("Recipes", "Type", recipeType.toString());
-                insertInto("Recipes", "Cuisine", recipeCuisine.toString());
-                insertInto("Recipes", "Difficulty", recipeDifficulty.toString());
-                insertInto("Recipes", "Diet", recipeDiet.toString());
-                insertInto("Recipes", "Time", recipeTime.toString());
-                insertInto("Recipes", "Description", recipeDescription.toString());
+                updateData("Recipes",columns,values , condition);
+
+
 
             } catch (SQLException e) {
                 e.printStackTrace();
