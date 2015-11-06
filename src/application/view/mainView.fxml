@@ -46,7 +46,7 @@
                </children>
             </HBox>
             <ListView fx:id="recipList" VBox.vgrow="ALWAYS" />
-            <Button fx:id="recipeEdit" mnemonicParsing="false" onAction="#handleButtonClick" text="+" />
+            <Button fx:id="recipeEdit" mnemonicParsing="false" onAction="#addNewRecipeButton" text="+" />
          </children>
       </VBox>
    </left>

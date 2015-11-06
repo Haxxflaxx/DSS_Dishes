@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 
 import java.sql.SQLException;
 
+import static application.dbTools.Query.deleteFrom;
 import static application.dbTools.Query.insertInto;
 import static application.dbTools.Query.updateData;
 
@@ -16,12 +17,12 @@ import static application.dbTools.Query.updateData;
 /**
  * Created by haxxflaxx on 2015-11-03.
  */
-public class EditRecipesController  {
+public class EditRecipesController{
 
     MainController mainController;
 
     @FXML
-    private TextField recipeName;
+    public TextField recipeName;
     @FXML
     private TextField recipeType;
     @FXML
@@ -42,22 +43,47 @@ public class EditRecipesController  {
 
 
 
-   public void handleButton(){
-      String newRecipe = mainController.recipList.getSelectionModel().getSelectedItems().toString();
-       String[] columns = {"Name", "Type", "Cuisine", "Difficulty", "Diet", "Time", "Description"};
-       String[] values = {recipeName.toString(), recipeType.toString(), recipeCuisine.toString(), recipeDifficulty.toString(),
-               recipeDiet.toString(), recipeTime.toString(), recipeDescription.toString()};
+    public void addRecipe(){
+        try {
+         System.out.println("THIS IS THE BLOODY NAME " + recipeName.getText());
+            insertInto("Recipes", "Name", "'" + recipeName.getText() + "'");
 
-            try {
-                String condition = "ID='"+ Query.fetchData("Recipes", "ID", "Name ='" + newRecipe + "'") +"'";
-
-                updateData("Recipes",columns,values , condition);
-
-
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
+    public void deleteRecipe(){
+
+
+        try {
+
+            String criteria = "ID='" + Query.fetchData("Recipes", "ID", "Name ='" + recipeName.getText() + "'") + "'";
+            System.out.println("criteria" + criteria);
+            deleteFrom("Recipes", criteria);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+   public void SubmitButtonAction() {
+       String[] columns = {"Name", "Type", "Cuisine", "Difficulty", "Diet", "Time", "Description"};
+       String[] values = {recipeName.getText(), recipeType.getText(), recipeCuisine.getText(), recipeDifficulty.getText(),
+               recipeDiet.getText(), recipeTime.getText(), recipeDescription.getText()};
+
+       try {
+           String condition = "ID='" + Query.fetchData("Recipes", "ID", "Name ='" + recipeName.getText() + "'") + "'";
+           updateData("Recipes", columns, values, condition);
+           System.out.println("HERE'S YOUR BLOODY CONDITION " + condition);
+
+
+       } catch (SQLException e) {
+           e.printStackTrace();
+       }
+   }
+
+
 }

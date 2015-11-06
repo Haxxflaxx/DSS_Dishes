@@ -45,6 +45,7 @@ public class Connection {
      * @exception SQLException if a database access error occurs.
      */
     public static void runUpdate(String sql) throws SQLException {
+
         java.sql.Connection c = open();
         c.setAutoCommit(false);
         Statement stmt = c.createStatement();

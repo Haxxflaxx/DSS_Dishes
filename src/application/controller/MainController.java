@@ -105,20 +105,11 @@ public class MainController implements Initializable {
         updateRecipList(recipSearch.getText());
     }
 
-    public void handleButtonClick(){
-        try {
-            insertInto("Recipes", "Name", "'--New--'");
-
-            recipList.getSelectionModel().select("--New--");
-
-            VistaNavigator.loadVista(
-                    VistaNavigator.EDITRECIPES);
-
-        }
-     catch (SQLException e) {
-        e.printStackTrace();
+    public void addNewRecipeButton(){
+        VistaNavigator.loadVista(
+                VistaNavigator.EDITRECIPES);
     }
-    }
+
 
 }
 

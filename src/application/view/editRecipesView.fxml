@@ -20,7 +20,9 @@
             <TextField fx:id="recipeTime" layoutX="14.0" layoutY="229.0" promptText="Time to make" />
             <TextArea fx:id="recipeDescription" layoutX="194.0" layoutY="29.0" prefHeight="200.0" prefWidth="200.0" promptText="Description" />
             <ListView fx:id="recipeIngredients" layoutX="394.0" layoutY="29.0" prefHeight="200.0" prefWidth="200.0" />
-            <Button fx:id="recipeSubmit" layoutX="494.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleButton" text="Submit" />
+            <Button fx:id="recipeSubmit" layoutX="494.0" layoutY="360.0" mnemonicParsing="false" onAction="#SubmitButtonAction" text="Submit" />
+            <Button fx:id="recipeAdd" layoutX="163.0" layoutY="360.0" mnemonicParsing="false" onAction="#addRecipe" text="Add" />
+            <Button fx:id="recipeDelete" layoutX="214.0" layoutY="360.0" mnemonicParsing="false" onAction="#deleteRecipe" text="Delete" />
             </children>
         </Pane>
     </center>
