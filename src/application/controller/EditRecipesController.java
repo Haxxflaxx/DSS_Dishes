@@ -47,7 +47,6 @@ public class EditRecipesController{
         try {
          System.out.println("THIS IS THE BLOODY NAME " + recipeName.getText());
             insertInto("Recipes", "Name", "'" + recipeName.getText() + "'");
-
         }
         catch (SQLException e) {
             e.printStackTrace();
@@ -56,18 +55,16 @@ public class EditRecipesController{
 
     public void deleteRecipe(){
 
-
         try {
-
             String criteria = "ID='" + Query.fetchData("Recipes", "ID", "Name ='" + recipeName.getText() + "'") + "'";
-            System.out.println("criteria" + criteria);
+            criteria = criteria.replaceAll("\\[", "").replaceAll("\\]","");
             deleteFrom("Recipes", criteria);
+            System.out.println("THIS IS YOUR BLOODY CRITERIA " + criteria);
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
 
    public void SubmitButtonAction() {
        String[] columns = {"Name", "Type", "Cuisine", "Difficulty", "Diet", "Time", "Description"};
@@ -76,9 +73,9 @@ public class EditRecipesController{
 
        try {
            String condition = "ID='" + Query.fetchData("Recipes", "ID", "Name ='" + recipeName.getText() + "'") + "'";
+           condition = condition.replaceAll("\\[", "").replaceAll("\\]","");
            updateData("Recipes", columns, values, condition);
            System.out.println("HERE'S YOUR BLOODY CONDITION " + condition);
-
 
        } catch (SQLException e) {
            e.printStackTrace();
