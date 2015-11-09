@@ -1,5 +1,7 @@
 package application;
 
+import application.controller.LoginController;
+import application.controller.LoginNavigator;
 import application.controller.MainController;
 import application.controller.VistaNavigator;
 
@@ -44,6 +46,11 @@ public class Main extends Application {
                 getClass().getResourceAsStream(
                         VistaNavigator.MAIN
                 )
+        );
+        MainController loginController = loader.getController();
+        LoginNavigator.setLoginController(loginController);
+        LoginNavigator.loadLogin(
+                LoginNavigator.LOGIN
         );
 
         MainController mainController = loader.getController();

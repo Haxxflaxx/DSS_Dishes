@@ -3,6 +3,7 @@ package application.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -23,6 +24,7 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
 
     @FXML    private Button recipeAdd;
+    //@FXML    private
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         updateRecipList();
@@ -31,7 +33,9 @@ public class MainController implements Initializable {
                     VistaNavigator.RECIPE
             );
         });
-    }
+
+        }
+
 
     /** Holder of a switchable vista. */
     @FXML private StackPane vistaHolder;
@@ -52,6 +56,11 @@ public class MainController implements Initializable {
      */
     public void setVista(Node node) {
         vistaHolder.getChildren().setAll(node);
+    }
+
+    public void setLogin(Node node){
+        loginHolder.getChildren().setAll(node);
+
     }
 
 
@@ -103,10 +112,6 @@ public class MainController implements Initializable {
     public void search(){
         System.out.println(recipSearch.getText());
         updateRecipList(recipSearch.getText());
-    }
-
-    public void setLogin(){
-
     }
 
 
