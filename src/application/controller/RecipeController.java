@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -28,13 +29,13 @@ public class RecipeController implements Initializable {
     @FXML    private Label recipeType;
     @FXML    private Label recipeCuisine;
     @FXML    private Label recipeDifficulty;
-    @FXML    private Label recipeTIme;
+    @FXML    private Label recipeTime;
     @FXML    private Label recipeDiet;
     @FXML    private TextArea recipeDescription;
     @FXML    private ListView recipeIngredients;
+    @FXML    private Button editRecipe;
 
 
-    //TODO: Add control id for items in view.
 
     /**
      * On view creation:
@@ -77,7 +78,7 @@ public class RecipeController implements Initializable {
             recipeType.setText(dataSet.get(0).get(2));
             recipeCuisine.setText(dataSet.get(0).get(3));
             recipeDifficulty.setText(dataSet.get(0).get(4));
-            recipeTIme.setText(dataSet.get(0).get(7));
+            recipeTime.setText(dataSet.get(0).get(7));
             recipeDiet.setText(dataSet.get(0).get(6));
             recipeDescription.setText(dataSet.get(0).get(9));
 
@@ -104,5 +105,9 @@ public class RecipeController implements Initializable {
 
     }
 
+    public void editRecipeView(){
+        VistaNavigator.loadVista(
+                VistaNavigator.EDITRECIPES);
+    }
 
 }

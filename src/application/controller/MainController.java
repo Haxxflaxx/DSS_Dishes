@@ -69,7 +69,7 @@ public class MainController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        recipList.setItems(itemList);
+            recipList.setItems(itemList);
     }
 
     /**
@@ -104,9 +104,18 @@ public class MainController implements Initializable {
     }
 
     public void addNewRecipeButton(){
-        VistaNavigator.loadVista(
-                VistaNavigator.EDITRECIPES);
+
+        try {
+            insertInto("Recipes", "Name", "'--New--'");
+            updateRecipList();
+            recipList.getSelectionModel().select("--New--");
+
     }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }

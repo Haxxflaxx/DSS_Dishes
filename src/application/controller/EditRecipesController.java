@@ -49,7 +49,9 @@ public class EditRecipesController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         mainController = VistaNavigator.getMainController();
+
         updateEditRecipeList();
+
 
     }
 
@@ -76,7 +78,7 @@ public class EditRecipesController implements Initializable{
             recipeTime.setText(dataSet.get(0).get(7));
             recipeDiet.setText(dataSet.get(0).get(6));
             recipeDescription.setText(dataSet.get(0).get(9));
-            mainController.updateRecipList();
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,33 +87,14 @@ public class EditRecipesController implements Initializable{
 
 
 
-    public void addRecipe(){
-        mainController.updateRecipList();
-        try {
-         System.out.println("THIS IS THE BLOODY NAME " + recipeName.getText());
-            insertInto("Recipes", "Name", "'--New--'");
-
-
-            recipeName.setText("");
-            recipeType.setText("");
-            recipeCuisine.setText("");
-            recipeDifficulty.setText("");
-            recipeTime.setText("");
-            recipeDiet.setText("");
-            recipeDescription.setText("");
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void deleteRecipe(){
-        mainController.updateRecipList();
+
         try {
             String criteria = "ID='" + Query.fetchData("Recipes", "ID", "Name ='" + recipeName.getText() + "'") + "'";
             criteria = criteria.replaceAll("\\[", "").replaceAll("\\]","");
             deleteFrom("Recipes", criteria);
             System.out.println("THIS IS YOUR BLOODY CRITERIA " + criteria);
+            mainController.updateRecipList();
         }
         catch (SQLException e) {
             e.printStackTrace();
@@ -122,12 +105,13 @@ public class EditRecipesController implements Initializable{
        String[] columns = {"Name", "Type", "Cuisine", "Difficulty", "Diet", "Time", "Description"};
        String[] values = {recipeName.getText(), recipeType.getText(), recipeCuisine.getText(), recipeDifficulty.getText(),
                recipeDiet.getText(), recipeTime.getText(), recipeDescription.getText()};
-       mainController.updateRecipList();
+
        try {
            String condition = "ID='" + Query.fetchData("Recipes", "ID", "Name ='" + recipeName.getText() + "'") + "'";
            condition = condition.replaceAll("\\[", "").replaceAll("\\]","");
            updateData("Recipes", columns, values, condition);
            System.out.println("HERE'S YOUR BLOODY CONDITION " + condition);
+           mainController.updateRecipList();
 
        } catch (SQLException e) {
            e.printStackTrace();

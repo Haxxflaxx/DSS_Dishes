@@ -35,7 +35,7 @@
                <children>
                   <HBox spacing="10.0">
                      <children>
-                        <Label text="Type" />
+                        <Label fx:id="recipeType" text="Type" />
                         <Region HBox.hgrow="ALWAYS" />
                         <Label fx:id="recipeType" text="#" />
                      </children>
@@ -45,7 +45,7 @@
                   </HBox>
                   <HBox spacing="10.0">
                      <children>
-                        <Label text="Cuisine" />
+                        <Label fx:id="recipeCuisine" text="Cuisine" />
                         <Region HBox.hgrow="ALWAYS" />
                         <Label fx:id="recipeCuisine" text="#" />
                      </children>
@@ -55,7 +55,7 @@
                   </HBox>
                   <HBox spacing="10.0">
                      <children>
-                        <Label text="Difficulty" />
+                        <Label fx:id="recipeDifficulty" text="Difficulty" />
                         <Region HBox.hgrow="ALWAYS" />
                         <Label fx:id="recipeDifficulty" text="#" />
                      </children>
@@ -65,9 +65,9 @@
                   </HBox>
                   <HBox spacing="10.0">
                      <children>
-                        <Label text="Prep time" />
+                        <Label fx:id="recipeTime" text="Prep time" />
                         <Region HBox.hgrow="ALWAYS" />
-                        <Label fx:id="recipeTIme" text="#" />
+                        <Label fx:id="recipeTime" text="#" />
                      </children>
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -75,7 +75,7 @@
                   </HBox>
                   <HBox spacing="10.0">
                      <children>
-                        <Label text="Diet" />
+                        <Label fx:id="recipeDiet" text="Diet" />
                         <Region HBox.hgrow="ALWAYS" />
                         <Label fx:id="recipeDiet" text="#" />
                      </children>
@@ -84,6 +84,7 @@
                      </padding>
                   </HBox>
                   <ListView fx:id="recipeIngredients" />
+                  <Button fx:id="editRecipe" mnemonicParsing="false" onAction="#editRecipeView" text="Edit Recipe" />
                </children>
             </VBox>
          </children>
