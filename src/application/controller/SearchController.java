@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -20,6 +22,14 @@ public class SearchController implements Initializable {
 
 
     @FXML TableView searchResult;
+    @FXML TableColumn id;
+    @FXML TableColumn name;
+    @FXML TableColumn type;
+    @FXML TableColumn diet;
+    @FXML TableColumn cuisine;
+    @FXML TableColumn difficulty;
+    @FXML TableColumn prepTime;
+
 
     //Search conditions
     String search;
@@ -33,11 +43,11 @@ public class SearchController implements Initializable {
     public SearchController() {
         search = VistaNavigator.getMainController().getSearch();
 
-        String nameCondition = "Name = '%" + search + "%' ";
-        String typeCondition = "Type = '%" + search + "%' ";
-        String dietCondition = "Diet = '%" + search + "%' ";
-        String cuisineCondition = "Cuisine = '%" + search + "%' ";
-        String difficultyCondition = "Difficulty = '%" + search + "%' ";
+        String nameCondition = "Name LIKE '%" + search + "%' ";
+        String typeCondition = "Type LIKE '%" + search + "%' ";
+        String dietCondition = "Diet LIKE '%" + search + "%' ";
+        String cuisineCondition = "Cuisine LIKE '%" + search + "%' ";
+        String difficultyCondition = "Difficulty LIKE '%" + search + "%';";
 
         condition = nameCondition + " OR " +
                 typeCondition + " OR " +
@@ -47,7 +57,30 @@ public class SearchController implements Initializable {
     }
 
     @Override
+
     public void initialize(URL location, ResourceBundle resources) {
+        id.setCellValueFactory(
+                new PropertyValueFactory<Recipe, String>("id")
+        );
+        name.setCellValueFactory(
+                new PropertyValueFactory<Recipe, String>("name")
+        );
+        type.setCellValueFactory(
+                new PropertyValueFactory<Recipe, String>("type")
+        );
+        diet.setCellValueFactory(
+                new PropertyValueFactory<Recipe, String>("diet")
+        );
+        cuisine.setCellValueFactory(
+                new PropertyValueFactory<Recipe, String>("cuisine")
+        );
+        difficulty.setCellValueFactory(
+                new PropertyValueFactory<Recipe, String>("difficulty")
+        );
+        prepTime.setCellValueFactory(
+                new PropertyValueFactory<Recipe, String>("time")
+        );
+
         updateResultTable();
     }
 
@@ -57,6 +90,7 @@ public class SearchController implements Initializable {
 
         try {
             dataSet = Query.fetchData("recipes", "*", condition);
+            System.out.println(condition);
 
             for (ArrayList<String> element : dataSet){
                 items.add(new Recipe(
@@ -75,6 +109,7 @@ public class SearchController implements Initializable {
             }
 
             searchResult.setItems(items);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -31,11 +31,11 @@
       </VBox>
    </top>
    <center>
-      <ScrollPane prefViewportHeight="371.0" prefViewportWidth="345.0">
-         <content>
-            <StackPane fx:id="vistaHolder" />
-         </content>
-      </ScrollPane>
+      <Pane>
+         <children>
+            <StackPane fx:id="vistaHolder" BorderPane.alignment="CENTER" />
+         </children>
+      </Pane>
    </center>
    <left>
       <VBox BorderPane.alignment="CENTER">
@@ -45,7 +45,6 @@
                   <TextField fx:id="recipSearch" onAction="#search" promptText="Search" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <HBox />
             <ListView fx:id="recipList" VBox.vgrow="ALWAYS" />
             <Button fx:id="recipeAdd" mnemonicParsing="false" text="+" />
          </children>
