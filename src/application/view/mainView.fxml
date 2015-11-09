@@ -42,7 +42,7 @@
          <children>
             <HBox>
                <children>
-                  <TextField fx:id="recipSearch" onKeyPressed="#search" promptText="Search" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="recipSearch" onAction="#search" promptText="Search" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox>

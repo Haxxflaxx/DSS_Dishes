@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
-
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
