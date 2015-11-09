@@ -23,7 +23,8 @@ public class VistaNavigator {
     public static final String MAIN = "/application/view/mainView.fxml";
     public static final String RECIPE = "/application/view/recipeDetailsVista.fxml";
     public static final String WELCOME = "/application/view/welcomeVista.fxml";
-
+    public static final String EDITRECIPES = "/application/view/editRecipesView.fxml";
+    public static final String REGISTER = "/application/view/registerVista.fxml";
     /** The main application layout controller. */
     private static MainController mainController;
 

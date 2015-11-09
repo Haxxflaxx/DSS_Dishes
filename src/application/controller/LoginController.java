@@ -28,6 +28,10 @@ public class LoginController {
     @FXML   private MenuItem buttonSettings;
     @FXML   private MenuItem buttonSignout;
 
-
+    public void registerButtonclick(){
+        VistaNavigator.loadVista(
+                VistaNavigator.REGISTER
+        );
+    }
 
 }

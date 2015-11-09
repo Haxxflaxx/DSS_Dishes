@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.LoginController">
    <children>
       <VBox>
          <children>
@@ -37,7 +37,7 @@
                         <Insets />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="registerButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Register">
+                  <Button fx:id="registerButton" mnemonicParsing="false" onAction="#registerButtonclick" prefHeight="25.0" prefWidth="80.0" text="Register">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>

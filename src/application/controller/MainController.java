@@ -60,7 +60,6 @@ public class MainController implements Initializable {
 
     public void setLogin(Node node){
         loginHolder.getChildren().setAll(node);
-
     }
 
 
