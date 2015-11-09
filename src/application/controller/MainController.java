@@ -24,8 +24,6 @@ import static application.dbTools.Query.insertInto;
  */
 public class MainController implements Initializable {
 
-    @FXML    private Button recipeEdit;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         updateRecipList();

@@ -69,7 +69,7 @@ public class RecipeController implements Initializable {
             dataSet = Query.fetchData("recipes", "*", condition);
 
             System.out.println(mainController.recipList.getSelectionModel().getSelectedItems().toString());
-            //TODO: Move data from dataSet into view fields
+
             System.out.println(dataSet.get(0).get(1));
 
             recipeID = dataSet.get(0).get(0);
