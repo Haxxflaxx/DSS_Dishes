@@ -2,15 +2,18 @@ package application.controller;
 
 import application.dbTools.Query;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 /**
  * Created by haxxflaxx on 2015-11-03.
  */
-public class RecipeController {
+public class RecipeController implements Initializable{
 
     MainController mainController;
 
@@ -32,7 +35,8 @@ public class RecipeController {
      * Get controller for main view.
      * Run update.
      */
-    public RecipeController(){
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         mainController = VistaNavigator.getMainController();
         updateContent();
     }
@@ -53,4 +57,6 @@ public class RecipeController {
             e.printStackTrace();
         }
     }
+
+
 }
