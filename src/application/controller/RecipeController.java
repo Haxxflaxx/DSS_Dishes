@@ -4,14 +4,7 @@ import application.dbTools.Query;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-<<<<<<< HEAD
 
-
-import javafx.fxml.Initializable;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-=======
->>>>>>> View update
 
 import java.net.URL;
 import java.sql.SQLException;
