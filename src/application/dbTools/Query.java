@@ -67,6 +67,7 @@ public class Query {
     public static void updateData(String table, String column, String value, String condition) throws SQLException {
         String sql = "UPDATE " + table + " SET " + column + " = '" + value + "' WHERE " + condition + ";";
         Connection.runUpdate(sql);
+
     }
 
     /**
