@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.LoginController">
    <top>
-      <Region prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <Region prefHeight="100.0" BorderPane.alignment="CENTER" />
    </top>
    <left>
-      <Region prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <Region prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
    </left>
    <bottom>
-      <Region prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <Region prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </bottom>
    <center>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="320.0" BorderPane.alignment="CENTER">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
          <children>
             <StackPane fx:id="vistaHolder" />
-            <VBox spacing="5.0">
+            <VBox spacing="10.0">
                <children>
                   <HBox spacing="5.0">
                      <children>
@@ -29,6 +32,11 @@
                            </HBox.margin>
                         </TextField>
                         <Region />
+                        <PasswordField fx:id="passwordField" promptText="password">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </PasswordField>
                         <Button fx:id="loginButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Login">
                            <HBox.margin>
                               <Insets />
@@ -36,33 +44,65 @@
                         </Button>
                      </children>
                      <VBox.margin>
-                        <Insets />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox spacing="5.0">
+                  <Region prefHeight="20.0" />
+                  <Line endX="300.0" startX="-100.0" strokeWidth="3.0">
+                     <stroke>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="BLACK" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </stroke>
+                  </Line>
+                  <VBox spacing="10.0">
                      <children>
-                        <PasswordField fx:id="passwordField" promptText="password">
-                           <HBox.margin>
+                        <Label contentDisplay="CENTER" text="Not a member? Register here." textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="recipeTime" promptText="Username" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <PasswordField promptText="Choose your password" />
+                              <PasswordField promptText="Confirm password" />
+                           </children>
+                           <VBox.margin>
                               <Insets />
-                           </HBox.margin>
-                        </PasswordField>
-                        <Region HBox.hgrow="ALWAYS" />
-                        <Button fx:id="registerButton" mnemonicParsing="false" onAction="#registerButtonclick" prefHeight="25.0" prefWidth="80.0" text="Register">
-                           <HBox.margin>
+                           </VBox.margin>
+                        </HBox>
+                        <TextField fx:id="recipeDiet" promptText="Email" />
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Region HBox.hgrow="ALWAYS" />
+                              <Button fx:id="registerButton" mnemonicParsing="false" onAction="#registerButtonclick" prefHeight="25.0" prefWidth="80.0" text="Register">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
                               <Insets />
-                           </HBox.margin>
-                        </Button>
+                           </VBox.margin>
+                        </HBox>
                      </children>
                      <VBox.margin>
-                        <Insets />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
-                  </HBox>
+                  </VBox>
                </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </VBox>
          </children>
       </Pane>
    </center>
    <right>
-      <Region prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <Region prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
    </right>
 </BorderPane>
