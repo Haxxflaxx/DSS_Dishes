@@ -2,6 +2,8 @@ package application;
 
 /**
  * Created by haxxflaxx on 2015-11-09.
+ *
+ * Container for holding a recipe.
  */
 public class Recipe {
     String id;

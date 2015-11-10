@@ -40,6 +40,9 @@ public class SearchController implements Initializable {
     String difficultyCondition;
     String condition;
 
+    /**
+     * Get MainController instance and generate a selection condition for query.
+     */
     public SearchController() {
         search = VistaNavigator.getMainController().getSearch();
 
@@ -84,6 +87,10 @@ public class SearchController implements Initializable {
         updateResultTable();
     }
 
+    /**
+     * Get data from recipes based on search query.
+     * Put data into TableView.
+     */
     private void updateResultTable(){
         ArrayList<ArrayList<String>> dataSet = new ArrayList<>();
         ObservableList<Recipe> items = FXCollections.observableArrayList();
