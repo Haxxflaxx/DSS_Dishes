@@ -1,16 +1,14 @@
 package application.controller;
 
+import application.dbTools.Query;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
-import javafx.scene.control.ListView;
-
-import application.dbTools.*;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -26,11 +24,13 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("- Intialize mainController");
         updateRecipList();
         recipList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             VistaNavigator.loadVista(
                     VistaNavigator.RECIPE
             );
+            System.out.println("- End of Initialize mainController");
         });
     }
 
@@ -61,11 +61,15 @@ public class MainController implements Initializable {
         ObservableList<String> itemList = FXCollections.observableArrayList();
 
         try {
+            System.out.println("- Main updateRecipList");
+
             dataSet = Query.fetchData("recipes", "Name");
 
             for (ArrayList<String> element : dataSet){
                 itemList.add(element.get(0));
             }
+
+            System.out.println("- end of Main updateRecipList");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -84,10 +88,12 @@ public class MainController implements Initializable {
         System.out.println(condition);
 
         try {
+            System.out.println("- updateRecipList");
             dataSet = Query.fetchData("recipes", "Name", condition);
 
             for (ArrayList<String> element : dataSet){
                 itemList.add(element.get(0));
+                System.out.println("- End of updateRecipList");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -103,13 +109,17 @@ public class MainController implements Initializable {
         updateRecipList(recipSearch.getText());
     }
 
+    /**
+     * Button for adding new Recipes.
+     */
     public void addNewRecipeButton(){
 
         try {
+            System.out.println("- addNewRecipeButton");
             insertInto("Recipes", "Name", "'--New--'");
             updateRecipList();
             recipList.getSelectionModel().select("--New--");
-
+            System.out.println("- End of addNewRecipeButton");
     }
         catch (SQLException e) {
             e.printStackTrace();

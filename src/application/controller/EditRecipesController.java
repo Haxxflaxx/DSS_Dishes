@@ -1,12 +1,12 @@
 package application.controller;
 
 import application.dbTools.Query;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static application.dbTools.Query.deleteFrom;
-import static application.dbTools.Query.insertInto;
 import static application.dbTools.Query.updateData;
 
 
@@ -48,13 +47,15 @@ public class EditRecipesController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("Initialize EditRecipesController");
         mainController = VistaNavigator.getMainController();
-
         updateEditRecipeList();
-
-
+        System.out.println("- End of Initialize EditRecipesController");
     }
 
+    /**
+     * Updates the fields in the editing of recipes to the selected item.
+     */
     public void updateEditRecipeList(){
         ArrayList<ArrayList<String>> dataSet;
         String currentRecipe = mainController.recipList.getSelectionModel().getSelectedItems().toString();
@@ -62,15 +63,10 @@ public class EditRecipesController implements Initializable{
 
         String condition = "Name= '" + currentRecipe + "'";
 
-
-
         try {
-            dataSet = Query.fetchData("recipes", "*", condition);
-
-            System.out.println(mainController.recipList.getSelectionModel().getSelectedItems().toString());
-            System.out.println(dataSet.get(0).get(1));
-
-            recipeID = dataSet.get(0).get(0);
+            System.out.println("- UpdateEditRecipeList");
+            dataSet = Query.fetchData("recipes", "*", condition);       //Method for fetching the recipes where
+            recipeID = dataSet.get(0).get(0);                           //name == selected recipe
             recipeName.setText(dataSet.get(0).get(1));
             recipeType.setText(dataSet.get(0).get(2));
             recipeCuisine.setText(dataSet.get(0).get(3));
@@ -78,46 +74,53 @@ public class EditRecipesController implements Initializable{
             recipeTime.setText(dataSet.get(0).get(7));
             recipeDiet.setText(dataSet.get(0).get(6));
             recipeDescription.setText(dataSet.get(0).get(9));
-
-
+            System.out.println("- End of UpdateEditRecipeList");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
 
-
+    /**
+     * ButtonMethod for deleting the selected recipe
+     */
     public void deleteRecipe(){
 
         try {
+            System.out.println("- DeleteRecipe");
             String criteria = "ID='" + Query.fetchData("Recipes", "ID", "Name ='" + recipeName.getText() + "'") + "'";
             criteria = criteria.replaceAll("\\[", "").replaceAll("\\]","");
-            deleteFrom("Recipes", criteria);
-            System.out.println("THIS IS YOUR BLOODY CRITERIA " + criteria);
-            mainController.updateRecipList();
+            deleteFrom("Recipes", criteria);            //Delete recipes where name == selected recipe
+
+            mainController.recipList.getSelectionModel().select(1);
+            System.out.println("- End of DeleteRecipe");
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     *  ButtonMethod for updating Recipes
+     */
    public void SubmitButtonAction() {
-       String[] columns = {"Name", "Type", "Cuisine", "Difficulty", "Diet", "Time", "Description"};
+       String[] columns = {"Name", "Type", "Cuisine", "Difficulty", "Diet", "Time", "Description"};     //Array with columns
        String[] values = {recipeName.getText(), recipeType.getText(), recipeCuisine.getText(), recipeDifficulty.getText(),
-               recipeDiet.getText(), recipeTime.getText(), recipeDescription.getText()};
+               recipeDiet.getText(), recipeTime.getText(), recipeDescription.getText()};                //Array with Values
 
        try {
+           System.out.println("- SubmitButtonAction");
            String condition = "ID='" + Query.fetchData("Recipes", "ID", "Name ='" + recipeName.getText() + "'") + "'";
            condition = condition.replaceAll("\\[", "").replaceAll("\\]","");
-           updateData("Recipes", columns, values, condition);
-           System.out.println("HERE'S YOUR BLOODY CONDITION " + condition);
-           mainController.updateRecipList();
+           updateData("Recipes", columns, values, condition);                   //Update data in columns with values
+           VistaNavigator.loadVista(
+                   VistaNavigator.WELCOME);                                     //Load wellcome vista
+           System.out.println("- End of SubmitButtonAction");
+       }
 
-       } catch (SQLException e) {
+       catch (SQLException e) {
            e.printStackTrace();
        }
    }
-
-
 
 }
