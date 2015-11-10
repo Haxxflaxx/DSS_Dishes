@@ -26,7 +26,7 @@ public class Main extends Application {
                         loadMainPane()
                 )
         );
-
+        stage.setResizable(false);
         stage.show();
     }
 
