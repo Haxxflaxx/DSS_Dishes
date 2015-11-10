@@ -43,6 +43,9 @@ public class MainController implements Initializable {
     /** Field for entering search criteria. */
     @FXML private TextField recipSearch;
 
+    /** Holder of Login view */
+    @FXML private StackPane loginHolder;
+
     /**
      * Replaces the vista displayed in the vista holder with a new vista.
      *
@@ -50,6 +53,10 @@ public class MainController implements Initializable {
      */
     public void setVista(Node node) {
         vistaHolder.getChildren().setAll(node);
+    }
+
+    public void setLogin(Node node){
+        loginHolder.getChildren().setAll(node);
     }
 
     public String getSearch(){

@@ -15,18 +15,13 @@ import java.io.IOException;
  * All methods on the navigator are static to facilitate
  * simple access from anywhere in the application.
  */
-public class VistaNavigator {
+public class LoginNavigator {
 
     /**
      * Constants holding path and name for views.
      */
-    public static final String MAIN = "/application/view/mainView.fxml";
-    public static final String RECIPE = "/application/view/recipeDetailsVista.fxml";
-    public static final String WELCOME = "/application/view/welcomeVista.fxml";
-    public static final String SEARCH = "/application/view/searchResultVista.fxml";
-    public static final String EDITRECIPES = "/application/view/editRecipesView.fxml";
-    public static final String REGISTER = "/application/view/registerVista.fxml";
-    public static final String LOGINVISTA = "/application/view/loginVista.fxml";
+    public static final String LOGIN = "/application/view/loginView.fxml";
+    public static final String LOGGEDIN = "/application/view/loggedinView.fxml";
 
     /** The main application layout controller. */
     private static MainController mainController;
@@ -36,8 +31,8 @@ public class VistaNavigator {
      *
      * @param mainController the main application layout controller.
      */
-    public static void setMainController(MainController mainController) {
-        VistaNavigator.mainController = mainController;
+    public static void setLoginController(MainController loginController){
+        LoginNavigator.mainController = loginController;
     }
 
     /**
@@ -45,7 +40,7 @@ public class VistaNavigator {
      *
      * @return MainController the main application layout controller.
      */
-    public static MainController getMainController(){
+    public static MainController getLoginController(){
         return mainController;
     }
 
@@ -66,12 +61,12 @@ public class VistaNavigator {
      *
      * @param fxml the fxml file to be loaded.
      */
-    public static void loadVista(String fxml) {
+    public static void loadLogin(String fxml) {
         try {
-            mainController.setVista(
+            mainController.setLogin(
 
                     FXMLLoader.load(
-                            VistaNavigator.class.getResource(
+                            LoginNavigator.class.getResource(
                                     fxml
                             )
                     )
