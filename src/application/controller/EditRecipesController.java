@@ -103,24 +103,26 @@ public class EditRecipesController implements Initializable{
     /**
      *  ButtonMethod for updating Recipes
      */
-   public void SubmitButtonAction() {
-       String[] columns = {"Name", "Type", "Cuisine", "Difficulty", "Diet", "Time", "Description"};     //Array with columns
-       String[] values = {recipeName.getText(), recipeType.getText(), recipeCuisine.getText(), recipeDifficulty.getText(),
-               recipeDiet.getText(), recipeTime.getText(), recipeDescription.getText()};                //Array with Values
+    public void SubmitButtonAction() {
+        String[] columns = {"Name", "Type", "Cuisine", "Difficulty", "Diet", "Time", "Description"};     //Array with columns
+        String[] values = {recipeName.getText(), recipeType.getText(), recipeCuisine.getText(), recipeDifficulty.getText(),
+                recipeDiet.getText(), recipeTime.getText(), recipeDescription.getText()};                //Array with Values
 
-       try {
-           System.out.println("- SubmitButtonAction");
-           String condition = "ID='" + Query.fetchData("Recipes", "ID", "Name ='" + recipeName.getText() + "'") + "'";
-           condition = condition.replaceAll("\\[", "").replaceAll("\\]","");
-           updateData("Recipes", columns, values, condition);                   //Update data in columns with values
-           VistaNavigator.loadVista(
-                   VistaNavigator.WELCOME);                                     //Load wellcome vista
-           System.out.println("- End of SubmitButtonAction");
-       }
+        String currentRecipe = mainController.recipList.getSelectionModel().getSelectedItems().toString();
+        currentRecipe = "NAME='" + currentRecipe + "'";
+        currentRecipe = currentRecipe.replaceAll("\\[", "").replaceAll("\\]","");
 
-       catch (SQLException e) {
-           e.printStackTrace();
-       }
-   }
+
+        try {
+            System.out.println("- SubmitButtonAction");
+            updateData("Recipes", columns, values, currentRecipe);                   //Update data in columns with values
+            mainController.recipList.getSelectionModel().select(1);
+            System.out.println("- End of SubmitButtonAction");
+        }
+
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
