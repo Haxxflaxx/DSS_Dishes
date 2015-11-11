@@ -46,8 +46,8 @@ public class RecipeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("- Initialize RecipeController");
         mainController = VistaNavigator.getMainController();
-        updateIngredientList();
         updateContent();
+        updateIngredientList();
         mainController.updateRecipList();
         System.out.println("- End of Initialize RecipeController");
     }
