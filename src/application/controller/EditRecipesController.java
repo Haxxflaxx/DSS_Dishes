@@ -50,7 +50,7 @@ public class EditRecipesController implements Initializable{
     @FXML
     private TextField ingredientTime;
     @FXML
-    private ListView ingredientUnit;
+    private TextField ingredientSearch;
     @FXML
     private Button addIngredients;
 
@@ -161,12 +161,12 @@ public class EditRecipesController implements Initializable{
 
     public void addIngredientsButton(){
 
-        try {
-            updateData("Ingredients, RUI",ingredientTime.getText() );
+     //   try {
+          //  updateData("Ingredients, RUI",ingredientTime.getText() );
 
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
+   //     }
+     //   catch (SQLException e) {
+       //     e.printStackTrace();
+ //       }
     }
 }
