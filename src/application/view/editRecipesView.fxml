@@ -1,39 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.EditRecipesController">
-    <top>
-        <VBox BorderPane.alignment="CENTER" />
-    </top>
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.EditRecipesController">
     <center>
         <Pane>
             <children>
                 <StackPane fx:id="vistaHolder" BorderPane.alignment="CENTER" />
-            <ListView fx:id="recipeIngredients" layoutX="219.0" layoutY="49.0" prefHeight="200.0" prefWidth="200.0" />
-            <Button fx:id="recipeDelete" layoutX="14.0" layoutY="360.0" mnemonicParsing="false" onAction="#deleteRecipe" text="Delete" />
-            <TextArea fx:id="recipeDescription" layoutX="14.0" layoutY="49.0" prefHeight="200.0" prefWidth="200.0" promptText="Description" />
-            <TextField fx:id="IngredientSearch" layoutX="219.0" layoutY="23.0" promptText="Search" />
-            <Button fx:id="recipeSubmit" layoutX="84.0" layoutY="360.0" mnemonicParsing="false" onAction="#SubmitButtonAction" text="Submit" />
-            <TextField fx:id="ingredientUnit" layoutX="258.0" layoutY="249.0" promptText="Unit" />
-            <Button fx:id="addIngredients" layoutX="282.0" layoutY="327.0" mnemonicParsing="false" onAction="#addIngredientsButton" text="Add Ingredient" />
-            <TextField fx:id="ingredientTime" layoutX="258.0" layoutY="275.0" promptText="Time to make " />
+            <HBox prefWidth="800.0" spacing="10.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <TextField fx:id="recipeCuisine" promptText="Cuisine" />
+                        <TextField fx:id="recipeType" promptText="Type of Dish" />
+                        <TextField fx:id="recipeDiet" promptText="Diet" />
+                        <TextField fx:id="recipeTime" promptText="Time to make" />
+                        <TextField fx:id="recipeDifficulty" promptText="Difficulty" />
+                     </children>
+                  </VBox>
+                  <TextArea fx:id="recipeDescription" promptText="Description" />
+                  <VBox>
+                     <children>
+                        <TextField fx:id="IngredientSearch" promptText="Search ingredients" />
+                        <ListView fx:id="recipeIngredients" prefHeight="200.0" prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </ListView>
+                        <TextField fx:id="ingredientAmount" promptText="Amount" />
+                        <TextField fx:id="ingredientUnit" promptText="Unit" />
+                        <Button fx:id="addIngredients" mnemonicParsing="false" onAction="#addIngredientsButton" text="Add Ingredient" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
             </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
         </Pane>
     </center>
-    <left>
-        <VBox prefHeight="281.0" prefWidth="163.0" spacing="5.0" BorderPane.alignment="CENTER">
-            <children>
-            <TextField fx:id="recipeCuisine" promptText="Cuisine" />
-            <TextField fx:id="recipeType" promptText="Type of Dish" />
-            <TextField fx:id="recipeName" promptText="Recipe Name" />
-                <HBox />
-            <TextField fx:id="recipeDiet" promptText="Diet" />
-            <TextField fx:id="recipeTime" promptText="Time to make" />
-            <TextField fx:id="recipeDifficulty" promptText="Difficulty" />
-            </children>
-        </VBox>
-    </left>
+   <bottom>
+      <Pane BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="100.0" prefWidth="799.0">
+               <children>
+                  <Region prefHeight="200.0" />
+                  <HBox spacing="10.0">
+                     <children>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button fx:id="recipeSubmit" mnemonicParsing="false" onAction="#SubmitButtonAction" text="Submit" />
+                        <Button fx:id="recipeDelete" mnemonicParsing="false" onAction="#deleteRecipe" text="Delete" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </Pane>
+   </bottom>
+   <top>
+      <VBox prefHeight="100.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Region prefHeight="200.0" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="recipeName" promptText="Recipe Name">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </top>
 </BorderPane>
