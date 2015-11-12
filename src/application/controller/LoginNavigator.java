@@ -29,7 +29,7 @@ public class LoginNavigator {
     /**
      * Stores the main controller for later use in navigation tasks.
      *
-     * @param mainController the main application layout controller.
+     * @param loginController the main application layout controller.
      */
     public static void setLoginController(MainController loginController){
         LoginNavigator.mainController = loginController;

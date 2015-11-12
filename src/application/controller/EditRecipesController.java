@@ -1,6 +1,8 @@
 package application.controller;
 
 import application.dbTools.Query;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -43,6 +45,14 @@ public class EditRecipesController implements Initializable{
     private ListView recipeIngredients;
     @FXML
     private Button recipeSubmit;
+    @FXML
+    private TextField ingredientUnit;
+    @FXML
+    private TextField ingredientTime;
+    @FXML
+    private ListView ingredientUnit;
+    @FXML
+    private Button addIngredients;
 
 
     @Override
@@ -50,6 +60,7 @@ public class EditRecipesController implements Initializable{
         System.out.println("Initialize EditRecipesController");
         mainController = VistaNavigator.getMainController();
         updateEditRecipeList();
+        updateIngredients();
         System.out.println("- End of Initialize EditRecipesController");
     }
 
@@ -125,4 +136,37 @@ public class EditRecipesController implements Initializable{
         }
     }
 
+    /**
+     * Loads the name of all recipes and puts them into recipList.
+     */
+    public void updateIngredients(){
+        ArrayList<ArrayList<String>> dataSet;
+        ObservableList<String> itemList = FXCollections.observableArrayList();
+
+        try {
+            System.out.println("- Main updateIngredientsRecipList");
+
+            dataSet = Query.fetchData("Ingredients", "Name");
+
+            for (ArrayList<String> element : dataSet){
+                itemList.add(element.get(0));
+            }
+
+            System.out.println("- end of Main updateIngredientsRecipList");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        recipeIngredients.setItems(itemList);
+    }
+
+    public void addIngredientsButton(){
+
+        try {
+            updateData("Ingredients, RUI",ingredientTime.getText() );
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -106,7 +106,6 @@ public class RecipeController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     /**
