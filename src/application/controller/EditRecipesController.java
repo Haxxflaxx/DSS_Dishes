@@ -15,14 +15,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static application.dbTools.Query.deleteFrom;
-import static application.dbTools.Query.updateData;
+import static application.dbTools.Query.*;
 
 
 /**
  * Created by haxxflaxx on 2015-11-03.
  */
-public class EditRecipesController implements Initializable{
+public class EditRecipesController implements Initializable {
 
     MainController mainController;
     private String recipeID;
@@ -46,9 +45,9 @@ public class EditRecipesController implements Initializable{
     @FXML
     private Button recipeSubmit;
     @FXML
-    private TextField ingredientUnit;
+    private TextField ingredientAmount;
     @FXML
-    private TextField ingredientTime;
+    private TextField ingredientUnit;
     @FXML
     private TextField ingredientSearch;
     @FXML
@@ -67,7 +66,7 @@ public class EditRecipesController implements Initializable{
     /**
      * Updates the fields in the editing of recipes to the selected item.
      */
-    public void updateEditRecipeList(){
+    public void updateEditRecipeList() {
         ArrayList<ArrayList<String>> dataSet;
         String currentRecipe = mainController.recipList.getSelectionModel().getSelectedItems().toString();
         currentRecipe = currentRecipe.substring(1, currentRecipe.length() - 1);
@@ -76,7 +75,7 @@ public class EditRecipesController implements Initializable{
 
         try {
             System.out.println("- UpdateEditRecipeList");
-            dataSet = Query.fetchData("recipes", "*", condition);       //Method for fetching the recipes where
+            dataSet = fetchData("recipes", "*", condition);       //Method for fetching the recipes where
             recipeID = dataSet.get(0).get(0);                           //name == selected recipe
             recipeName.setText(dataSet.get(0).get(1));
             recipeType.setText(dataSet.get(0).get(2));
@@ -95,24 +94,23 @@ public class EditRecipesController implements Initializable{
     /**
      * ButtonMethod for deleting the selected recipe
      */
-    public void deleteRecipe(){
+    public void deleteRecipe() {
 
         try {
             System.out.println("- DeleteRecipe");
-            String criteria = "ID='" + Query.fetchData("Recipes", "ID", "Name ='" + recipeName.getText() + "'") + "'";
-            criteria = criteria.replaceAll("\\[", "").replaceAll("\\]","");
+            String criteria = "ID='" + fetchData("Recipes", "ID", "Name ='" + recipeName.getText() + "'") + "'";
+            criteria = criteria.replaceAll("\\[", "").replaceAll("\\]", "");
             deleteFrom("Recipes", criteria);            //Delete recipes where name == selected recipe
 
             mainController.recipList.getSelectionModel().select(1);
             System.out.println("- End of DeleteRecipe");
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     *  ButtonMethod for updating Recipes
+     * ButtonMethod for updating Recipes
      */
     public void SubmitButtonAction() {
         String[] columns = {"Name", "Type", "Cuisine", "Difficulty", "Diet", "Time", "Description"};     //Array with columns
@@ -121,7 +119,7 @@ public class EditRecipesController implements Initializable{
 
         String currentRecipe = mainController.recipList.getSelectionModel().getSelectedItems().toString();
         currentRecipe = "NAME='" + currentRecipe + "'";
-        currentRecipe = currentRecipe.replaceAll("\\[", "").replaceAll("\\]","");
+        currentRecipe = currentRecipe.replaceAll("\\[", "").replaceAll("\\]", "");
 
 
         try {
@@ -129,9 +127,7 @@ public class EditRecipesController implements Initializable{
             updateData("Recipes", columns, values, currentRecipe);                   //Update data in columns with values
             mainController.recipList.getSelectionModel().select(1);
             System.out.println("- End of SubmitButtonAction");
-        }
-
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -139,16 +135,16 @@ public class EditRecipesController implements Initializable{
     /**
      * Loads the name of all recipes and puts them into recipList.
      */
-    public void updateIngredients(){
+    public void updateIngredients() {
         ArrayList<ArrayList<String>> dataSet;
         ObservableList<String> itemList = FXCollections.observableArrayList();
 
         try {
             System.out.println("- Main updateIngredientsRecipList");
 
-            dataSet = Query.fetchData("Ingredients", "Name");
+            dataSet = fetchData("Ingredients", "Name");
 
-            for (ArrayList<String> element : dataSet){
+            for (ArrayList<String> element : dataSet) {
                 itemList.add(element.get(0));
             }
 
@@ -159,14 +155,23 @@ public class EditRecipesController implements Initializable{
         recipeIngredients.setItems(itemList);
     }
 
-    public void addIngredientsButton(){
+    public void addIngredientsButton() {
 
-     //   try {
-          //  updateData("Ingredients, RUI",ingredientTime.getText() );
+        String selectedIngredient = recipeIngredients.getSelectionModel().getSelectedItems().toString();
+        selectedIngredient = selectedIngredient.replaceAll("\\[", "").replaceAll("\\]", "");
+        String condition = "Name='" + selectedIngredient + "'";
 
-   //     }
-     //   catch (SQLException e) {
-       //     e.printStackTrace();
- //       }
+
+        try {
+            String ID = fetchData("Ingredients","ID", condition).get(0).get(0);
+            String values = "'" +recipeID + "', '" + ID + "', '" + ingredientAmount.getText() + "', '" +
+                    ingredientUnit.getText() + "'";
+
+            insertInto("RUI", "RID, IID, Quantity, Unit", values);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
+
 }
