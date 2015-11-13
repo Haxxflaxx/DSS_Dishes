@@ -166,8 +166,10 @@ public class EditRecipesController implements Initializable {
             String ID = fetchData("Ingredients","ID", condition).get(0).get(0);
             String values = "'" +recipeID + "', '" + ID + "', '" + ingredientAmount.getText() + "', '" +
                     ingredientUnit.getText() + "'";
-
             insertInto("RUI", "RID, IID, Quantity, Unit", values);
+            ingredientAmount.setText("");
+            ingredientUnit.setText("");
+            recipeIngredients.getSelectionModel().clearSelection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
