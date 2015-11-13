@@ -1,5 +1,6 @@
 package application.controller;
 
+import application.Recipe;
 import application.dbTools.Query;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,9 +21,7 @@ import java.util.ResourceBundle;
  */
 public class RecipeController implements Initializable {
 
-    MainController mainController;
-    private String recipeID;
-
+    private Recipe recipe;
 
     @FXML    private Label recipeName;
     @FXML    private Label recipeType;
@@ -45,10 +44,9 @@ public class RecipeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("- Initialize RecipeController");
-        mainController = VistaNavigator.getMainController();
+        recipe = Recipe.getSelected();
         updateContent();
         updateIngredientList();
-        mainController.updateRecipList();
         System.out.println("- End of Initialize RecipeController");
     }
 
@@ -59,31 +57,18 @@ public class RecipeController implements Initializable {
      */
     private void updateContent(){
 
-        ArrayList<ArrayList<String>> dataSet;
-        String recipeChoice = mainController.recipList.getSelectionModel().getSelectedItems().toString();
+        System.out.println("- Recipe updateContent");
 
-        recipeChoice = recipeChoice.substring(1, recipeChoice.length() - 1);
+        recipeName.setText(recipe.getName());
+        recipeType.setText(recipe.getType());
+        recipeCuisine.setText(recipe.getCuisine());
+        recipeDifficulty.setText(recipe.getDifficulty());
+        recipeTime.setText(recipe.getTime());
+        recipeDiet.setText(recipe.getDiet());
+        recipeDescription.setText(recipe.getDescription());
 
-        String condition = "Name= '" + recipeChoice + "'";
+        System.out.println("- End of Recipe updateContent");
 
-        try {
-            System.out.println("- Recipe updateContent");
-
-            dataSet = Query.fetchData("recipes", "*", condition);
-            recipeID = dataSet.get(0).get(0);
-            recipeName.setText(dataSet.get(0).get(1));
-            recipeType.setText(dataSet.get(0).get(2));
-            recipeCuisine.setText(dataSet.get(0).get(3));
-            recipeDifficulty.setText(dataSet.get(0).get(4));
-            recipeTime.setText(dataSet.get(0).get(7));
-            recipeDiet.setText(dataSet.get(0).get(6));
-            recipeDescription.setText(dataSet.get(0).get(9));
-
-            System.out.println("- End of Recipe updateContent");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -91,7 +76,7 @@ public class RecipeController implements Initializable {
      */
     private void updateIngredientList() {
         ArrayList<ArrayList<String>> dataSet;                     //Arraylist for storing the ingredients
-        String condition = "RUI.IID = ingredients.ID AND RID = '" + recipeID + "'";
+        String condition = "RUI.IID = ingredients.ID AND RID = '" + recipe.getId() + "'";
         ObservableList<String> itemList = FXCollections.observableArrayList();
 
         try {

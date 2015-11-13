@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -62,6 +63,18 @@ public class SearchController implements Initializable {
     @Override
 
     public void initialize(URL location, ResourceBundle resources) {
+        searchResult.setRowFactory(tv -> {
+            TableRow<Recipe> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    Recipe.setSelected(row.getItem());
+                    VistaNavigator.loadVista(
+                            VistaNavigator.RECIPE
+                    );
+                }
+            });
+            return row;
+        });
         id.setCellValueFactory(
                 new PropertyValueFactory<Recipe, String>("id")
         );

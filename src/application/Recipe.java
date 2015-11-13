@@ -6,6 +6,8 @@ package application;
  * Container for holding a recipe.
  */
 public class Recipe {
+    private static Recipe selected;
+
     String id;
     String name;
     String type;
@@ -28,6 +30,14 @@ public class Recipe {
         this.time = time;
         this.timeUnit = timeUnit;
         this.description = description;
+    }
+
+    public static Recipe getSelected() {
+        return selected;
+    }
+
+    public static void setSelected(Recipe selected) {
+        Recipe.selected = selected;
     }
 
     public String getId() {
