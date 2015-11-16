@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.scene.control.Label;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,9 +19,13 @@ import java.util.ResourceBundle;
 
 import static application.dbTools.Query.fetchData;
 
+/**
+ * Created by Pierre on 2015-11-06.
+ */
+
 public class LoginController implements Initializable {
 
-
+    @FXML private Label CheckMessage;
     @FXML private TextField usernameField;
     @FXML private TextField passwordField;
     @FXML private Button loginButton;
@@ -65,46 +70,46 @@ public class LoginController implements Initializable {
     private boolean isValidCredentials(){
 
         boolean log_in = false;
-        String LoginUser = usernameField.getText(); //LoginUser is "username"+userinput
-        String LoginPass= passwordField.getText();//LoginPass is "password"+userinput
+        String LoginUser = usernameField.getText().toString(); //LoginUser is "username"+userinput
+        String LoginPass= passwordField.getText().toString();//LoginPass is "password"+userinput
 
         LoginUser = "Username='" + LoginUser + "'";
         LoginPass = "Password='" + LoginPass + "'";
 
         try {
-            String Username= fetchData("Users", "Username", LoginUser).toString();
-            String Password= fetchData("Users", "Password", LoginPass).toString();
+            String Username = fetchData("Users", "Username", LoginUser).toString();
+            String Password = fetchData("Users", "Password", LoginPass).toString();
 
-            Username = Username.replaceAll("\\[", "").replaceAll("\\]",""); //replacing sql chars which interrupting the code
-            Password = Password.replaceAll("\\[", "").replaceAll("\\]",""); //replacing sql chars which interrupting the code
 
-            String CheckUsername = usernameField.getText();
-            String CheckPassword = passwordField.getText();
+            Username = Username.replaceAll("\\[", "").replaceAll("\\]", ""); //replacing sql chars
+            Password = Password.replaceAll("\\[", "").replaceAll("\\]", ""); //replacing sql chars
+
+
+            String CheckUsername = usernameField.getText().toString();
+            String CheckPassword = passwordField.getText().toString();
 
             System.out.println("CheckUsername :" + CheckUsername); //checking username through intellij console
             System.out.println("CheckPassword :" + CheckPassword); //checking password through intellij console
 
-            if (CheckUsername.equals(Username) && CheckPassword.equals(Password)) {
-                System.out.println("You are logged in!");
-               log_in = true;
+
+                if (CheckUsername.equals(Username) && CheckPassword.equals(Password)) {
+
+                    System.out.println("You are logged in!");
+                    log_in = true;
+                } else {
+                    usernameField.clear();
+                    passwordField.clear();
+                    CheckMessage.setText("Invalid credentials MOFO");
+                }
+
+                return log_in;
             }
 
-            else { //username-password fields get cleared
-                usernameField.clear();
-                passwordField.clear();
+            catch(SQLException e){
+                e.printStackTrace();
             }
 
-            return log_in;
-        }
-
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
-
-    return log_in;
-    }
+    return log_in;}
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
