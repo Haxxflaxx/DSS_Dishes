@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,6 +30,7 @@ public class LoginController implements Initializable {
     @FXML private TextField usernameField;
     @FXML private TextField passwordField;
     @FXML private Button loginButton;
+    @FXML private MenuButton buttonLoggedin;
 
     @FXML private void handleButtonAction (ActionEvent event) throws IOException {
 
@@ -100,6 +102,7 @@ public class LoginController implements Initializable {
                     LoginNavigator.loadLogin(
                             LoginNavigator.LOGGEDIN
                     );
+                    
 
                 } else {
                     usernameField.clear();
