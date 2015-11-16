@@ -45,38 +45,70 @@
    <center>
       <Pane>
          <children>
+            <Separator orientation="VERTICAL" prefHeight="630.0" />
+            <Separator prefWidth="820.0" />
             <StackPane fx:id="vistaHolder" BorderPane.alignment="CENTER" />
          </children>
       </Pane>
    </center>
    <left>
-      <VBox prefWidth="175.0" spacing="5.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="browseMenu" prefWidth="175.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="All Recipes">
+            <Separator layoutX="10.0" layoutY="115.0" prefWidth="200.0" />
+            <Label fx:id="allRecipes" onMouseClicked="#allRecipesclick" text="All Recipes">
                <font>
                   <Font size="20.0" />
                </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
             </Label>
-            <Label layoutX="10.0" layoutY="40.0" text="Top Rated">
+            <Label fx:id="topRated" layoutX="10.0" layoutY="40.0" onMouseClicked="#topRatedclick" text="Top Rated">
                <font>
                   <Font size="20.0" />
                </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
             </Label>
-            <Label layoutX="10.0" layoutY="10.0" text="New Recipes">
+            <Label fx:id="newRecipes" layoutX="10.0" layoutY="10.0" onMouseClicked="#newRecipesclick" text="New Recipes">
                <font>
                   <Font size="20.0" />
                </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
             </Label>
-            <Region prefHeight="100.0" />
-            <Label layoutX="10.0" layoutY="70.0" text="My Recipes">
+            <Region prefHeight="20.0">
+               <padding>
+                  <Insets left="10.0" />
+               </padding></Region>
+            <Separator layoutX="10.0" layoutY="10.0" prefWidth="200.0">
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </Separator>
+            <Label fx:id="myRecipes" layoutX="10.0" layoutY="70.0" onMouseClicked="#myRecipesclick" text="My Recipes">
                <font>
                   <Font size="20.0" />
                </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
             </Label>
-            <ListView fx:id="recipList" VBox.vgrow="ALWAYS" />
-            <Button fx:id="addRecipe" mnemonicParsing="false" onAction="#addNewRecipeButton" text="+" />
-            <Region prefHeight="200.0" />
+            <Label fx:id="addRecipe" layoutX="10.0" layoutY="137.0" onMouseClicked="#addNewRecipeclick" text="+ Add Recipe">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <ListView fx:id="recipList" maxHeight="1.0" maxWidth="1.0" prefHeight="1.0" prefWidth="1.0" VBox.vgrow="NEVER" />
          </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </VBox>
    </left>
 </BorderPane>

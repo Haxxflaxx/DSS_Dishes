@@ -9,7 +9,9 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import javafx.scene.control.Label;
 
+import java.awt.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -124,7 +126,7 @@ public class MainController implements Initializable {
     /**
      * Button for adding new Recipes.
      */
-    public void addNewRecipeButton(){
+    public void addNewRecipeclick(){
 
         try {
             System.out.println("- addNewRecipeButton");
@@ -139,7 +141,25 @@ public class MainController implements Initializable {
     }
 
 
+    public void allRecipesclick(){
+        VistaNavigator.loadVista(
+                VistaNavigator.WELCOME
+        );
+        System.out.println("Load All Recipes");
 
+    }
+
+    public void topRatedclick(){
+        System.out.println("Load Top Rated Recipes");
+    }
+
+    public void newRecipesclick(){
+        System.out.println("Load New Recipes");
+    }
+
+    public void myRecipesclick(){
+        System.out.println("Load My Recipes");
+    }
 
 }
 
