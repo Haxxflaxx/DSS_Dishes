@@ -37,7 +37,7 @@
                               <Insets />
                            </HBox.margin>
                         </PasswordField>
-                        <Button fx:id="loginButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Login">
+                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginScreen" prefHeight="25.0" prefWidth="80.0" text="Login">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -47,6 +47,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                   </HBox>
+                  <Label fx:id="CheckMessage" prefHeight="37.0" prefWidth="408.0" textAlignment="JUSTIFY" textFill="RED" />
                   <Region prefHeight="20.0" />
                   <Line endX="300.0" startX="-100.0" strokeWidth="3.0">
                      <stroke>
