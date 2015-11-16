@@ -80,5 +80,4 @@ public class VistaNavigator {
             e.printStackTrace();
         }
     }
-
 }
