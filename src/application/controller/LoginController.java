@@ -96,10 +96,15 @@ public class LoginController implements Initializable {
 
                     System.out.println("You are logged in!");
                     log_in = true;
+
+                    LoginNavigator.loadLogin(
+                            LoginNavigator.LOGGEDIN
+                    );
+
                 } else {
                     usernameField.clear();
                     passwordField.clear();
-                    CheckMessage.setText("Invalid credentials MOFO");
+                    CheckMessage.setText("Wrong Username or Password");
                 }
 
                 return log_in;
