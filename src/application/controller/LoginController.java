@@ -29,6 +29,10 @@ public class LoginController implements Initializable {
     @FXML private Button loginButton;
     @FXML private MenuButton buttonLoggedin;
     @FXML private MenuItem buttonSignout;
+    @FXML private TextField registerusernameField;
+    @FXML private TextField registerPasswordField;
+    @FXML private TextField confirmPasswordField;
+    @FXML private TextField emailField;
 
      private void handleButtonAction (ActionEvent event) throws IOException {
 
