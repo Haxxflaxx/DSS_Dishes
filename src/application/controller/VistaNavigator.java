@@ -88,17 +88,6 @@ public class VistaNavigator {
      * Loads the vista specified by the fxml file into the
      * vistaHolder pane of the main application layout.
      *
-     * Previously loaded vista for the same fxml file are not cached.
-     * The fxml is loaded anew and a new vista node hierarchy generated
-     * every time this method is invoked.
-     *
-     * A more sophisticated load function could potentially add some
-     * enhancements or optimizations, for example:
-     *   cache FXMLLoaders
-     *   cache loaded vista nodes, so they can be recalled or reused
-     *   allow a user to specify vista node reuse or new creation
-     *   allow back and forward history like a browser
-     *
      * @param fxml the fxml file to be loaded.
      */
     public static void loadVista(String fxml) {
@@ -108,6 +97,27 @@ public class VistaNavigator {
                     FXMLLoader.load(
                             VistaNavigator.class.getResource(
                                     fxml
+                            )
+                    )
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Loads the vista specified by the activeController
+     * into the vistaHolder pane of the main application layout.
+     */
+    public static void reloadVista(){
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setController(activeController);
+
+        try {
+            mainController.setVista(
+                    fxmlLoader.load(
+                            VistaNavigator.class.getResource(
+                                    activeController.getFxml()
                             )
                     )
             );
