@@ -72,17 +72,17 @@
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="recipeTime" promptText="Username" />
+                        <TextField fx:id="registerusernameField" promptText="Username" />
                         <HBox spacing="10.0">
                            <children>
-                              <PasswordField promptText="Choose your password" />
-                              <PasswordField promptText="Confirm password" />
+                              <PasswordField fx:id="registerPasswordField" promptText="Choose your password" />
+                              <PasswordField fx:id="confirmPasswordField" promptText="Confirm password" />
                            </children>
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
                         </HBox>
-                        <TextField fx:id="recipeDiet" promptText="Email" />
+                        <TextField fx:id="emailField" promptText="Email" />
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Region HBox.hgrow="ALWAYS" />
