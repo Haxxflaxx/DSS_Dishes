@@ -20,7 +20,7 @@ import static application.dbTools.Query.updateData;
 /**
  * Created by haxxflaxx on 2015-11-03.
  */
-public class EditRecipesController implements Initializable{
+public class EditRecipesController extends NavigationController implements Initializable{
 
     MainController mainController;
     private String recipeID;
@@ -125,4 +125,8 @@ public class EditRecipesController implements Initializable{
         }
     }
 
+    @Override
+    public String getFxml() {
+        return VistaNavigator.EDITRECIPES;
+    }
 }

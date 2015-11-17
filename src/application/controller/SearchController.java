@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 /**
  * Created by Haxxflaxx on 2015-11-06.
  */
-public class SearchController implements Initializable {
+public class SearchController extends NavigationController implements Initializable {
 
 
     @FXML TableView searchResult;
@@ -133,5 +133,10 @@ public class SearchController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public String getFxml() {
+        return VistaNavigator.SEARCH;
     }
 }

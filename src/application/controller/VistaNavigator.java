@@ -3,6 +3,7 @@ package application.controller;
 import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
+import java.util.Stack;
 
 /**
  * Created by Haxxflaxx on 2015-11-02.
@@ -30,6 +31,40 @@ public class VistaNavigator {
 
     /** The main application layout controller. */
     private static MainController mainController;
+
+    /**
+     * Holds controllers for navigation history.
+     */
+    private static Stack<NavigationController> historyBack;
+    private static Stack<NavigationController> historyForward;
+    private static NavigationController activeController;
+
+    public static void moveForward() {
+        if (!historyForward.isEmpty()) {
+            historyBack.add(activeController);
+            activeController = historyForward.pop();
+        }
+    }
+
+    public static void moveBack() {
+        if (!historyBack.isEmpty()) {
+            historyForward.add(activeController);
+            activeController = historyBack.pop();
+        }
+    }
+
+    public static void clearForward() {
+        historyForward.clear();
+    }
+
+    public static NavigationController getActiveController() {
+        return activeController;
+    }
+
+    public static void setActiveController(NavigationController activeController) {
+        historyBack.add(VistaNavigator.activeController);
+        VistaNavigator.activeController = activeController;
+    }
 
     /**
      * Stores the main controller for later use in navigation tasks.
