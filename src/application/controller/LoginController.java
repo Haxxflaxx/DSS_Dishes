@@ -7,11 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,8 +28,9 @@ public class LoginController implements Initializable {
     @FXML private TextField passwordField;
     @FXML private Button loginButton;
     @FXML private MenuButton buttonLoggedin;
+    @FXML private MenuItem buttonSignout;
 
-    @FXML private void handleButtonAction (ActionEvent event) throws IOException {
+     private void handleButtonAction (ActionEvent event) throws IOException {
 
         Parent homepage = FXMLLoader.load(getClass().getResource("Homepage.fxml")); //access the fxml
         Scene homepagescene = new Scene(homepage); //ui elements
@@ -102,7 +100,7 @@ public class LoginController implements Initializable {
                     LoginNavigator.loadLogin(
                             LoginNavigator.LOGGEDIN
                     );
-                    
+
 
                 } else {
                     usernameField.clear();
@@ -118,6 +116,17 @@ public class LoginController implements Initializable {
             }
 
     return log_in;}
+
+    public void buttonSignout(){
+        System.out.println("You have been signed out");
+
+        LoginNavigator.loadLogin(
+                LoginNavigator.LOGIN
+        );
+        VistaNavigator.loadVista(
+                VistaNavigator.LOGINVISTA
+        );
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
