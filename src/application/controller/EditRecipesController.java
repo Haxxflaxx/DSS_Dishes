@@ -1,15 +1,16 @@
 package application.controller;
 
+import application.Ingredient;
+import application.Recipe;
 import application.dbTools.Query;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ public class EditRecipesController implements Initializable {
 
     MainController mainController;
     private String recipeID;
+    private ObservableList<Ingredient> items = FXCollections.observableArrayList();
+
 
     @FXML
     public TextField recipeName;
@@ -52,7 +55,14 @@ public class EditRecipesController implements Initializable {
     private TextField ingredientSearch;
     @FXML
     private Button addIngredients;
-
+    @FXML
+    private TableView addedIngredientTable;
+    @FXML
+    private TableColumn Name;
+    @FXML
+    private TableColumn Amount;
+    @FXML
+    private TableColumn Unit;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -60,6 +70,15 @@ public class EditRecipesController implements Initializable {
         mainController = VistaNavigator.getMainController();
         updateEditRecipeList();
         updateIngredients();
+        Name.setCellValueFactory(
+                new PropertyValueFactory<Ingredient, String>("name")
+        );
+        Amount.setCellValueFactory(
+                new PropertyValueFactory<Ingredient, String>("amount")
+        );
+        Unit.setCellValueFactory(
+                new PropertyValueFactory<Ingredient, String>("unit")
+        );
         System.out.println("- End of Initialize EditRecipesController");
     }
 
@@ -122,12 +141,31 @@ public class EditRecipesController implements Initializable {
         currentRecipe = currentRecipe.replaceAll("\\[", "").replaceAll("\\]", "");
 
 
+
         try {
             System.out.println("- SubmitButtonAction");
             updateData("Recipes", columns, values, currentRecipe);                   //Update data in columns with values
-            mainController.recipList.getSelectionModel().select(1);
             System.out.println("- End of SubmitButtonAction");
-        } catch (SQLException e) {
+
+            for (Object o : addedIngredientTable.getItems()) {
+                String iName = Name.getCellData(o).toString();                      //iName = ingredientName
+                String iAmount = Amount.getCellData(o).toString();                  //iAmount = ingredientAmount
+                String iUnit = Unit.getCellData(o).toString();                      //iUnit = ingredientUnit
+
+                System.out.println("TESTING" + iName);
+
+                String currentId = fetchData("Ingredients", "ID", "Name='" + iName + "'").toString();
+                currentId = currentId.replaceAll("\\[", "").replaceAll("\\]", "");
+
+                System.out.println("RECIPE ID"+ recipeID);
+                System.out.println("Current ID"+ currentId);
+
+                insertInto("RUI", "RID, IID, Quantity, Unit", recipeID + "," + currentId + "," + iAmount + "," + iUnit);
+
+            }
+            mainController.updateRecipList();
+            }
+         catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -155,25 +193,36 @@ public class EditRecipesController implements Initializable {
         recipeIngredients.setItems(itemList);
     }
 
-    public void addIngredientsButton() {
+    public void addIngredientButton() {
 
         String selectedIngredient = recipeIngredients.getSelectionModel().getSelectedItems().toString();
         selectedIngredient = selectedIngredient.replaceAll("\\[", "").replaceAll("\\]", "");
-        String condition = "Name='" + selectedIngredient + "'";
 
+        items.add(new Ingredient(selectedIngredient, ingredientAmount.getText(), ingredientUnit.getText()));
+        addedIngredientTable.setItems(items);
+
+    }
+
+    public void updateIngredientSearch(){
+        ArrayList<ArrayList<String>> dataSet;
+        ObservableList<String> itemList = FXCollections.observableArrayList();
+        String condition = "Name LIKE '" +"%" + ingredientSearch.getText() + "%'";
+        System.out.println("Condition " + condition);
 
         try {
-            String ID = fetchData("Ingredients","ID", condition).get(0).get(0);
-            String values = "'" +recipeID + "', '" + ID + "', '" + ingredientAmount.getText() + "', '" +
-                    ingredientUnit.getText() + "'";
-            insertInto("RUI", "RID, IID, Quantity, Unit", values);
-            ingredientAmount.setText("");
-            ingredientUnit.setText("");
-            recipeIngredients.getSelectionModel().clearSelection();
+
+            dataSet = fetchData("Ingredients", "Name", condition);
+
+            for (ArrayList<String> element : dataSet){
+                itemList.add(element.get(0));
+
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        recipeIngredients.setItems(itemList);
     }
+
 
 
 }

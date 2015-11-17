@@ -44,7 +44,7 @@
                            <children>
                               <VBox>
                                  <children>
-                                    <TextField fx:id="IngredientSearch" promptText="Search ingredients" />
+                                    <TextField fx:id="ingredientSearch" onKeyPressed="#updateIngredientSearch" promptText="Search ingredients" />
                                     <ListView fx:id="recipeIngredients" prefWidth="250.0" />
                                  </children>
                               </VBox>
@@ -54,12 +54,21 @@
                                     <Region prefHeight="200.0" prefWidth="200.0" />
                                     <TextField fx:id="ingredientAmount" promptText="Amount" />
                                     <TextField fx:id="ingredientUnit" promptText="Unit" />
-                                    <Button fx:id="addIngredients" mnemonicParsing="false" onAction="#addIngredientsButton" text="Add Ingredient" />
-                                    <Region prefHeight="200.0" />
+                                    <Button fx:id="addIngredients" mnemonicParsing="false" onAction="#addIngredientButton" text="Add Ingredient" />
+                                    <Region prefHeight="200.0">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin></Region>
                                  </children>
                               </VBox>
+                              <TableView fx:id="addedIngredientTable" editable="true" prefHeight="200.0" prefWidth="277.0">
+                                <columns>
+                                  <TableColumn fx:id="Name" prefWidth="132.0" text="Name" />
+                                  <TableColumn fx:id="Amount" prefWidth="32.0" text="Amount" />
+                                    <TableColumn fx:id="Unit" prefWidth="112.0" text="Unit" />
+                                </columns>
+                              </TableView>
                               <Region HBox.hgrow="ALWAYS" />
-                              <ListView prefWidth="250.0" />
                            </children>
                         </HBox>
                      </children>
