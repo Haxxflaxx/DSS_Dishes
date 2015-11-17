@@ -35,9 +35,9 @@ public class VistaNavigator {
     /**
      * Holds controllers for navigation history.
      */
-    private static Stack<NavigationController> historyBack;
-    private static Stack<NavigationController> historyForward;
-    private static NavigationController activeController;
+    private static Stack<NavigationController> historyBack = new Stack<>();
+    private static Stack<NavigationController> historyForward = new Stack<>();
+    private static NavigationController activeController = null;
 
     public static void moveForward() {
         if (!historyForward.isEmpty()) {
@@ -54,7 +54,7 @@ public class VistaNavigator {
     }
 
     public static void clearForward() {
-        historyForward.clear();
+        if (!historyForward.isEmpty()) historyForward.clear();
     }
 
     public static NavigationController getActiveController() {
@@ -62,7 +62,7 @@ public class VistaNavigator {
     }
 
     public static void setActiveController(NavigationController activeController) {
-        historyBack.add(VistaNavigator.activeController);
+        if (activeController != null) historyBack.add(VistaNavigator.activeController);
         VistaNavigator.activeController = activeController;
     }
 

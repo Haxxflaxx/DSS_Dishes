@@ -34,8 +34,8 @@
                      <children>
                         <HBox spacing="10.0">
                            <children>
-                              <Button fx:id="back" mnemonicParsing="false" text="&lt;" />
-                              <Button fx:id="forward" mnemonicParsing="false" text="&gt;" />
+                              <Button fx:id="back" mnemonicParsing="false" onAction="#back" text="&lt;" />
+                              <Button fx:id="forward" mnemonicParsing="false" onAction="#forward" text="&gt;" />
                            </children>
                         </HBox>
                               <TextField fx:id="recipSearch" onKeyPressed="#search" promptText="Search" />

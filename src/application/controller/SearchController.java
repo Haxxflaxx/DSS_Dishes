@@ -45,6 +45,8 @@ public class SearchController extends NavigationController implements Initializa
      * Get MainController instance and generate a selection condition for query.
      */
     public SearchController() {
+        super();
+
         search = VistaNavigator.getMainController().getSearch();
 
         String nameCondition = "Name LIKE '%" + search + "%' ";

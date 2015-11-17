@@ -138,5 +138,23 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Navigation method for going back to a previous view
+     */
+    public void back(){
+        System.out.println(VistaNavigator.getActiveController());
+        VistaNavigator.moveBack();
+        System.out.println(VistaNavigator.getActiveController());
+        VistaNavigator.reloadVista();
+    }
+
+    /**
+     * Navigation method for going forward to a previous view
+     */
+    public void forward(){
+        VistaNavigator.moveForward();
+        VistaNavigator.reloadVista();
+    }
 }
 
