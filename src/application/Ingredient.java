@@ -1,9 +1,9 @@
 package application;
 
-import javafx.fxml.Initializable;
-
 /**
- * Created by Frank on 16/11/15.
+ * Created by Fredrik on 2015-11-15.
+ *
+ * Container for holding a ingredient.
  */
 public class Ingredient {
     String name;

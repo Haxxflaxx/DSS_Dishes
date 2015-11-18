@@ -86,7 +86,7 @@ public class RecipeController implements Initializable {
             for (ArrayList<String> element : dataSet){            //Adds an element for every item in the dataset
                 itemList.add(element.get(0)+ "  " + element.get(1)+ "  " + element.get(2));
                 }
-            recipeIngredients.setItems(itemList);
+            recipeIngredients.setItems(itemList);                 //Sets the listview as the observable arraylist
             System.out.println("- End of UpdateIngredientList");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -99,7 +99,7 @@ public class RecipeController implements Initializable {
     public void editRecipeView(){
         System.out.println("- Load editRecipeview");
         VistaNavigator.loadVista(
-                VistaNavigator.EDITRECIPES);
+                VistaNavigator.EDITRECIPES);                       //Load editRecipesView
         System.out.println("- end of Load editRecipeview");
     }
 

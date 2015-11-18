@@ -1,8 +1,6 @@
 package application.controller;
 
 import application.Ingredient;
-import application.Recipe;
-import application.dbTools.Query;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,7 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -64,6 +61,10 @@ public class EditRecipesController implements Initializable {
     @FXML
     private TableColumn Unit;
 
+    /**
+     * Updates updateEditRecipeList and UpdateIngredients when loading vista.
+     * Sets cellValueFactory with the column names for the tableview.
+     */
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -132,7 +133,7 @@ public class EditRecipesController implements Initializable {
     }
 
     /**
-     * ButtonMethod for updating Recipes
+     * ButtonMethod for updating data into the recipes
      */
     public void SubmitButtonAction() {
         String[] columns = {"Name", "Type", "Cuisine", "Difficulty", "Diet", "Time", "Description"};     //Array with columns
@@ -150,7 +151,7 @@ public class EditRecipesController implements Initializable {
             updateData("Recipes", columns, values, currentRecipe);                   //Update data in columns with values
             System.out.println("- End of SubmitButtonAction");
 
-            for (Object o : addedIngredientTable.getItems()) {
+            for (Object o : addedIngredientTable.getItems()) {                      //Foreach object in the list, getItems
                 String iName = Name.getCellData(o).toString();                      //iName = ingredientName
                 String iAmount = Amount.getCellData(o).toString();                  //iAmount = ingredientAmount
                 String iUnit = Unit.getCellData(o).toString();                      //iUnit = ingredientUnit
@@ -174,38 +175,44 @@ public class EditRecipesController implements Initializable {
     }
 
     /**
-     * Loads the name of all ingredients and puts them into ingredientlist.
+     * Loads the name of all ingredients and puts them in ingredientlist.
      */
     public void updateIngredients() {
         ArrayList<ArrayList<String>> dataSet;
-        ObservableList<String> itemList = FXCollections.observableArrayList();
+        ObservableList<String> itemList = FXCollections.observableArrayList();      //Observable arraylist for the listview
 
         try {
             System.out.println("- Main updateIngredientsRecipList");
 
-            dataSet = fetchData("Ingredients", "Name");
+            dataSet = fetchData("Ingredients", "Name");                             //Gives the arraylist the ingredientnames
 
             for (ArrayList<String> element : dataSet) {
-                itemList.add(element.get(0));
+                itemList.add(element.get(0));                                       //For every element in the array, get name
             }
 
             System.out.println("- end of Main updateIngredientsRecipList");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        recipeIngredients.setItems(itemList);
+        recipeIngredients.setItems(itemList);                                       //Sets the Listview to show the obs arraylist
     }
 
+    /**
+     * ButtonMethod for add ingredients from the ingredientList into the tableview
+     */
     public void addIngredientButton() {
 
         String selectedIngredient = recipeIngredients.getSelectionModel().getSelectedItems().toString();
         selectedIngredient = selectedIngredient.replaceAll("\\[", "").replaceAll("\\]", "");
 
-        items.add(new Ingredient(selectedIngredient, ingredientAmount.getText(), ingredientUnit.getText()));
-        addedIngredientTable.setItems(items);
+        items.add(new Ingredient(selectedIngredient, ingredientAmount.getText(), ingredientUnit.getText()));    //Creates new
+        addedIngredientTable.setItems(items);               //Object of the type Ingredient and adds it to the tableView.
 
     }
 
+    /**
+     * Searchfield for searching ingredients in the ingredientList
+     */
     public void updateIngredientSearch(){
         ArrayList<ArrayList<String>> dataSet;
         ObservableList<String> itemList = FXCollections.observableArrayList();
@@ -223,9 +230,6 @@ public class EditRecipesController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        recipeIngredients.setItems(itemList);
-    }
-
-
-
+        recipeIngredients.setItems(itemList);               //Sets the listview to show the ingredients that matches the search
+    }                                                       //Criteria
 }

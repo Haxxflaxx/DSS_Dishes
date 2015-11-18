@@ -1,16 +1,7 @@
 package application.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.control.MenuItem;
-
-import java.awt.*;
-import java.net.URL;
-import java.util.ResourceBundle;
+import javafx.scene.control.*;
 
 
 /**
