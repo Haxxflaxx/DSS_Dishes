@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 /**
  * Created by Pierre on 2015-11-18.
  */
-public class BrowseController implements Initializable {
+public class BrowseController extends NavigationController implements Initializable {
 
     @FXML private TableView recipeTable;
     @FXML TableColumn id;
@@ -87,5 +87,9 @@ public class BrowseController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    @Override
+    public String getFxml() {
+        return VistaNavigator.WELCOME;
     }
 }
