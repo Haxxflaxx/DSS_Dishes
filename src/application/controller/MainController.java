@@ -153,7 +153,9 @@ public class MainController implements Initializable {
      * Navigation method for going forward to a previous view
      */
     public void forward(){
+        System.out.println(VistaNavigator.getActiveController());
         VistaNavigator.moveForward();
+        System.out.println(VistaNavigator.getActiveController());
         VistaNavigator.reloadVista();
     }
 }

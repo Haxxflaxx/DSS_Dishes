@@ -1,6 +1,7 @@
 package application.controller;
 
 import javafx.fxml.FXMLLoader;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.util.Stack;
@@ -40,21 +41,23 @@ public class VistaNavigator {
     private static NavigationController activeController = null;
 
     public static void moveForward() {
-        if (!historyForward.isEmpty()) {
-            historyBack.add(activeController);
+        if (!historyForward.empty()) {
+            historyBack.push(activeController);
             activeController = historyForward.pop();
         }
     }
 
     public static void moveBack() {
-        if (!historyBack.isEmpty()) {
-            historyForward.add(activeController);
+        if (!historyBack.empty()) {
+            historyForward.push(activeController);
+            System.out.println(historyBack.peek());
             activeController = historyBack.pop();
+            System.out.println(historyBack.peek());
         }
     }
 
     public static void clearForward() {
-        if (!historyForward.isEmpty()) historyForward.clear();
+        if (!historyForward.empty()) historyForward.clear();
     }
 
     public static NavigationController getActiveController() {
@@ -108,18 +111,24 @@ public class VistaNavigator {
     /**
      * Loads the vista specified by the activeController
      * into the vistaHolder pane of the main application layout.
+     * Uses activeController as controller.
      */
     public static void reloadVista(){
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setController(activeController);
+
+        fxmlLoader.setControllerFactory(type -> {
+            return activeController; // Let the FXMLLoader handle construction...
+        });
+
+        fxmlLoader.setLocation(
+                VistaNavigator.class.getResource(
+                        activeController.getFxml()
+                )
+        );
 
         try {
             mainController.setVista(
-                    fxmlLoader.load(
-                            VistaNavigator.class.getResource(
-                                    activeController.getFxml()
-                            )
-                    )
+                    fxmlLoader.load()
             );
         } catch (IOException e) {
             e.printStackTrace();
