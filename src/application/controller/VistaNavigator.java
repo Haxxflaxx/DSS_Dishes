@@ -1,8 +1,10 @@
 package application.controller;
 
 import javafx.fxml.FXMLLoader;
+import javafx.util.Callback;
 
 import java.io.IOException;
+import java.util.Stack;
 
 /**
  * Created by Haxxflaxx on 2015-11-02.
@@ -32,6 +34,42 @@ public class VistaNavigator {
     private static MainController mainController;
 
     /**
+     * Holds controllers for navigation history.
+     */
+    private static Stack<NavigationController> historyBack = new Stack<>();
+    private static Stack<NavigationController> historyForward = new Stack<>();
+    private static NavigationController activeController = null;
+
+    public static void moveForward() {
+        if (!historyForward.empty()) {
+            historyBack.push(activeController);
+            activeController = historyForward.pop();
+        }
+    }
+
+    public static void moveBack() {
+        if (!historyBack.empty()) {
+            historyForward.push(activeController);
+            System.out.println(historyBack.peek());
+            activeController = historyBack.pop();
+            System.out.println(historyBack.peek());
+        }
+    }
+
+    public static void clearForward() {
+        if (!historyForward.empty()) historyForward.clear();
+    }
+
+    public static NavigationController getActiveController() {
+        return activeController;
+    }
+
+    public static void setActiveController(NavigationController activeController) {
+        if (activeController != null) historyBack.add(VistaNavigator.activeController);
+        VistaNavigator.activeController = activeController;
+    }
+
+    /**
      * Stores the main controller for later use in navigation tasks.
      *
      * @param mainController the main application layout controller.
@@ -53,17 +91,6 @@ public class VistaNavigator {
      * Loads the vista specified by the fxml file into the
      * vistaHolder pane of the main application layout.
      *
-     * Previously loaded vista for the same fxml file are not cached.
-     * The fxml is loaded anew and a new vista node hierarchy generated
-     * every time this method is invoked.
-     *
-     * A more sophisticated load function could potentially add some
-     * enhancements or optimizations, for example:
-     *   cache FXMLLoaders
-     *   cache loaded vista nodes, so they can be recalled or reused
-     *   allow a user to specify vista node reuse or new creation
-     *   allow back and forward history like a browser
-     *
      * @param fxml the fxml file to be loaded.
      */
     public static void loadVista(String fxml) {
@@ -81,4 +108,30 @@ public class VistaNavigator {
         }
     }
 
+    /**
+     * Loads the vista specified by the activeController
+     * into the vistaHolder pane of the main application layout.
+     * Uses activeController as controller.
+     */
+    public static void reloadVista(){
+        FXMLLoader fxmlLoader = new FXMLLoader();
+
+        fxmlLoader.setControllerFactory(type -> {
+            return activeController; // Let the FXMLLoader handle construction...
+        });
+
+        fxmlLoader.setLocation(
+                VistaNavigator.class.getResource(
+                        activeController.getFxml()
+                )
+        );
+
+        try {
+            mainController.setVista(
+                    fxmlLoader.load()
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 /**
  * Created by haxxflaxx on 2015-11-03.
  */
-public class RecipeController implements Initializable {
+public class RecipeController extends NavigationController implements Initializable {
 
     private Recipe recipe;
 
@@ -103,4 +103,8 @@ public class RecipeController implements Initializable {
         System.out.println("- end of Load editRecipeview");
     }
 
+    @Override
+    public String getFxml() {
+        return VistaNavigator.RECIPE;
+    }
 }

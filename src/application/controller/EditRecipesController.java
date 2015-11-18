@@ -19,7 +19,9 @@ import static application.dbTools.Query.*;
 /**
  * Created by haxxflaxx on 2015-11-03.
  */
-public class EditRecipesController implements Initializable {
+
+public class EditRecipesController extends NavigationController implements Initializable{
+
 
     MainController mainController;
     private String recipeID;
@@ -197,6 +199,7 @@ public class EditRecipesController implements Initializable {
         recipeIngredients.setItems(itemList);                                       //Sets the Listview to show the obs arraylist
     }
 
+
     /**
      * ButtonMethod for add ingredients from the ingredientList into the tableview
      */
@@ -232,4 +235,9 @@ public class EditRecipesController implements Initializable {
         }
         recipeIngredients.setItems(itemList);               //Sets the listview to show the ingredients that matches the search
     }                                                       //Criteria
+
+    @Override
+    public String getFxml() {
+        return VistaNavigator.EDITRECIPES;
+    }
 }

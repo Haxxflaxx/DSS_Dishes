@@ -4,6 +4,7 @@ import application.dbTools.Query;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
@@ -138,8 +139,24 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Navigation method for going back to a previous view
+     */
+    public void back(){
+        System.out.println(VistaNavigator.getActiveController());
+        VistaNavigator.moveBack();
+        System.out.println(VistaNavigator.getActiveController());
+        VistaNavigator.reloadVista();
+    }
 
-
-
+    /**
+     * Navigation method for going forward to a previous view
+     */
+    public void forward(){
+        System.out.println(VistaNavigator.getActiveController());
+        VistaNavigator.moveForward();
+        System.out.println(VistaNavigator.getActiveController());
+        VistaNavigator.reloadVista();
+    }
 }
 
