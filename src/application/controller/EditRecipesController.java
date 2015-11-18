@@ -64,6 +64,7 @@ public class EditRecipesController implements Initializable {
     @FXML
     private TableColumn Unit;
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("Initialize EditRecipesController");
@@ -87,10 +88,12 @@ public class EditRecipesController implements Initializable {
      */
     public void updateEditRecipeList() {
         ArrayList<ArrayList<String>> dataSet;
+
         String currentRecipe = mainController.recipList.getSelectionModel().getSelectedItems().toString();
         currentRecipe = currentRecipe.substring(1, currentRecipe.length() - 1);
 
         String condition = "Name= '" + currentRecipe + "'";
+
 
         try {
             System.out.println("- UpdateEditRecipeList");
@@ -154,15 +157,15 @@ public class EditRecipesController implements Initializable {
 
                 System.out.println("TESTING" + iName);
 
-                String currentId = fetchData("Ingredients", "ID", "Name='" + iName + "'").toString();
-                currentId = currentId.replaceAll("\\[", "").replaceAll("\\]", "");
+                String currentId = fetchData("Ingredients", "ID", "Name='" + iName + "'").toString();   //Fetches id where name
+                currentId = currentId.replaceAll("\\[", "").replaceAll("\\]", "");                      //is column-name
 
                 System.out.println("RECIPE ID"+ recipeID);
                 System.out.println("Current ID"+ currentId);
 
-                insertInto("RUI", "RID, IID, Quantity, Unit", recipeID + "," + currentId + "," + iAmount + "," + iUnit);
-
-            }
+                insertInto("RUI", "RID, IID, Quantity, Unit", "'" + recipeID + "','" + currentId + "','" + iAmount + "','" + iUnit + "'");
+                                                                                    //Inserts recipe id, current id,
+            }                                                                       //amount, and unit
             mainController.updateRecipList();
             }
          catch (SQLException e) {
@@ -171,7 +174,7 @@ public class EditRecipesController implements Initializable {
     }
 
     /**
-     * Loads the name of all recipes and puts them into recipList.
+     * Loads the name of all ingredients and puts them into ingredientlist.
      */
     public void updateIngredients() {
         ArrayList<ArrayList<String>> dataSet;
