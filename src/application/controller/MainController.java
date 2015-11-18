@@ -10,7 +10,10 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import javafx.scene.control.Label;
 
+import javax.swing.text.TableView;
+import java.awt.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -46,6 +49,8 @@ public class MainController implements Initializable {
 
     /** Holder of Login view */
     @FXML private StackPane loginHolder;
+
+    @FXML private TableView recipeTable;
 
     /**
      * Replaces the vista displayed in the vista holder with a new vista.
@@ -125,7 +130,7 @@ public class MainController implements Initializable {
     /**
      * Button for adding new Recipes.
      */
-    public void addNewRecipeButton(){
+    public void addNewRecipeclick(){
 
         try {
             System.out.println("- addNewRecipeButton");
@@ -158,5 +163,30 @@ public class MainController implements Initializable {
         System.out.println(VistaNavigator.getActiveController());
         VistaNavigator.reloadVista();
     }
+
+    /**
+     *  The browser menu
+     */
+    public void allRecipesclick(){
+        VistaNavigator.loadVista(
+                VistaNavigator.WELCOME
+        );
+
+        System.out.println("Load All Recipes");
+
+    }
+
+    public void topRatedclick(){
+        System.out.println("Load Top Rated Recipes");
+    }
+
+    public void newRecipesclick(){
+        System.out.println("Load New Recipes");
+    }
+
+    public void myRecipesclick(){
+        System.out.println("Load My Recipes");
+    }
+
 }
 
