@@ -1,6 +1,7 @@
 package application.controller;
 
 import application.Ingredient;
+import application.Recipe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -92,9 +93,7 @@ public class EditRecipesController extends NavigationController implements Initi
     public void updateEditRecipeList() {
         ArrayList<ArrayList<String>> dataSet;
 
-        String currentRecipe = mainController.recipList.getSelectionModel().getSelectedItems().toString();
-        currentRecipe = currentRecipe.substring(1, currentRecipe.length() - 1);
-
+        String currentRecipe = Recipe.getSelected().getName();
         String condition = "Name= '" + currentRecipe + "'";
 
 
@@ -127,7 +126,7 @@ public class EditRecipesController extends NavigationController implements Initi
             criteria = criteria.replaceAll("\\[", "").replaceAll("\\]", "");
             deleteFrom("Recipes", criteria);            //Delete recipes where name == selected recipe
 
-            mainController.recipList.getSelectionModel().select(1);
+
             System.out.println("- End of DeleteRecipe");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -142,7 +141,7 @@ public class EditRecipesController extends NavigationController implements Initi
         String[] values = {recipeName.getText(), recipeType.getText(), recipeCuisine.getText(), recipeDifficulty.getText(),
                 recipeDiet.getText(), recipeTime.getText(), recipeDescription.getText()};                //Array with Values
 
-        String currentRecipe = mainController.recipList.getSelectionModel().getSelectedItems().toString();
+        String currentRecipe = Recipe.getSelected().getName();
         currentRecipe = "NAME='" + currentRecipe + "'";
         currentRecipe = currentRecipe.replaceAll("\\[", "").replaceAll("\\]", "");
 
@@ -169,7 +168,6 @@ public class EditRecipesController extends NavigationController implements Initi
                 insertInto("RUI", "RID, IID, Quantity, Unit", "'" + recipeID + "','" + currentId + "','" + iAmount + "','" + iUnit + "'");
                                                                                     //Inserts recipe id, current id,
             }                                                                       //amount, and unit
-            mainController.updateRecipList();
             }
          catch (SQLException e) {
             e.printStackTrace();

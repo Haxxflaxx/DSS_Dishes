@@ -5,10 +5,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.BrowseController">
    <children>
-      <TableView fx:id="recipeTable" layoutX="10.0" layoutY="10.0">
+      <TableView fx:id="recipeTable">
          <columns>
             <TableColumn fx:id="id" prefWidth="50.0" text="ID" />
             <TableColumn fx:id="name" prefWidth="250.0" text="Name" />
