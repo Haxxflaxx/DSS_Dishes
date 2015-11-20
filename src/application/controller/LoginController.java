@@ -1,20 +1,13 @@
 package application.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static application.dbTools.Query.fetchData;
@@ -28,24 +21,6 @@ public class LoginController implements Initializable {
     @FXML private Label CheckMessage;
     @FXML private TextField usernameField;
     @FXML private TextField passwordField;
-    @FXML private Button loginButton;
-
-    @FXML private void handleButtonAction (ActionEvent event) throws IOException {
-
-        Parent homepage = FXMLLoader.load(getClass().getResource("Homepage.fxml")); //access the fxml
-        Scene homepagescene = new Scene(homepage); //ui elements
-        Stage appstage = (Stage) ((Node) event.getSource()).getScene().getWindow(); //scene visible to stage
-
-        if (isValidCredentials()) {   //main page is loaded
-            appstage.setScene(homepagescene);
-            appstage.show();
-        }
-
-        else {   //username-password fields get cleared
-            usernameField.clear();
-            passwordField.clear();
-        }
-    }
 
     public void loginviewButtonclick () {
         VistaNavigator.loadVista(VistaNavigator.LOGINVISTA);
@@ -67,47 +42,60 @@ public class LoginController implements Initializable {
         VistaNavigator.loadVista(VistaNavigator.REGISTER);
     }
 
+    /**
+     * @return
+     */
     private boolean isValidCredentials(){
 
-        boolean log_in = false;
-        String LoginUser = usernameField.getText().toString(); //LoginUser is "username"+userinput
-        String LoginPass= passwordField.getText().toString();//LoginPass is "password"+userinput
+        ArrayList<ArrayList<String>> dataSet;
 
-        LoginUser = "Username='" + LoginUser + "'";
-        LoginPass = "Password='" + LoginPass + "'";
+
+        boolean log_in = false;
+        String loginCondition = usernameField.getText(); //user input in the username field
+        loginCondition = "Username='" + loginCondition + "'";
 
         try {
-            String Username = fetchData("Users", "Username", LoginUser).toString();
-            String Password = fetchData("Users", "Password", LoginPass).toString();
+
+            String testlogin = fetchData("Users", "Username", loginCondition).toString();//fetching data from column users in database
 
 
-            Username = Username.replaceAll("\\[", "").replaceAll("\\]", ""); //replacing sql chars
-            Password = Password.replaceAll("\\[", "").replaceAll("\\]", ""); //replacing sql chars
+            dataSet = fetchData("Users", "*", loginCondition);
+            String checkUsername = usernameField.getText();
+            String checkPassword = passwordField.getText();
+
+            if (!testlogin.equals("[]")) {
+
+                String username = (dataSet.get(0).get(0));
+                String password = (dataSet.get(0).get(1));
 
 
-            String CheckUsername = usernameField.getText().toString();
-            String CheckPassword = passwordField.getText().toString();
-
-            System.out.println("CheckUsername :" + CheckUsername); //checking username through intellij console
-            System.out.println("CheckPassword :" + CheckPassword); //checking password through intellij console
+                System.out.println("testerror " + username);
 
 
-                if (CheckUsername.equals(Username) && CheckPassword.equals(Password)) {
+                if (checkUsername.equals(username) && checkPassword.equals(password)) {
 
                     System.out.println("You are logged in!");
                     log_in = true;
-                } else {
+
+                } else if (!checkUsername.equals(username) || !checkPassword.equals(password)) {
+                    System.out.println("Please enter username again");
                     usernameField.clear();
                     passwordField.clear();
-                    CheckMessage.setText("Invalid credentials MOFO");
+                    CheckMessage.setText("Invalid Credentials, please try again bitch");}
+                }
+                 else {
+                    //clear fields if user input isn't correct
+                    usernameField.clear();
+                    passwordField.clear();
+                    CheckMessage.setText("Invalid credentials, please try again");
                 }
 
                 return log_in;
-            }
 
-            catch(SQLException e){
-                e.printStackTrace();
             }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
 
     return log_in;}
 
