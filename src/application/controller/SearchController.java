@@ -6,20 +6,26 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.awt.*;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import static application.dbTools.Query.*;
 
 /**
  * Created by Haxxflaxx on 2015-11-06.
  */
 public class SearchController extends NavigationController implements Initializable {
+
 
 
     @FXML TableView searchResult;
@@ -31,6 +37,12 @@ public class SearchController extends NavigationController implements Initializa
     @FXML TableColumn difficulty;
     @FXML TableColumn prepTime;
 
+    //Choicebox
+    @FXML private ChoiceBox typeChoicebox;
+    @FXML private ChoiceBox cuisineChoicebox;
+    @FXML private ChoiceBox difficultyChoicebox;
+    @FXML private ChoiceBox timeChoicebox;
+    @FXML private ChoiceBox dietChoicebox;
 
     //Search conditions
     String search;
@@ -100,6 +112,9 @@ public class SearchController extends NavigationController implements Initializa
         );
 
         updateResultTable();
+        updateChoicebox();
+
+
     }
 
     /**
@@ -137,8 +152,61 @@ public class SearchController extends NavigationController implements Initializa
         }
     }
 
+    public void updateChoicebox(){
+        ArrayList<ArrayList<String>> dataSet;
+        ObservableList<String> typeChoicelist = FXCollections.observableArrayList();
+        ArrayList<ArrayList<String>> dataSet2;
+        ObservableList<String> cuisineChoicelist = FXCollections.observableArrayList();
+        ArrayList<ArrayList<String>> dataSet3;
+        ObservableList<String> difficultyChoicelist = FXCollections.observableArrayList();
+        //ArrayList<ArrayList<String>> dataSet4;
+        //ObservableList<Recipe> timeChoicelist = FXCollections.observableArrayList();
+        //ArrayList<ArrayList<String>> dataSet5;
+        //ObservableList<Recipe> dietChoicelist = FXCollections.observableArrayList();
+
+        try {
+            dataSet = fetchData("Recipes", "Type");
+            dataSet2 = fetchData("Recipes", "Cuisine");
+            dataSet3 = fetchData("Recipes", "Difficulty");
+        //    dataSet4 = fetchData("Recipes", "Time");
+        //    dataSet5 = fetchData("Recipes", "Diet");
+
+            for (ArrayList<String> element : dataSet) {
+                typeChoicelist.add(element.get(0));
+            }
+            for (ArrayList<String> element : dataSet2){
+                cuisineChoicelist.add(element.get(0));
+            }
+            for (ArrayList<String> element : dataSet3){
+                difficultyChoicelist.add(element.get(0));
+            }
+        }
+
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        typeChoicebox.setItems(typeChoicelist);
+        cuisineChoicebox.setItems(cuisineChoicelist);
+        difficultyChoicebox.setItems(difficultyChoicelist);
+        //timeChoicebox.setItems(timeChoicelist);
+        //dietChoicebox.setItems(dietChoicelist);
+
+        }
+
+
     @Override
     public String getFxml() {
         return VistaNavigator.SEARCH;
     }
+
+/*    public void handlechickenBox() {
+
+        if (chickenBox.is()) {
+            String typeCondition = "Type LIKE '%" + "Chicken" + "%' ";
+            condition = typeCondition;
+
+            updateResultTable();
+        }
+    } */
 }

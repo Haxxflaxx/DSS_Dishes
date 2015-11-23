@@ -57,7 +57,7 @@ public class Main extends Application {
 
         VistaNavigator.setMainController(mainController);
         VistaNavigator.loadVista(
-                VistaNavigator.WELCOME
+                VistaNavigator.SEARCH
         );
 
         return mainPane;

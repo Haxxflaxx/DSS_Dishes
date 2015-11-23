@@ -1,21 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
 <Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.SearchController">
    <children>
-      <TableView fx:id="searchResult" VBox.vgrow="ALWAYS">
-        <columns>
-            <TableColumn fx:id="id" prefWidth="50.0" text="ID" />
-          <TableColumn fx:id="name" prefWidth="250.0" text="Name" />
-          <TableColumn fx:id="type" prefWidth="100.0" text="Type" />
-            <TableColumn fx:id="diet" prefWidth="100.0" text="Diet" />
-            <TableColumn fx:id="cuisine" prefWidth="150.0" text="Cuisine" />
-            <TableColumn fx:id="difficulty" prefWidth="100.0" text="Difficulty" />
-            <TableColumn fx:id="prepTime" prefWidth="100.0" text="Prep Time" />
-        </columns>
-      </TableView>
+      <BorderPane>
+         <center>
+            <TableView fx:id="searchResult" BorderPane.alignment="CENTER">
+              <columns>
+                  <TableColumn fx:id="id" prefWidth="50.0" text="ID" />
+                <TableColumn fx:id="name" prefWidth="250.0" text="Name" />
+                <TableColumn fx:id="type" prefWidth="100.0" text="Type" />
+                  <TableColumn fx:id="diet" prefWidth="100.0" text="Diet" />
+                  <TableColumn fx:id="cuisine" prefWidth="150.0" text="Cuisine" />
+                  <TableColumn fx:id="difficulty" prefWidth="100.0" text="Difficulty" />
+                  <TableColumn fx:id="prepTime" prefWidth="100.0" text="Prep Time" />
+              </columns>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </BorderPane.margin>
+            </TableView>
+         </center>
+         <top>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefWidth="220.0" spacing="10.0">
+                     <children>
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <Label text="Type">
+                                 <font>
+                                    <Font name="System Bold Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Region HBox.hgrow="ALWAYS" />
+                              <ChoiceBox fx:id="typeChoicebox" prefWidth="150.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Cuisine">
+                                 <font>
+                                    <Font name="System Bold Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Region HBox.hgrow="ALWAYS" />
+                              <ChoiceBox fx:id="cuisineChoicebox" prefWidth="150.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Difficulty">
+                                 <font>
+                                    <Font name="System Bold Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Region HBox.hgrow="ALWAYS" />
+                              <ChoiceBox fx:id="difficultyChoicebox" prefWidth="150.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Region prefWidth="50.0" />
+                  <VBox prefWidth="220.0" spacing="10.0">
+                     <children>
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <Label text="Prep time">
+                                 <font>
+                                    <Font name="System Bold Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Region HBox.hgrow="ALWAYS" />
+                              <ChoiceBox fx:id="timeChoicebox" prefWidth="150.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <Label text="Diet">
+                                 <font>
+                                    <Font name="System Bold Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Region HBox.hgrow="ALWAYS" />
+                              <ChoiceBox fx:id="dietChoicebox" prefWidth="150.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <Region HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Region prefWidth="50.0" HBox.hgrow="ALWAYS" />
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </BorderPane.margin>
+            </HBox>
+         </top>
+      </BorderPane>
    </children>
 </Pane>

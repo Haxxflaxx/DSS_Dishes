@@ -169,7 +169,7 @@ public class MainController implements Initializable {
      */
     public void allRecipesclick(){
         VistaNavigator.loadVista(
-                VistaNavigator.WELCOME
+                VistaNavigator.SEARCH
         );
 
         System.out.println("Load All Recipes");
