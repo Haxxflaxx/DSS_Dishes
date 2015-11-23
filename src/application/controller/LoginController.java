@@ -1,10 +1,16 @@
 package application.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,6 +27,30 @@ public class LoginController implements Initializable {
     @FXML private Label CheckMessage;
     @FXML private TextField usernameField;
     @FXML private TextField passwordField;
+    @FXML private Button loginButton;
+    @FXML private MenuButton buttonLoggedin;
+    @FXML private MenuItem buttonSignout;
+    @FXML private TextField registerusernameField;
+    @FXML private TextField registerPasswordField;
+    @FXML private TextField confirmPasswordField;
+    @FXML private TextField emailField;
+
+     private void handleButtonAction (ActionEvent event) throws IOException {
+
+        Parent homepage = FXMLLoader.load(getClass().getResource("Homepage.fxml")); //access the fxml
+        Scene homepagescene = new Scene(homepage); //ui elements
+        Stage appstage = (Stage) ((Node) event.getSource()).getScene().getWindow(); //scene visible to stage
+
+        if (isValidCredentials()) {   //main page is loaded
+            appstage.setScene(homepagescene);
+            appstage.show();
+        }
+
+        else {   //username-password fields get cleared
+            usernameField.clear();
+            passwordField.clear();
+        }
+    }
 
     public void loginviewButtonclick () {
         VistaNavigator.loadVista(VistaNavigator.LOGINVISTA);
@@ -43,12 +73,11 @@ public class LoginController implements Initializable {
     }
 
     /**
-     * @return
+     * Method which gives the user accessibility to his profile
      */
     private boolean isValidCredentials(){
 
         ArrayList<ArrayList<String>> dataSet;
-
 
         boolean log_in = false;
         String loginCondition = usernameField.getText(); //user input in the username field
@@ -56,38 +85,39 @@ public class LoginController implements Initializable {
 
         try {
 
-            String testlogin = fetchData("Users", "Username", loginCondition).toString();//fetching data from column users in database
+            String testlogin = fetchData("Users", "Username", loginCondition).toString(); //fetching data from username column in database
 
 
             dataSet = fetchData("Users", "*", loginCondition);
-            String checkUsername = usernameField.getText();
-            String checkPassword = passwordField.getText();
+            String checkUsername = usernameField.getText(); //string which will allow us to test if the user input is correct
+            String checkPassword = passwordField.getText(); //string which will allow us to test if the user input is correct
 
-            if (!testlogin.equals("[]")) {
+            if (!testlogin.equals("[]")) //if username or password isn't in the database, system prompts user to type the right ones
+            {
 
-                String username = (dataSet.get(0).get(0));
-                String password = (dataSet.get(0).get(1));
+                String username = (dataSet.get(0).get(0)); //checking the username column in table users
+                String password = (dataSet.get(0).get(1)); //checking the password column in table users
 
-
-                System.out.println("testerror " + username);
-
-
-                if (checkUsername.equals(username) && checkPassword.equals(password)) {
+                if (checkUsername.equals(username) && checkPassword.equals(password))//if credentials are correct, user logs in
+                {
 
                     System.out.println("You are logged in!");
                     log_in = true;
 
                 } else if (!checkUsername.equals(username) || !checkPassword.equals(password)) {
-                    System.out.println("Please enter username again");
                     usernameField.clear();
                     passwordField.clear();
-                    CheckMessage.setText("Invalid Credentials, please try again bitch");}
+                    CheckMessage.setText("Invalid credentials, please try again");}
                 }
                  else {
-                    //clear fields if user input isn't correct
                     usernameField.clear();
                     passwordField.clear();
                     CheckMessage.setText("Invalid credentials, please try again");
+                    LoginNavigator.loadLogin(
+                            LoginNavigator.LOGGEDIN
+                    );
+
+
                 }
 
                 return log_in;
@@ -98,6 +128,19 @@ public class LoginController implements Initializable {
                 }
 
     return log_in;}
+
+    public void buttonSignout(){
+
+            System.out.println("You have been signed out");
+
+            LoginNavigator.loadLogin(
+                    LoginNavigator.LOGIN
+            );
+            VistaNavigator.loadVista(
+                    VistaNavigator.LOGINVISTA
+            );
+
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
