@@ -62,7 +62,8 @@ public class LoginController implements Initializable {
     public void loginScreen () {
 
         if (isValidCredentials()) {
-            VistaNavigator.loadVista(VistaNavigator.MAIN);
+            VistaNavigator.loadVista(VistaNavigator.WELCOME);
+            LoginNavigator.loadLogin(LoginNavigator.LOGGEDIN);
         }
 
         else {

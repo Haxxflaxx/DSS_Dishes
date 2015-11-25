@@ -12,7 +12,7 @@
             <HBox VBox.vgrow="ALWAYS">
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <MenuButton fx:id="buttonLoggedin" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="25.0" text="User">
+                  <MenuButton fx:id="buttonLoggedin" alignment="CENTER_RIGHT" minWidth="80.0" mnemonicParsing="false" prefHeight="25.0" text="Username" HBox.hgrow="ALWAYS">
                     <items>
                       <MenuItem fx:id="buttonSettings" mnemonicParsing="false" text="Settings" />
                       <MenuItem fx:id="buttonSignout" mnemonicParsing="false" text="Sign out" />
