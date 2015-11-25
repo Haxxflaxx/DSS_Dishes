@@ -53,6 +53,8 @@ public class LoginController implements Initializable {
 
     @FXML private Label WELCOMEPAGE;
 
+    @FXML private Label showusername;
+
 
 
     public void loginviewButtonclick () {
@@ -95,37 +97,39 @@ public class LoginController implements Initializable {
         } else if (emailField.getText().isEmpty()) {
         CheckMessage.setText("E-mail is invalid");
 
-        } else if(registerPasswordField.getText().isEmpty()){
-        CheckMessage.setText("Please set a password");
+        } else {
+        if (registerPasswordField.getText().isEmpty()) {
+            CheckMessage.setText("Please set a password");
 
         } else {
-        if (usernameTaken) {
-            registerusernameField.clear();
-            CheckMessage.setText("Sorry,the Username is already been registered");
-        } else {
-            if (emailTaken) {
-                emailField.clear();
-                CheckMessage.setText("Sorry,the email is already been registered");
-
-         //
+            if (usernameTaken) {
+                registerusernameField.clear();
+                CheckMessage.setText("Sorry,the Username is already been registered");
             } else {
-                try {
-                    System.out.println("- UpdateNewUser");
+                if (emailTaken) {
+                    emailField.clear();
+                    CheckMessage.setText("Sorry,the email is already been registered");
 
-                    insertInto("Users", columns, values);
+                    //
+                } else {
+                    try {
+                        System.out.println("- UpdateNewUser");
 
-                    System.out.println("- End of UpdateNewUser");
+                        insertInto("Users", columns, values);
 
-                    System.out.println("You are registered,welcome");
-                    VistaNavigator.loadVista(VistaNavigator.WELCOMEPAGE);
+                        System.out.println("- End of UpdateNewUser");
 
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                        System.out.println("You are registered,welcome");
+                        VistaNavigator.loadVista(VistaNavigator.WELCOMEPAGE);
 
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+
+                    }
                 }
-                }
-                }
-                }
+            }
+        }
+    }
                 }
     private boolean isValidCredentials(){
 
