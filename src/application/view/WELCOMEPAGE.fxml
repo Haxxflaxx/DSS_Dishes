@@ -5,13 +5,14 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.LoginController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="application.controller.LoginController">
    <children>
-      <Label fx:id="WELCOMEPAGE" layoutX="18.0" layoutY="82.0" prefHeight="217.0" prefWidth="565.0" text=" WELCOME TO THE TEAM 10 KITCHEN">
+      <Label fx:id="WELCOMEPAGE" layoutX="14.0" layoutY="21.0" prefHeight="56.0" prefWidth="198.0" text=" WELCOME ! ">
          <font>
             <Font size="33.0" />
          </font>
       </Label>
+      <Label layoutX="212.0" layoutY="157.0" prefHeight="34.0" prefWidth="139.0" />
+      <Label fx:id="showusername" layoutX="212.0" layoutY="28.0" prefHeight="42.0" prefWidth="139.0" text="Label" />
    </children>
 </Pane>
