@@ -16,8 +16,8 @@
                 <TableColumn fx:id="name" prefWidth="250.0" text="Name" />
                 <TableColumn fx:id="type" prefWidth="100.0" text="Type" />
                   <TableColumn fx:id="diet" prefWidth="100.0" text="Diet" />
-                  <TableColumn fx:id="cuisine" prefWidth="150.0" text="Cuisine" />
-                  <TableColumn fx:id="difficulty" prefWidth="100.0" text="Difficulty" />
+                  <TableColumn fx:id="cuisine" prefWidth="125.0" text="Cuisine" />
+                  <TableColumn fx:id="difficulty" prefWidth="125.0" text="Difficulty" />
                   <TableColumn fx:id="prepTime" prefWidth="100.0" text="Prep Time" />
               </columns>
                <BorderPane.margin>
