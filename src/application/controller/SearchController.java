@@ -155,31 +155,26 @@ public class SearchController extends NavigationController implements Initializa
     public void updateChoicebox(){
         ArrayList<ArrayList<String>> dataSet;
         ObservableList<String> typeChoicelist = FXCollections.observableArrayList();
-        ArrayList<ArrayList<String>> dataSet2;
         ObservableList<String> cuisineChoicelist = FXCollections.observableArrayList();
-        ArrayList<ArrayList<String>> dataSet3;
         ObservableList<String> difficultyChoicelist = FXCollections.observableArrayList();
-        //ArrayList<ArrayList<String>> dataSet4;
-        //ObservableList<Recipe> timeChoicelist = FXCollections.observableArrayList();
-        //ArrayList<ArrayList<String>> dataSet5;
-        //ObservableList<Recipe> dietChoicelist = FXCollections.observableArrayList();
+        ObservableList<String> timeChoicelist = FXCollections.observableArrayList();
+        ObservableList<String> dietChoicelist = FXCollections.observableArrayList();
 
         try {
-            dataSet = fetchData("Recipes", "Type");
-            dataSet2 = fetchData("Recipes", "Cuisine");
-            dataSet3 = fetchData("Recipes", "Difficulty");
-        //    dataSet4 = fetchData("Recipes", "Time");
-        //    dataSet5 = fetchData("Recipes", "Diet");
+            dataSet = fetchDistinct("Recipes", "Type");
+            for (ArrayList<String> element : dataSet) typeChoicelist.add(element.get(0));
 
-            for (ArrayList<String> element : dataSet) {
-                typeChoicelist.add(element.get(0));
-            }
-            for (ArrayList<String> element : dataSet2){
-                cuisineChoicelist.add(element.get(0));
-            }
-            for (ArrayList<String> element : dataSet3){
-                difficultyChoicelist.add(element.get(0));
-            }
+            dataSet = fetchDistinct("Recipes", "Cuisine");
+            for (ArrayList<String> element : dataSet) cuisineChoicelist.add(element.get(0));
+
+            dataSet = fetchDistinct("Recipes", "Difficulty");
+            for (ArrayList<String> element : dataSet) difficultyChoicelist.add(element.get(0));
+
+            dataSet = fetchDistinct("Recipes", "Time");
+            for (ArrayList<String> element : dataSet) timeChoicelist.add(element.get(0));
+
+            dataSet = fetchDistinct("Recipes", "Diet");
+            for (ArrayList<String> element : dataSet) dietChoicelist.add(element.get(0));
         }
 
         catch (SQLException e){
@@ -189,8 +184,8 @@ public class SearchController extends NavigationController implements Initializa
         typeChoicebox.setItems(typeChoicelist);
         cuisineChoicebox.setItems(cuisineChoicelist);
         difficultyChoicebox.setItems(difficultyChoicelist);
-        //timeChoicebox.setItems(timeChoicelist);
-        //dietChoicebox.setItems(dietChoicelist);
+        timeChoicebox.setItems(timeChoicelist);
+        dietChoicebox.setItems(dietChoicelist);
 
         }
 
@@ -200,13 +195,8 @@ public class SearchController extends NavigationController implements Initializa
         return VistaNavigator.SEARCH;
     }
 
-/*    public void handlechickenBox() {
+    public void submitFilter() {
 
-        if (chickenBox.is()) {
-            String typeCondition = "Type LIKE '%" + "Chicken" + "%' ";
-            condition = typeCondition;
 
-            updateResultTable();
-        }
-    } */
+    }
 }

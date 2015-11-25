@@ -32,7 +32,7 @@ public class Query {
     }
 
     /**
-     * Builds and executes a query to fetch a tuple from the DB.
+     * Builds and executes a query to fetch a specific value from the DB.
      * @param table Table for data selection.
      * @param column Column for data selection. e.g. "column1, column2,...columnN" and "*" for select all.
      * @param condition Conditions for which tuple to fetch. e.g. "ID=1"
@@ -45,7 +45,7 @@ public class Query {
     }
 
     /**
-     * Builds and executes a query to fetch a tuple from the DB.
+     * Builds and executes a query to fetch values from the DB.
      * @param table Table for data selection.
      * @param column Column for data selection. e.g. "column1, column2,...columnN" and "*" for select all.
      * @return String Array List with the fetched data set.
@@ -53,6 +53,31 @@ public class Query {
      */
     public static ArrayList<ArrayList<String>> fetchData(String table, String column) throws SQLException {
         String sql = "SELECT " + column + " FROM " + table + ";";
+        return Connection.runQuery(sql);
+    }
+
+    /**
+     * Builds and executes a query to fetch unique values from the DB.
+     * @param table Table for data selection.
+     * @param column Column for data selection. e.g. "column1, column2,...columnN" and "*" for select all.
+     * @return String Array List with the fetched data set.
+     * @exception SQLException if a database access error occurs.
+     */
+    public static ArrayList<ArrayList<String>> fetchDistinct(String table, String column) throws SQLException {
+        String sql = "SELECT DISTINCT " + column + " FROM " + table + ";";
+        return Connection.runQuery(sql);
+    }
+
+    /**
+     * Builds and executes a query to fetch a specific value from the DB.
+     * @param table Table for data selection.
+     * @param column Column for data selection. e.g. "column1, column2,...columnN" and "*" for select all.
+     * @param condition Conditions for which tuple to fetch. e.g. "ID=1"
+     * @return String Array List with the fetched data set.
+     * @exception SQLException if a database access error occurs.
+     */
+    public static ArrayList<ArrayList<String>> fetchDistinct(String table, String column, String condition) throws SQLException {
+        String sql = "SELECT DISTINCT " + column + " FROM " + table + " WHERE " + condition + ";";
         return Connection.runQuery(sql);
     }
 
