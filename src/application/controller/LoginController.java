@@ -51,38 +51,28 @@ public class LoginController implements Initializable {
     @FXML
     private TextField emailField;
 
-    public void handleButtonAction(ActionEvent event) throws IOException {
+    @FXML private Label WELCOMEPAGE;
 
-        Parent homepage = FXMLLoader.load(getClass().getResource("Homepage.fxml")); //access the fxml
-        Scene homepagescene = new Scene(homepage); //ui elements
-        Stage appstage = (Stage) ((Node) event.getSource()).getScene().getWindow(); //scene visible to stage
 
-        if (!isValidCredentials()) {   //username-password fields get cleared
-            usernameField.clear();
-            passwordField.clear();
-        } else {   //main page is loaded
-            appstage.setScene(homepagescene);
-            appstage.show();
-        }
-    }
 
-    public void loginviewButtonclick() {
+    public void loginviewButtonclick () {
         VistaNavigator.loadVista(VistaNavigator.LOGINVISTA);
     }
 
-    public void loginScreen() {
+    public void loginScreen () {
 
         if (isValidCredentials()) {
-            VistaNavigator.loadVista(VistaNavigator.WELCOME);
-        } else {
+            VistaNavigator.loadVista(VistaNavigator.MAIN);
+        }
+
+        else {
             System.out.println("Invalid Credentials");
         }
 
     }
 
-    //user register
-    public void registerButtonclick() throws SQLException {
 
+    public void registerButtonclick() throws SQLException { //register part
         //if users input invalid
         CheckMessage.setText("");
 
@@ -98,7 +88,7 @@ public class LoginController implements Initializable {
         dataSet = Query.fetchData("Users", "Email", "Email = '" + emailField.getText() + "'");
         boolean emailTaken = dataSet.size() > 0;
 
-        // ensure the users
+        // ensure the users input is valid
     if (registerusernameField.getText().isEmpty()) {
             CheckMessage.setText("Username is invalid");
 
@@ -117,6 +107,7 @@ public class LoginController implements Initializable {
                 emailField.clear();
                 CheckMessage.setText("Sorry,the email is already been registered");
 
+         //
             } else {
                 try {
                     System.out.println("- UpdateNewUser");
@@ -126,8 +117,8 @@ public class LoginController implements Initializable {
                     System.out.println("- End of UpdateNewUser");
 
                     System.out.println("You are registered,welcome");
+                    VistaNavigator.loadVista(VistaNavigator.WELCOMEPAGE);
 
-                    VistaNavigator.loadVista(VistaNavigator.WELCOME);
                 } catch (SQLException e) {
                     e.printStackTrace();
 
@@ -136,72 +127,79 @@ public class LoginController implements Initializable {
                 }
                 }
                 }
-                   private boolean isValidCredentials () {
+    private boolean isValidCredentials(){
 
-                       boolean log_in = false;
-                       String LoginUser = usernameField.getText(); //LoginUser is "username"+userinput
-                       String LoginPass = passwordField.getText();//LoginPass is "password"+userinput
+        ArrayList<ArrayList<String>> dataSet;
 
-                       LoginUser = "Username='" + LoginUser + "'";
-                       LoginPass = "Password='" + LoginPass + "'";
+        boolean log_in = false;
+        String loginCondition = usernameField.getText(); //user input in the username field
+        loginCondition = "Username='" + loginCondition + "'";
 
-                       try {
-                           String Username = fetchData("Users", "Username", LoginUser).toString();
-                           ArrayList<ArrayList<String>> PasswordList = fetchData("Users", "Password", "Username = " + LoginUser);
-                           String Password = PasswordList.get(0).get(0);
-                           Username = Username.replaceAll("\\[", "").replaceAll("\\]", ""); //replacing sql chars
-                           Password = Password.replaceAll("\\[", "").replaceAll("\\]", ""); //replacing sql chars
+        try {
+
+            String testlogin = fetchData("Users", "Username", loginCondition).toString(); //fetching data from username column in database
 
 
-                           String CheckUsername = usernameField.getText().toString();
-                           String CheckPassword = passwordField.getText().toString();
+            dataSet = fetchData("Users", "*", loginCondition);
+            String checkUsername = usernameField.getText(); //string which will allow us to test if the user input is correct
+            String checkPassword = passwordField.getText(); //string which will allow us to test if the user input is correct
 
-                           System.out.println("CheckUsername :" + CheckUsername); //checking username through intellij console
-                           System.out.println("CheckPassword :" + CheckPassword); //checking password through intellij console
+            if (!testlogin.equals("[]")) //if username or password isn't in the database, system prompts user to type the right ones
+            {
 
+                String username = (dataSet.get(0).get(0)); //checking the username column in table users
+                String password = (dataSet.get(0).get(1)); //checking the password column in table users
 
-                           if (CheckPassword.equals(Password)) {
+                if (checkUsername.equals(username) && checkPassword.equals(password))//if credentials are correct, user logs in
+                {
 
-                               System.out.println("You are logged in!");
-                               log_in = true;
+                    System.out.println("You are logged in!");
+                    log_in = true;
 
-                               LoginNavigator.loadLogin(
-                                       LoginNavigator.LOGGEDIN
-                               );
-
-
-                           } else {
-                               usernameField.clear();
-                               passwordField.clear();
-                               CheckMessage.setText("Wrong Username or Password");
-                           }
-
-                           return log_in;
-                       } catch (SQLException e) {
-                           e.printStackTrace();
-                       }
-
-                       return log_in;
-                   }
-
-               public void buttonSignout () {
+                } else if (!checkUsername.equals(username) || !checkPassword.equals(password)) {
+                    usernameField.clear();
+                    passwordField.clear();
+                    CheckMessage.setText("Invalid credentials, please try again");}
+            }
+            else {
+                usernameField.clear();
+                passwordField.clear();
+                CheckMessage.setText("Invalid credentials, please try again");
+                LoginNavigator.loadLogin(
+                        LoginNavigator.LOGGEDIN
+                );
 
 
+            }
+
+            return log_in;
+
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return log_in;}
+
+    public void buttonSignout(){
+
+        if (isValidCredentials()) {
 
 
-                   System.out.println("You have been signed out");
+            System.out.println("You have been signed out");
 
-                   LoginNavigator.loadLogin(
-                           LoginNavigator.LOGIN
-                   );
-                   VistaNavigator.loadVista(
-                           VistaNavigator.LOGINVISTA
-                   );
-               }
+            LoginNavigator.loadLogin(
+                    LoginNavigator.LOGIN
+            );
+            VistaNavigator.loadVista(
+                    VistaNavigator.LOGINVISTA
+            );
+        }
+    }
 
-               @Override
-               public void initialize (URL url, ResourceBundle rb){
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
 
-               }
+    }
 
-           }
+}
