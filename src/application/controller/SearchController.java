@@ -122,12 +122,28 @@ public class SearchController extends NavigationController implements Initializa
      * Put data into TableView.
      */
     private void updateResultTable(){
+        String filterCondition = "";
         ArrayList<ArrayList<String>> dataSet = new ArrayList<>();
         ObservableList<Recipe> items = FXCollections.observableArrayList();
 
+        if(!typeChoicebox.getSelectionModel().isEmpty())
+            filterCondition += " Type='" + typeChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
+
+        if(!cuisineChoicebox.getSelectionModel().isEmpty())
+            filterCondition += " Cuisine='" + cuisineChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
+
+        if(!difficultyChoicebox.getSelectionModel().isEmpty())
+            filterCondition += " Difficulty='" + difficultyChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
+
+        if(!timeChoicebox.getSelectionModel().isEmpty())
+            filterCondition += " Time='" + timeChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
+
+        if(!dietChoicebox.getSelectionModel().isEmpty())
+            filterCondition += " Diet='" + dietChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
+
         try {
-            dataSet = Query.fetchData("recipes", "*", condition);
-            System.out.println(condition);
+            dataSet = Query.fetchData("recipes", "*", nameCondition + filterCondition);
+            System.out.println(nameCondition);
 
             for (ArrayList<String> element : dataSet){
                 items.add(new Recipe(
@@ -193,10 +209,5 @@ public class SearchController extends NavigationController implements Initializa
     @Override
     public String getFxml() {
         return VistaNavigator.SEARCH;
-    }
-
-    public void submitFilter() {
-
-
     }
 }
