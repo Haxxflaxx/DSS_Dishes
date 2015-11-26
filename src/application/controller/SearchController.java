@@ -119,31 +119,40 @@ public class SearchController extends NavigationController implements Initializa
 
     /**
      * Get data from recipes based on search query.
+     * Filter selection based on selected filters.
      * Put data into TableView.
      */
-    private void updateResultTable(){
+    private void updateResultTable() {
         String filterCondition = "";
         ArrayList<ArrayList<String>> dataSet = new ArrayList<>();
         ObservableList<Recipe> items = FXCollections.observableArrayList();
 
-        if(!typeChoicebox.getSelectionModel().isEmpty())
+        if (typeChoicebox.getSelectionModel().getSelectedItem() != null)
             filterCondition += " Type='" + typeChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
 
-        if(!cuisineChoicebox.getSelectionModel().isEmpty())
+        if (cuisineChoicebox.getSelectionModel().getSelectedItem() != null) {
+            filterCondition += filterCondition == "" ? " AND" : "";
             filterCondition += " Cuisine='" + cuisineChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
-
-        if(!difficultyChoicebox.getSelectionModel().isEmpty())
+        }
+        if (difficultyChoicebox.getSelectionModel().getSelectedItem() != null) {
+            filterCondition += filterCondition == "" ? " AND" : "";
             filterCondition += " Difficulty='" + difficultyChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
+        }
 
-        if(!timeChoicebox.getSelectionModel().isEmpty())
+        if (timeChoicebox.getSelectionModel().getSelectedItem() != null) {
+            filterCondition += filterCondition == "" ? " AND" : "";
             filterCondition += " Time='" + timeChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
+        }
 
-        if(!dietChoicebox.getSelectionModel().isEmpty())
+        if (dietChoicebox.getSelectionModel().getSelectedItem() != null){
+            filterCondition += filterCondition == "" ? " AND" : "";
             filterCondition += " Diet='" + dietChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
+        }
 
         try {
-            dataSet = Query.fetchData("recipes", "*", nameCondition + filterCondition);
-            System.out.println(nameCondition);
+            dataSet = Query.fetchData("recipes", "*", condition + filterCondition);
+            System.out.println("Select condition");
+            System.out.println(condition + filterCondition);
 
             for (ArrayList<String> element : dataSet){
                 items.add(new Recipe(
