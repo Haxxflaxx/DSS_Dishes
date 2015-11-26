@@ -64,7 +64,8 @@ public class LoginController implements Initializable {
     public void loginScreen () {
 
         if (isValidCredentials()) {
-            VistaNavigator.loadVista(VistaNavigator.MAIN);
+            VistaNavigator.loadVista(VistaNavigator.MYPAGE);
+            LoginNavigator.loadLogin(LoginNavigator.LOGGEDIN);
         }
 
         else {
@@ -169,9 +170,7 @@ public class LoginController implements Initializable {
                 usernameField.clear();
                 passwordField.clear();
                 CheckMessage.setText("Invalid credentials, please try again");
-                LoginNavigator.loadLogin(
-                        LoginNavigator.LOGGEDIN
-                );
+
 
 
             }
