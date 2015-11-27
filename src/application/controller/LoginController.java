@@ -1,18 +1,10 @@
 package application.controller;
 
 import application.dbTools.Query;
-import com.sun.org.apache.bcel.internal.generic.Select;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,7 +14,6 @@ import java.util.ResourceBundle;
 
 import static application.dbTools.Query.fetchData;
 import static application.dbTools.Query.insertInto;
-import static application.dbTools.Query.updateData;
 
 /**
  * Created by Pierre on 2015-11-06.
