@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="283.0" prefWidth="472.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="51.0" layoutY="43.0" prefHeight="33.0" prefWidth="371.0" text="You are going to log out. Are you sure?" textAlignment="CENTER">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Button fx:id="yesSignout" layoutX="100.0" layoutY="129.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" text="Yes" />
+      <Button fx:id="cancelSignout" layoutX="268.0" layoutY="129.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" text="Cancel" />
+   </children>
+</Pane>

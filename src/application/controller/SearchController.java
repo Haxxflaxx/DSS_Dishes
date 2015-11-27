@@ -12,14 +12,12 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.awt.*;
 import java.net.URL;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static application.dbTools.Query.*;
+import static application.dbTools.Query.fetchDistinct;
 
 /**
  * Created by Haxxflaxx on 2015-11-06.
@@ -207,7 +205,9 @@ public class SearchController extends NavigationController implements Initializa
 
         }
 
+    public void searchresultClick() {
 
+    }
     @Override
     public String getFxml() {
         return VistaNavigator.SEARCH;
