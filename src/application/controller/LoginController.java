@@ -113,7 +113,7 @@ public class LoginController implements Initializable {
 
                         System.out.println("You are registered,welcome");
                         VistaNavigator.loadVista(VistaNavigator.WELCOMEPAGE);
-                        CheckMessage.setText(registerusernameField.toString());
+
                     } catch (SQLException e) {
                         e.printStackTrace();
 
@@ -123,6 +123,10 @@ public class LoginController implements Initializable {
         }
     }
                 }
+
+    public void mypagesClick(){
+        VistaNavigator.loadVista(VistaNavigator.MYPAGE);
+    }
     private boolean isValidCredentials(){
 
         ArrayList<ArrayList<String>> dataSet;
