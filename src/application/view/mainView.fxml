@@ -37,9 +37,9 @@
                            <children>
                               <Button fx:id="back" mnemonicParsing="false" onAction="#back" text="&lt;" />
                               <Button fx:id="forward" mnemonicParsing="false" onAction="#forward" text="&gt;" />
+                                    <TextField fx:id="recipSearch" onAction="#search" promptText="Search" />
                            </children>
                         </HBox>
-                              <TextField fx:id="recipSearch" onAction="#search" promptText="Search" />
                      </children>
                   </VBox>
                         <Region HBox.hgrow="ALWAYS" />
