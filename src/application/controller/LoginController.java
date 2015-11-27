@@ -95,25 +95,25 @@ public class LoginController implements Initializable {
     if (registerusernameField.getText().isEmpty()) {
             CheckMessage.setText("Username is invalid");
 
-        } else if (emailField.getText().isEmpty()) {
-        CheckMessage.setText("E-mail is invalid");
+        } else {
+        if (emailField.getText().isEmpty()) {
+            CheckMessage.setText("E-mail is invalid");
 
         } else {
-        if (registerPasswordField.getText().isEmpty()) {
-            CheckMessage.setText("Please set a password");
+            if (registerPasswordField.getText().isEmpty()) {
+                CheckMessage.setText("Please set a password");
 
-        } else {
-            if (usernameTaken) {
-                registerusernameField.clear();
-                CheckMessage.setText("Sorry,the Username is already been registered");
             } else {
-                if (emailTaken) {
-                    emailField.clear();
-                    CheckMessage.setText("Sorry,the email is already been registered");
-
-                    //
+                if (usernameTaken) {
+                    registerusernameField.clear();
+                    CheckMessage.setText("Sorry,the Username is already been registered");
                 } else {
-                    try {
+                    if (emailTaken) {
+                        emailField.clear();
+                        CheckMessage.setText("Sorry,the email is already been registered");
+
+                        //register successful
+                    } else try {
                         System.out.println("- UpdateNewUser");
 
                         insertInto("Users", columns, values);
@@ -122,7 +122,7 @@ public class LoginController implements Initializable {
 
                         System.out.println("You are registered,welcome");
                         VistaNavigator.loadVista(VistaNavigator.WELCOMEPAGE);
-
+                        CheckMessage.setText(registerusernameField.toString());
                     } catch (SQLException e) {
                         e.printStackTrace();
 
