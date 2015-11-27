@@ -65,13 +65,9 @@ public class SearchController extends NavigationController implements Initializa
         String typeCondition = "Type LIKE '%" + search + "%' ";
         String dietCondition = "Diet LIKE '%" + search + "%' ";
         String cuisineCondition = "Cuisine LIKE '%" + search + "%' ";
-        String difficultyCondition = "Difficulty LIKE '%" + search + "%';";
+        String difficultyCondition = "Difficulty LIKE '%" + search + "%'";
 
-        condition = nameCondition + " OR " +
-                typeCondition + " OR " +
-                dietCondition + " OR " +
-                cuisineCondition + " OR " +
-                difficultyCondition;
+        condition = nameCondition;
     }
 
     @Override
@@ -122,37 +118,33 @@ public class SearchController extends NavigationController implements Initializa
      * Filter selection based on selected filters.
      * Put data into TableView.
      */
-    private void updateResultTable() {
+    public void updateResultTable() {
         String filterCondition = "";
         ArrayList<ArrayList<String>> dataSet = new ArrayList<>();
         ObservableList<Recipe> items = FXCollections.observableArrayList();
 
         if (typeChoicebox.getSelectionModel().getSelectedItem() != null)
-            filterCondition += " Type='" + typeChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
+            filterCondition += " AND Type='" + typeChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
 
         if (cuisineChoicebox.getSelectionModel().getSelectedItem() != null) {
-            filterCondition += filterCondition == "" ? " AND" : "";
-            filterCondition += " Cuisine='" + cuisineChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
+            filterCondition += " AND Cuisine='" + cuisineChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
         }
         if (difficultyChoicebox.getSelectionModel().getSelectedItem() != null) {
-            filterCondition += filterCondition == "" ? " AND" : "";
-            filterCondition += " Difficulty='" + difficultyChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
+            filterCondition += " AND Difficulty='" + difficultyChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
         }
 
         if (timeChoicebox.getSelectionModel().getSelectedItem() != null) {
-            filterCondition += filterCondition == "" ? " AND" : "";
-            filterCondition += " Time='" + timeChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
+            filterCondition += " AND Time='" + timeChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
         }
 
         if (dietChoicebox.getSelectionModel().getSelectedItem() != null){
-            filterCondition += filterCondition == "" ? " AND" : "";
-            filterCondition += " Diet='" + dietChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
+            filterCondition += " AND Diet='" + dietChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
         }
 
         try {
             dataSet = Query.fetchData("recipes", "*", condition + filterCondition);
             System.out.println("Select condition");
-            System.out.println(condition + filterCondition);
+            System.out.println(condition + filterCondition + ";");
 
             for (ArrayList<String> element : dataSet){
                 items.add(new Recipe(
@@ -171,6 +163,7 @@ public class SearchController extends NavigationController implements Initializa
             }
 
             searchResult.setItems(items);
+            searchResult.refresh();
 
         } catch (SQLException e) {
             e.printStackTrace();
