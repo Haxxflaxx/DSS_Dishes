@@ -185,6 +185,7 @@ public class MainController implements Initializable {
     }
 
     public void myRecipesclick(){
+        VistaNavigator.loadVista(VistaNavigator.MYPAGE);
         System.out.println("Load My Recipes");
     }
 
