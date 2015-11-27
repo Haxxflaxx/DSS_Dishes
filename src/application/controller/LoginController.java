@@ -19,31 +19,31 @@ import static application.dbTools.Query.insertInto;
 
 public class LoginController implements Initializable {
 
-    @FXML
-    private Label CheckMessage;
-    @FXML
-    private TextField usernameField;
-    @FXML
-    private TextField passwordField;
-    @FXML
-    private Button loginButton;
-    @FXML
-    private MenuButton buttonLoggedin;
-    @FXML
-    private MenuItem buttonSignout;
-    @FXML
-    private TextField registerusernameField;
-    @FXML
-    private TextField registerPasswordField;
-    @FXML
-    private TextField confirmPasswordField;
-    @FXML
-    private TextField emailField;
+    @FXML private Label CheckMessage;
+
+    @FXML private TextField usernameField;
+
+    @FXML private TextField passwordField;
+
+    @FXML private Button loginButton;
+
+    @FXML private MenuButton buttonLoggedin;
+
+    @FXML private MenuItem buttonSignout;
+
+    @FXML private TextField registerusernameField;
+
+    @FXML private TextField registerPasswordField;
+
+    @FXML private TextField confirmPasswordField;
+
+    @FXML private TextField emailField;
 
     @FXML private Label WELCOMEPAGE;
 
     @FXML private Label showusername;
 
+    @FXML private Button yesSignout;
 
 
     public void loginviewButtonclick () {
@@ -53,9 +53,9 @@ public class LoginController implements Initializable {
     public void loginScreen () {
 
         if (isValidCredentials()) {
-            VistaNavigator.loadVista(VistaNavigator.MAIN);
-            LoginNavigator.loadLogin(
-                    LoginNavigator.LOGGEDIN);
+            VistaNavigator.loadVista(VistaNavigator.MYPAGE);
+            LoginNavigator.loadLogin(LoginNavigator.LOGGEDIN);
+
         }
 
         else {
@@ -161,8 +161,6 @@ public class LoginController implements Initializable {
                 passwordField.clear();
                 CheckMessage.setText("Invalid credentials, please try again");
 
-
-
             }
 
             return log_in;
@@ -174,12 +172,10 @@ public class LoginController implements Initializable {
 
         return log_in;}
 
-    public void buttonSignout(){
+    private boolean buttonSignout(){
 
-        if (isValidCredentials()) {
+            System.out.println("Are you sure?");
 
-
-            System.out.println("You have been signed out");
 
             LoginNavigator.loadLogin(
                     LoginNavigator.LOGIN
@@ -187,7 +183,7 @@ public class LoginController implements Initializable {
             VistaNavigator.loadVista(
                     VistaNavigator.LOGINVISTA
             );
-        }
+        return false;
     }
 
     @Override

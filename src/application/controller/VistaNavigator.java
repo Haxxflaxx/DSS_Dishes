@@ -28,6 +28,8 @@ public class VistaNavigator {
     public static final String REGISTER = "/application/view/registerVista.fxml";
     public static final String LOGINVISTA = "/application/view/loginVista.fxml";
     public static final String WELCOMEPAGE = "/application/view/WELCOMEPAGE.fxml";
+    public static final String MYPAGE = "/application/view/myVista.fxml";
+
 
     /** The main application layout controller. */
     private static MainController mainController;
