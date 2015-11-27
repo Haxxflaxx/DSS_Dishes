@@ -50,6 +50,11 @@ public class LoginController implements Initializable {
         VistaNavigator.loadVista(VistaNavigator.LOGINVISTA);
     }
 
+    /*public boolean buttonSignout() {
+        return true;
+
+    }*/
+
     public void loginScreen () {
 
         if (isValidCredentials()) {
@@ -171,20 +176,6 @@ public class LoginController implements Initializable {
         }
 
         return log_in;}
-
-    private boolean buttonSignout(){
-
-            System.out.println("Are you sure?");
-
-
-            LoginNavigator.loadLogin(
-                    LoginNavigator.LOGIN
-            );
-            VistaNavigator.loadVista(
-                    VistaNavigator.LOGINVISTA
-            );
-        return false;
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
