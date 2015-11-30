@@ -135,7 +135,7 @@ public class SearchController extends NavigationController implements Initializa
             filterCondition += " AND Time='" + timeChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
         }
 
-        if (dietChoicebox.getSelectionModel().getSelectedItem() != null){
+        if (dietChoicebox.getSelectionModel().getSelectedItem() != null) {
             filterCondition += " AND Diet='" + dietChoicebox.getSelectionModel().getSelectedItem().toString() + "'";
         }
 
@@ -144,7 +144,7 @@ public class SearchController extends NavigationController implements Initializa
             System.out.println("Select condition");
             System.out.println(condition + filterCondition + ";");
 
-            for (ArrayList<String> element : dataSet){
+            for (ArrayList<String> element : dataSet) {
                 items.add(new Recipe(
                         element.get(0),
                         element.get(1),
@@ -156,17 +156,18 @@ public class SearchController extends NavigationController implements Initializa
                         element.get(7),
                         element.get(8),
                         element.get(9)
-                    )
+                        )
                 );
             }
 
             searchResult.setItems(items);
-            searchResult.refresh();
+            //searchResult.refresh();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     public void updateChoicebox(){
         ArrayList<ArrayList<String>> dataSet;
