@@ -42,11 +42,11 @@ public class LoginController implements Initializable {
 
     @FXML private TextField emailField;
 
-    @FXML private Label WELCOMEPAGE;
-
-    @FXML private Label showusername;
-
     @FXML private Button yesSignout;
+
+    @FXML private Button myvistaconnection;
+
+
 
 
     public void loginviewButtonclick () {
