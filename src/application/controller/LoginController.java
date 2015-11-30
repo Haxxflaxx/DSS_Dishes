@@ -1,5 +1,6 @@
 package application.controller;
 
+import application.User;
 import application.dbTools.Query;
 import javafx.fxml.FXML;
 
@@ -21,6 +22,9 @@ import static application.dbTools.Query.insertInto;
  */
 
 public class LoginController implements Initializable {
+
+    private User user;
+    String LoginID;
 
     @FXML private Label CheckMessage;
 
@@ -61,6 +65,7 @@ public class LoginController implements Initializable {
     public void loginScreen () {
 
         if (isValidCredentials()) {
+            user = new User(, registerusernameField.getText(), "1");
             VistaNavigator.loadVista(VistaNavigator.MYPAGE);
             LoginNavigator.loadLogin(LoginNavigator.LOGGEDIN);
 

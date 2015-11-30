@@ -131,6 +131,7 @@ public class EditRecipesController extends NavigationController implements Initi
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        VistaNavigator.loadVista(VistaNavigator.SEARCH);
     }
 
     /**
