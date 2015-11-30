@@ -15,15 +15,15 @@ public class User {
         this.privilege = name;
 
     }
-    public String getPrivilege() {
+    public static String getPrivilege() {
         return privilege;
     }
 
-    public String getId() {
+    public static String getId() {
         return id;
     }
 
-    public String getName() {
+    public static String getName() {
         return name;
     }
 
