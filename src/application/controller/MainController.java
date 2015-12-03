@@ -192,6 +192,5 @@ public class MainController implements Initializable {
     public void exit(){
         System.exit(0);
     }
-
 }
 

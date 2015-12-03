@@ -30,7 +30,7 @@
                <children>
                   <VBox prefWidth="220.0" spacing="10.0">
                      <children>
-                        <HBox prefWidth="200.0">
+                        <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Label text="Type">
                                  <font>
@@ -68,7 +68,7 @@
                   <Region prefWidth="50.0" />
                   <VBox prefWidth="220.0" spacing="10.0">
                      <children>
-                        <HBox prefWidth="200.0">
+                        <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Label text="Prep time">
                                  <font>
@@ -79,7 +79,7 @@
                               <ChoiceBox fx:id="timeChoicebox" prefWidth="150.0" />
                            </children>
                         </HBox>
-                        <HBox prefWidth="200.0">
+                        <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Label text="Diet">
                                  <font>
@@ -90,16 +90,27 @@
                               <ChoiceBox fx:id="dietChoicebox" prefWidth="150.0" />
                            </children>
                         </HBox>
-                        <HBox prefWidth="200.0">
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                            <children>
-                              <Region prefWidth="100.0" HBox.hgrow="ALWAYS" />
+                              <Region HBox.hgrow="ALWAYS" />
                               <Button fx:id="searchresultButton" mnemonicParsing="false" onAction="#updateResultTable" prefWidth="100.0" text="Search">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="clearresultButton" layoutX="130.0" layoutY="10.0" mnemonicParsing="false" onAction="#clearChoicebox" prefWidth="100.0" text="Clear">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
                            </children>
                         </HBox>
+                     </children>
+                  </VBox>
+                  <VBox>
+                     <children>
+                        <Region prefHeight="200.0" prefWidth="200.0" />
+                        <Region prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </VBox>
                   <Region prefWidth="50.0" HBox.hgrow="ALWAYS" />

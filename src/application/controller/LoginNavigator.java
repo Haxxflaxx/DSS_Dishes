@@ -76,4 +76,8 @@ public class LoginNavigator {
         }
     }
 
+    public void loginviewButtonclick () {
+        VistaNavigator.loadVista(VistaNavigator.LOGINVISTA);
+    }
+
 }

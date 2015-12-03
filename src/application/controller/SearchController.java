@@ -208,6 +208,11 @@ public class SearchController extends NavigationController implements Initializa
     public void searchresultClick() {
 
     }
+
+    public void clearChoicebox(){
+        VistaNavigator.loadVista(VistaNavigator.SEARCH);
+    }
+
     @Override
     public String getFxml() {
         return VistaNavigator.SEARCH;

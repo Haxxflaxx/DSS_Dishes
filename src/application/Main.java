@@ -5,10 +5,13 @@ import application.controller.MainController;
 import application.controller.VistaNavigator;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -19,11 +22,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception{
+
+        /**
+         * StageStyle set to UNDECORETED to remove system window
+         */
+        //stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("DSS Dishes");
 
         stage.setScene(
                 createScene(
-                        loadMainPane()
+                        loadMainPane(stage)
                 )
         );
         stage.setResizable(true);
@@ -38,7 +46,11 @@ public class Main extends Application {
      * @return the loaded pane.
      * @throws IOException if the pane could not be loaded.
      */
-    private Pane loadMainPane() throws IOException {
+
+    private static double xOffset = 0;
+    private static double yOffset = 0;
+
+    private Pane loadMainPane(final Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader();
 
         Pane mainPane = (Pane) loader.load(
@@ -60,6 +72,22 @@ public class Main extends Application {
                 VistaNavigator.SEARCH
         );
 
+        mainPane.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = stage.getX() - event.getScreenX();
+                yOffset = stage.getY() - event.getScreenY();
+            }
+        });
+
+        mainPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.setX(event.getScreenX() + xOffset);
+                stage.setY(event.getScreenY() + yOffset);
+            }
+        });
+
         return mainPane;
     }
 
@@ -74,7 +102,7 @@ public class Main extends Application {
         Scene scene = new Scene(
                 mainPane
         );
-        scene.getStylesheets().add("test.css");
+        scene.getStylesheets().add("dark.css");
 
         return scene;
     }
