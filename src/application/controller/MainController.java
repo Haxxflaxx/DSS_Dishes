@@ -189,5 +189,9 @@ public class MainController implements Initializable {
         System.out.println("Load My Recipes");
     }
 
+    public void exit(){
+        System.exit(0);
+    }
+
 }
 
