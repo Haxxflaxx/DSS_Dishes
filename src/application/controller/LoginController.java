@@ -49,9 +49,7 @@ public class LoginController implements Initializable {
     @FXML private Button yesSignout;
 
 
-    public void loginviewButtonclick () {
-        VistaNavigator.loadVista(VistaNavigator.LOGINVISTA);
-    }
+
 
     /*public boolean buttonSignout() {
         return true;
