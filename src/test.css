@@ -7,26 +7,6 @@
     -fx-base: #406B80;
     -fx-background: #406B80;
     -fx-focus-color: #2E6C80;
+    -fx-selection-background-color: #406B80;
 }
 
-.button1{
-    -fx-text-fill: #006464;
-    -fx-background-color: #DFB951;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
-    -fx-padding: 5;
-}
-
-.button2{
-    -fx-text-fill: #c10000;
-    -fx-background-color: #DFB951;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
-    -fx-padding: 5;
-}
-
-.slider{
-    -fx-border-color: white;
-    -fx-border-style: dashed;
-    -fx-border-width: 2;
-}
