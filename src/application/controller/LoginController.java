@@ -2,11 +2,9 @@ package application.controller;
 
 import application.dbTools.Query;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,7 +18,7 @@ import static application.dbTools.Query.insertInto;
  */
 
 public class LoginController implements Initializable {
-
+    boolean adminrights = false;
     @FXML
     private Label CheckMessage;
     @FXML
@@ -46,10 +44,14 @@ public class LoginController implements Initializable {
 
     @FXML private Label showusername;
 
-
+    @FXML private Button adminClick;
 
     public void loginviewButtonclick () {
         VistaNavigator.loadVista(VistaNavigator.LOGINVISTA);
+    }
+
+    public void adminClick(){
+        VistaNavigator.loadVista(VistaNavigator.ADMINVIEW);
     }
 
     public void loginScreen () {
@@ -57,6 +59,9 @@ public class LoginController implements Initializable {
         if (isValidCredentials()) {
             VistaNavigator.loadVista(VistaNavigator.MYPAGE);
             LoginNavigator.loadLogin(LoginNavigator.LOGGEDIN);
+            if (adminrights==true){
+                VistaNavigator.loadVista(VistaNavigator.WELCOMEPAGE);
+            }
         }
 
         else {
@@ -112,7 +117,7 @@ public class LoginController implements Initializable {
                         System.out.println("- End of UpdateNewUser");
 
                         System.out.println("You are registered,welcome");
-                        VistaNavigator.loadVista(VistaNavigator.WELCOMEPAGE);
+                        VistaNavigator.loadVista(VistaNavigator.MYPAGE);
 
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -155,6 +160,11 @@ public class LoginController implements Initializable {
 
                     System.out.println("You are logged in!");
                     log_in = true;
+
+                    if (checkUsername.equals("admin")){
+                        System.out.println("AdminTools");
+                        adminrights = true;
+                    }
 
                 } else if (!checkUsername.equals(username) || !checkPassword.equals(password)) {
                     usernameField.clear();
