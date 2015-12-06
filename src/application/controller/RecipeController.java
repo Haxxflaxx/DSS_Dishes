@@ -1,6 +1,7 @@
 package application.controller;
 
 import application.Recipe;
+import application.User;
 import application.dbTools.Query;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,6 +48,13 @@ public class RecipeController extends NavigationController implements Initializa
         recipe = Recipe.getSelected();
         updateContent();
         updateIngredientList();
+
+        if (User.getPrivilege() == 0 || User.getPrivilege() == 1){
+            editRecipe.setVisible(false);
+        }
+
+
+        System.out.println(User.getPrivilege());
         System.out.println("- End of Initialize RecipeController");
     }
 
@@ -100,8 +108,10 @@ public class RecipeController extends NavigationController implements Initializa
         System.out.println("- Load editRecipeview");
         VistaNavigator.loadVista(
                 VistaNavigator.EDITRECIPES);                       //Load editRecipesView
+
         System.out.println("- end of Load editRecipeview");
     }
+
 
     @Override
     public String getFxml() {

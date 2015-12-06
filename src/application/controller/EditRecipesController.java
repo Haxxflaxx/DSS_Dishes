@@ -146,8 +146,6 @@ public class EditRecipesController extends NavigationController implements Initi
         currentRecipe = "NAME='" + currentRecipe + "'";
         currentRecipe = currentRecipe.replaceAll("\\[", "").replaceAll("\\]", "");
 
-
-
         try {
             System.out.println("- SubmitButtonAction");
             updateData("Recipes", columns, values, currentRecipe);                   //Update data in columns with values

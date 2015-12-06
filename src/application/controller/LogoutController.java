@@ -37,8 +37,8 @@ public class LogoutController{
 
        /* if (yesSignout) {
 
-            LoginNavigator.loadLogin(
-                    LoginNavigator.LOGIN
+            LoginController2.loadLogin(
+                    LoginController2.LOGIN
             );
             VistaNavigator.loadVista(
                     VistaNavigator.LOGINVISTA

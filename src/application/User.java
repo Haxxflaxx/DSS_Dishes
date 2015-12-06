@@ -7,16 +7,11 @@ public class User {
 
     private static String id;
     private static String name;
-    private static String privilege;
+    private static String privilege ="0";
 
-    public User(String id, String name, String privilege){
-        this.id = id;
-        this.name = name;
-        this.privilege = name;
 
-    }
-    public static String getPrivilege() {
-        return privilege;
+    public static int getPrivilege() {
+        return Integer.parseInt(privilege);
     }
 
     public static String getId() {
@@ -27,15 +22,14 @@ public class User {
         return name;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public static void setId(String id) {User.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public static void setName(String name) {
+        User.name = name;
     }
 
-    public void setPrivilege(String privilege) {
-        this.privilege = privilege;
+    public static void setPrivilege(String privilege) {
+        User.privilege = privilege;
     }
 }

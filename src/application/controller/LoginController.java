@@ -2,12 +2,13 @@ package application.controller;
 
 import application.User;
 import application.dbTools.Query;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.*;
 
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -23,8 +24,9 @@ import static application.dbTools.Query.insertInto;
 
 public class LoginController implements Initializable {
 
-    private User user;
     String LoginID;
+    ArrayList<ArrayList<String>> userData;
+
 
     @FXML private Label CheckMessage;
 
@@ -50,22 +52,36 @@ public class LoginController implements Initializable {
 
     @FXML private Label showusername;
 
+    @FXML private Label loginLabel;
+
     @FXML private Button yesSignout;
 
+    @FXML private ChoiceBox registerChoiceBox;
 
-    public void loginviewButtonclick () {
-        VistaNavigator.loadVista(VistaNavigator.LOGINVISTA);
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+System.out.println("SUPER MEGA MEGA TEST");
+        updateRegisterChoiceBox();
+
     }
 
-    /*public boolean buttonSignout() {
-        return true;
-
-    }*/
 
     public void loginScreen () {
 
         if (isValidCredentials()) {
-
+            String currentUser = "Username='" + usernameField.getText() +"'";
+            try {
+                userData = fetchData("Users","*", currentUser);
+                System.out.println("userDATA " + userData);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+             User.setId(userData.get(0).get(2));
+             User.setName(userData.get(0).get(0));
+            User.setPrivilege(userData.get(0).get(4).replaceAll("\\[", "").replaceAll("\\]", ""));
+            System.out.println("TESTING PRIVILEGE IN LOGIN "+ User.getPrivilege());
+            System.out.println("TESTING USER ID IN LOGIN " + userData.get(0).get(0).toString());
             VistaNavigator.loadVista(VistaNavigator.MYPAGE);
             LoginNavigator.loadLogin(LoginNavigator.LOGGEDIN);
 
@@ -82,7 +98,7 @@ public class LoginController implements Initializable {
         //if users input invalid
         CheckMessage.setText("");
 
-        String columns = "Username,Password,Email";     //Array with columns
+        String columns = "Username,Password,Email,Privilege";     //Array with columns
         String values = "'" + registerusernameField.getText() + "','" + registerPasswordField.getText() + "','" + emailField.getText() + "'";
         ArrayList<ArrayList<String>> dataSet;
 
@@ -95,7 +111,7 @@ public class LoginController implements Initializable {
         boolean emailTaken = dataSet.size() > 0;
 
         // ensure the users input is valid
-    if (registerusernameField.getText().isEmpty()) {
+        if (registerusernameField.getText().isEmpty()) {
             CheckMessage.setText("Username is invalid");
 
         } else if (emailField.getText().isEmpty()) {
@@ -118,8 +134,22 @@ public class LoginController implements Initializable {
                 } else {
                     try {
                         System.out.println("- UpdateNewUser");
+                        if (registerChoiceBox.getSelectionModel().getSelectedItem() == "Standard user") {
+                            values += ",'1'";
+                            insertInto("Users", columns, values);
+                        }
 
-                        insertInto("Users", columns, values);
+                        else if (registerChoiceBox.getSelectionModel().getSelectedItem() == "Chef") {
+                            values += ",'2'";
+                            System.out.println("TESTING VALUES " + values );
+                            insertInto("Users", columns, values);
+                        }
+
+                        else if (registerChoiceBox.getSelectionModel().getSelectedItem() == "Admin") {
+                            values += ",'5'";
+                            insertInto("Users", columns, values);
+                        }
+
 
                         System.out.println("- End of UpdateNewUser");
 
@@ -185,9 +215,10 @@ public class LoginController implements Initializable {
 
         return log_in;}
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-
+    public void updateRegisterChoiceBox(){
+        ObservableList<String> registerList = FXCollections.observableArrayList("Standard user", "Chef", "Admin");
+        registerChoiceBox.setItems(registerList);
     }
+
 
 }

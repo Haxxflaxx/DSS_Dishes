@@ -85,6 +85,8 @@
                         <TextField fx:id="emailField" promptText="Email" />
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
+                              <Label fx:id="registerLabel" prefHeight="27.0" prefWidth="74.0" text="Register As" />
+                              <ChoiceBox fx:id="registerChoiceBox" prefWidth="150.0" />
                               <Region HBox.hgrow="ALWAYS" />
                               <Button fx:id="registerButton" mnemonicParsing="false" onAction="#registerButtonclick" prefHeight="25.0" prefWidth="80.0" text="Register">
                                  <HBox.margin>
