@@ -1,6 +1,7 @@
 package application.controller;
 
 import application.Recipe;
+import application.User;
 import application.dbTools.Query;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,6 +49,13 @@ public class RecipeController extends NavigationController implements Initializa
         updateContent();
         updateIngredientList();
         System.out.println("- End of Initialize RecipeController");
+
+        if (User.getPrivilege() == 0 || User.getPrivilege() == 1){
+            editRecipe.setVisible(false);
+        }
+
+
+
     }
 
 

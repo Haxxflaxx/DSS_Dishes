@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.LoginController">
+<Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.LoginNavigator">
    <children>
       <VBox prefHeight="25.0" prefWidth="320.0">
          <children>
@@ -15,7 +15,7 @@
                   <MenuButton fx:id="buttonLoggedin" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="25.0" text="User">
                     <items>
                       <MenuItem fx:id="buttonSettings" mnemonicParsing="false" text="Settings" />
-                      <MenuItem fx:id="buttonSignout" mnemonicParsing="false" text="Sign out" />
+                      <MenuItem fx:id="buttonSignout" mnemonicParsing="false" onAction="#signoutButton" text="Sign out" />
                     </items>
                   </MenuButton>
                </children>

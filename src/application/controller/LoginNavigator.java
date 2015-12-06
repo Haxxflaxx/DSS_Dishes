@@ -1,6 +1,9 @@
 package application.controller;
 
+import application.User;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 
 import java.io.IOException;
 
@@ -16,6 +19,8 @@ import java.io.IOException;
  * simple access from anywhere in the application.
  */
 public class LoginNavigator {
+    @FXML
+    private Button loginviewButton;
 
     /**
      * Constants holding path and name for views.
@@ -78,6 +83,15 @@ public class LoginNavigator {
 
     public void loginviewButtonclick () {
         VistaNavigator.loadVista(VistaNavigator.LOGINVISTA);
+    }
+
+    public void signoutButton(){
+        User.setName("");
+        User.setId("");
+        User.setPrivilege("0");
+        LoginNavigator.loadLogin(LoginNavigator.LOGIN);
+        VistaNavigator.loadVista(VistaNavigator.WELCOME);
+
     }
 
 }
