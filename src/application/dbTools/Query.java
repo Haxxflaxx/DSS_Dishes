@@ -82,6 +82,19 @@ public class Query {
     }
 
     /**
+     * Builds and executes a query to fetch a sorted set of tuples.
+     * @param table Table for data selection.
+     * @param column Column for data selection. e.g. "column1, column2,...columnN" and "*" for select all.
+     * @param sortBy Column for sorting data selection.
+     * @return String Array List with the fetched data set.
+     * @exception SQLException if a database access error occurs.
+     */
+    public static ArrayList<ArrayList<String>> fetchSorted(String table, String column, String sortBy) throws SQLException {
+        String sql = "SELECT " + column + " FROM " + table + " ORDER BY " + sortBy + ";";
+        return Connection.runQuery(sql);
+    }
+
+    /**
      * Builds and executes a query to update an attribute in the DB.
      * @param table The table for the update.
      * @param column The attribute for the update.

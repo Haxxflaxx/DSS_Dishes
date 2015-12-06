@@ -52,6 +52,8 @@ public class MainController implements Initializable {
 
     @FXML private TableView recipeTable;
 
+    public String selectionSort = "";
+
     /**
      * Replaces the vista displayed in the vista holder with a new vista.
      *
@@ -178,6 +180,8 @@ public class MainController implements Initializable {
 
     public void topRatedclick(){
         System.out.println("Load Top Rated Recipes");
+        selectionSort = "Ratings";
+        VistaNavigator.loadVista(VistaNavigator.BROWSE);
     }
 
     public void newRecipesclick(){
