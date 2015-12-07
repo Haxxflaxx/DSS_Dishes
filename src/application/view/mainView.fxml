@@ -76,7 +76,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="newRecipes" layoutX="10.0" layoutY="10.0" onMouseClicked="#newRecipesclick" text="New Recipes">
+            <Label fx:id="newRecipes" layoutX="10.0" layoutY="10.0" onMouseClicked="#topDateClick" text="Newest">
                <font>
                   <Font size="20.0" />
                </font>

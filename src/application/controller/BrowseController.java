@@ -23,6 +23,7 @@ public class BrowseController extends NavigationController implements Initializa
 
     @FXML private TableView recipeTable;
     @FXML TableColumn id;
+    @FXML TableColumn rating;
     @FXML TableColumn name;
     @FXML TableColumn type;
     @FXML TableColumn diet;
@@ -30,12 +31,17 @@ public class BrowseController extends NavigationController implements Initializa
     @FXML TableColumn difficulty;
     @FXML TableColumn prepTime;
 
+    private final int selectNr = 20;
+
 
     @Override
 
     public void initialize(URL location, ResourceBundle resources){
         id.setCellValueFactory(
                 new PropertyValueFactory<Recipe, String>("id")
+        );
+        rating.setCellValueFactory(
+                new PropertyValueFactory<Recipe, String>("ratings")
         );
         name.setCellValueFactory(
                 new PropertyValueFactory<Recipe, String>("name")
@@ -64,20 +70,21 @@ public class BrowseController extends NavigationController implements Initializa
         ObservableList<Recipe> items = FXCollections.observableArrayList();
 
         try {
-            dataSet = Query.fetchData("recipes", "*");
+            dataSet = Query.fetchSorted("recipes", "*", VistaNavigator.getMainController().selectionSort);
 
-            for (ArrayList<String> element : dataSet){
+            for (int i = 0; i < selectNr && i < dataSet.size(); i++){
                 items.add(new Recipe(
-                                element.get(0),
-                                element.get(1),
-                                element.get(2),
-                                element.get(3),
-                                element.get(4),
-                                element.get(5),
-                                element.get(6),
-                                element.get(7),
-                                element.get(8),
-                                element.get(9)
+                                dataSet.get(i).get(0),
+                                dataSet.get(i).get(1),
+                                dataSet.get(i).get(2),
+                                dataSet.get(i).get(3),
+                                dataSet.get(i).get(4),
+                                dataSet.get(i).get(5),
+                                dataSet.get(i).get(6),
+                                dataSet.get(i).get(7),
+                                dataSet.get(i).get(8),
+                                dataSet.get(i).get(9),
+                                dataSet.get(i).get(10)
                         )
                 );
             }
@@ -90,6 +97,6 @@ public class BrowseController extends NavigationController implements Initializa
     }
     @Override
     public String getFxml() {
-        return VistaNavigator.WELCOME;
+        return VistaNavigator.BROWSE;
     }
 }
