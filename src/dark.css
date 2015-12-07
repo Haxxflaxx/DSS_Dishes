@@ -40,6 +40,19 @@ Code for Choicebox on SearchVista
 
 }
 
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: linear-gradient(#333 0%, #777 25%, #aaa 75%, #eee 100%);
+    -fx-text-fill: white;
+}
+.list-cell { -fx-text-fill: white; }
+.list-cell:odd { -fx-background-color: #1d1d1d }
+.list-cell:even { -fx-background-color: #1d1d1d }
+.list-cell:filled:hover {
+    -fx-background-color: blue;
+    -fx-text-fill: white;
+}
+
+
 .table-view {
     -fx-base: #1d1d1d;
     -fx-control-inner-background: #1d1d1d;

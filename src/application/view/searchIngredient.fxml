@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.AdvancedSearchController">
+   <center>
+      <Pane BorderPane.alignment="CENTER">
+         <children>
+            <HBox>
+               <children>
+                  <VBox>
+                     <children>
+                        <TextField fx:id="ingredientSearch" onKeyPressed="#updateIngredientSearch" promptText="Search ingredients" />
+                        <ListView fx:id="recipeIngredients" prefWidth="250.0" />
+                     </children>
+                  </VBox>
+                  <Region prefWidth="50.0" HBox.hgrow="ALWAYS" />
+                  <VBox>
+                     <children>
+                        <Region prefHeight="200.0" />
+                        <Button fx:id="addIngredients" mnemonicParsing="false" onAction="#addIngredientButton" text="Add Ingredient" />
+                        <Region prefHeight="200.0">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Region>
+                     </children>
+                  </VBox>
+                  <Region prefWidth="50.0" />
+                  <TableView fx:id="addedIngredientTable" editable="true">
+                     <columns>
+                        <TableColumn fx:id="Name" maxWidth="-1.0" minWidth="250.0" prefWidth="-1.0" text="Name" />
+                     </columns>
+                  </TableView>
+               </children>
+            </HBox>
+            <StackPane fx:id="vistaHolder" />
+         </children>
+      </Pane>
+   </center>
+   <top>
+      <Region prefHeight="50.0" BorderPane.alignment="CENTER" />
+   </top>
+   <right>
+      <Region prefWidth="50.0" BorderPane.alignment="CENTER" />
+   </right>
+   <left>
+      <Region prefWidth="50.0" BorderPane.alignment="CENTER" />
+   </left>
+   <bottom>
+      <HBox>
+         <children>
+            <Region prefHeight="50.0" BorderPane.alignment="CENTER" HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" text="Search" />
+            <Region prefHeight="50.0" prefWidth="50.0" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
