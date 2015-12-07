@@ -31,6 +31,7 @@ public class VistaNavigator {
     public static final String WELCOMEPAGE = "/application/view/WELCOMEPAGE.fxml";
     public static final String MYPAGE = "/application/view/myVista.fxml";
     public static final String BROWSE = "/application/view/browseTopVista.fxml";
+    public static final String LOGOUT = "/application/view/logoutView.fxml";
 
 
     /** The main application layout controller. */

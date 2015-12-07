@@ -46,13 +46,9 @@ public class LoginController implements Initializable {
 
     @FXML private TextField emailField;
 
-    @FXML private Label WELCOMEPAGE;
-
-    @FXML private Label showusername;
-
-    @FXML private Button yesSignout;
-
     @FXML private ChoiceBox registerChoiceBox;
+
+    @FXML private Button registerButton;
 
 
 
@@ -121,54 +117,58 @@ public class LoginController implements Initializable {
         } else if (emailField.getText().isEmpty()) {
             CheckMessage.setText("E-mail is invalid");
 
-        } else {
-            if (registerPasswordField.getText().isEmpty()) {
+        } else if (registerPasswordField.getText().isEmpty()) {
                 CheckMessage.setText("Please set a password");
 
-            } else {
-                if (usernameTaken) {
-                    registerusernameField.clear();
-                    CheckMessage.setText("Sorry,the Username is already been registered");
-                } else {
-                    if (emailTaken) {
-                        emailField.clear();
-                        CheckMessage.setText("Sorry,the email is already been registered");
-
-                        //
-                    } else {
-                        try {
-                            System.out.println("- UpdateNewUser");
-                            if (registerChoiceBox.getSelectionModel().getSelectedItem() == "Standard user") {
-                                values += ",'1'";
-                                insertInto("Users", columns, values);
-                            }
-
-                            else if (registerChoiceBox.getSelectionModel().getSelectedItem() == "Chef") {
-                                values += ",'2'";
-                                System.out.println("TESTING VALUES " + values );
-                                insertInto("Users", columns, values);
-                            }
-
-                            else if (registerChoiceBox.getSelectionModel().getSelectedItem() == "Admin") {
-                                values += ",'5'";
-                                insertInto("Users", columns, values);
-                            }
-
-
-                            System.out.println("- End of UpdateNewUser");
-
-                            System.out.println("You are registered,welcome");
-                            VistaNavigator.loadVista(VistaNavigator.WELCOMEPAGE);
-
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-
-                        }
-                    }
+            } else if (usernameTaken) {
+            registerusernameField.clear();
+            CheckMessage.setText("Sorry,the Username is already been registered");
+        }
+                 else if (emailTaken) {
+            emailField.clear();
+            CheckMessage.setText("Sorry,the email is already been registered");
+        }
+            else if (!registerPasswordField.getText().equals(confirmPasswordField.getText())){
+            registerPasswordField.clear();
+            confirmPasswordField.clear();
+            CheckMessage.setText("Your passwords must match");
+            }
+            else {
+            try {
+                System.out.println("- UpdateNewUser");
+                if (registerChoiceBox.getSelectionModel().getSelectedItem() == "Standard user") {
+                    values += ",'1'";
+                    insertInto("Users", columns, values);
+                } else if (registerChoiceBox.getSelectionModel().getSelectedItem() == "Chef") {
+                    values += ",'2'";
+                    System.out.println("TESTING VALUES " + values);
+                    insertInto("Users", columns, values);
+                } else if (registerChoiceBox.getSelectionModel().getSelectedItem() == "Admin") {
+                    values += ",'5'";
+                    insertInto("Users", columns, values);
                 }
+
+                System.out.println("- End of UpdateNewUser");
+
+                String currentUser = "Username='" + registerusernameField.getText() + "'";
+
+                userData = fetchData("Users", "*", currentUser);
+                System.out.println("userDATA " + userData);
+
+                User.setId(userData.get(0).get(2));
+                User.setName(userData.get(0).get(0));
+                User.setPrivilege(userData.get(0).get(4).replaceAll("\\[", "").replaceAll("\\]", ""));
+
+                VistaNavigator.loadVista(VistaNavigator.MYPAGE);
+                LoginNavigator.loadLogin(LoginNavigator.LOGGEDIN);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
-    }
+                    }
+
+
     private boolean isValidCredentials(){
 
         ArrayList<ArrayList<String>> dataSet;
@@ -222,6 +222,7 @@ public class LoginController implements Initializable {
     public void updateRegisterChoiceBox(){
         ObservableList<String> registerList = FXCollections.observableArrayList("Standard user", "Chef", "Admin");
         registerChoiceBox.setItems(registerList);
+        registerChoiceBox.getSelectionModel().select("Standard user");
     }
 
 

@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.VistaNavigator">
+<Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.MyRecipeController">
    <children>
       <BorderPane>
          <center>
@@ -32,21 +32,15 @@
                      <children>
                         <HBox prefWidth="200.0">
                            <children>
-                              <Label text="My Recipes">
+                              <Label fx:id="myUsername" text="Username">
                                  <font>
-                                    <Font name="System Bold" size="32.0" />
+                                    <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Region HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
                         <HBox prefWidth="200.0">
                            <children>
-                              <Label fx:id="myUsername" text="Username">
-                                 <font>
-                                    <Font size="32.0" />
-                                 </font>
-                              </Label>
                               <Region HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>

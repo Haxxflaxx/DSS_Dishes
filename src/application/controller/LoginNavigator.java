@@ -4,6 +4,7 @@ import application.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 
 import java.io.IOException;
 
@@ -21,6 +22,13 @@ import java.io.IOException;
 public class LoginNavigator {
     @FXML
     private Button loginviewButton;
+    @FXML
+    private Button yesSignout;
+    @FXML
+    private Button cancelSignout;
+    @FXML
+    private MenuItem signoutView;
+
 
     /**
      * Constants holding path and name for views.
@@ -85,13 +93,20 @@ public class LoginNavigator {
         VistaNavigator.loadVista(VistaNavigator.LOGINVISTA);
     }
 
+    public void signoutView(){
+        VistaNavigator.loadVista(VistaNavigator.LOGOUT);
+    }
+
     public void signoutButton(){
         User.setName("");
         User.setId("");
         User.setPrivilege("0");
+        VistaNavigator.loadVista(VistaNavigator.SEARCH);
         LoginNavigator.loadLogin(LoginNavigator.LOGIN);
-        VistaNavigator.loadVista(VistaNavigator.WELCOME);
+    }
 
+    public void cancelSignout(){
+        VistaNavigator.loadVista(VistaNavigator.SEARCH);
     }
 
 }
