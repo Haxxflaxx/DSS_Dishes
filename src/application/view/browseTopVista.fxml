@@ -12,8 +12,8 @@
          <center>
             <TableView fx:id="recipeTable" BorderPane.alignment="CENTER">
               <columns>
-                  <TableColumn fx:id="id" prefWidth="50.0" text="ID" />
                   <TableColumn fx:id="rating" prefWidth="75.0" text="Rating" />
+                  <TableColumn fx:id="id" prefWidth="50.0" text="ID" />
                 <TableColumn fx:id="name" prefWidth="250.0" text="Name" />
                 <TableColumn fx:id="type" prefWidth="100.0" text="Type" />
                   <TableColumn fx:id="diet" prefWidth="100.0" text="Diet" />
