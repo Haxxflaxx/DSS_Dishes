@@ -83,7 +83,8 @@ public class BrowseController extends NavigationController implements Initializa
                                 dataSet.get(i).get(6),
                                 dataSet.get(i).get(7),
                                 dataSet.get(i).get(8),
-                                dataSet.get(i).get(9)
+                                dataSet.get(i).get(9),
+                                dataSet.get(i).get(10)
                         )
                 );
             }

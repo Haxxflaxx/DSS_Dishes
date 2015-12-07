@@ -184,8 +184,10 @@ public class MainController implements Initializable {
         VistaNavigator.loadVista(VistaNavigator.BROWSE);
     }
 
-    public void newRecipesclick(){
+    public void topDateClick(){
         System.out.println("Load New Recipes");
+        selectionSort = "Date";
+        VistaNavigator.loadVista(VistaNavigator.BROWSE);
     }
 
     public void myRecipesclick(){
