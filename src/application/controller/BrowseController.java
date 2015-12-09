@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -37,6 +38,19 @@ public class BrowseController extends NavigationController implements Initializa
     @Override
 
     public void initialize(URL location, ResourceBundle resources){
+        recipeTable.setRowFactory(tv -> {
+            TableRow<Recipe> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    Recipe.setSelected(row.getItem());
+                    VistaNavigator.loadVista(
+                            VistaNavigator.RECIPE
+                    );
+                }
+            });
+            return row;
+        });
+
         id.setCellValueFactory(
                 new PropertyValueFactory<Recipe, String>("id")
         );
