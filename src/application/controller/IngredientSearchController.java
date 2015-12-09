@@ -2,6 +2,7 @@ package application.controller;
 
 import application.Ingredient;
 import application.Recipe;
+import application.dbTools.Query;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,7 +22,7 @@ import static application.dbTools.Query.*;
  * Created by Pierre on 2015-11-03.
  */
 
-public class AdvancedSearchController extends NavigationController implements Initializable{
+public class IngredientSearchController extends NavigationController implements Initializable{
 
 
     MainController mainController;
@@ -30,27 +31,9 @@ public class AdvancedSearchController extends NavigationController implements In
 
 
     @FXML
-    public TextField recipeName;
-    @FXML
-    private TextField recipeType;
-    @FXML
-    private TextField recipeCuisine;
-    @FXML
-    private TextField recipeDifficulty;
-    @FXML
-    private TextField recipeDiet;
-    @FXML
-    private TextField recipeTime;
-    @FXML
-    private TextArea recipeDescription;
-    @FXML
     private ListView recipeIngredients;
     @FXML
     private Button recipeSubmit;
-    @FXML
-    private TextField ingredientAmount;
-    @FXML
-    private TextField ingredientUnit;
     @FXML
     private TextField ingredientSearch;
     @FXML
@@ -58,11 +41,21 @@ public class AdvancedSearchController extends NavigationController implements In
     @FXML
     private TableView addedIngredientTable;
     @FXML
+
+    private TableView searchResult;
+    @FXML TableColumn id;
+    @FXML TableColumn name;
+    @FXML TableColumn type;
+    @FXML TableColumn diet;
+    @FXML TableColumn cuisine;
+    @FXML TableColumn difficulty;
+    @FXML TableColumn prepTime;
+
+    @FXML
     private TableColumn Name;
     @FXML
-    private TableColumn Amount;
-    @FXML
-    private TableColumn Unit;
+    private Button searchIngredientbutton;
+
 
     /**
      * Updates updateEditRecipeList and UpdateIngredients when loading vista.
@@ -73,6 +66,41 @@ public class AdvancedSearchController extends NavigationController implements In
     public void initialize(URL location, ResourceBundle resources) {
     updateIngredients();
         Name.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("name"));
+
+        searchResult.setRowFactory(tv -> {
+            TableRow<Recipe> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    Recipe.setSelected(row.getItem());
+                    VistaNavigator.loadVista(
+                            VistaNavigator.RECIPE
+                    );
+                }
+            });
+            return row;
+        });
+        id.setCellValueFactory(
+                new PropertyValueFactory<Recipe, String>("id")
+        );
+        name.setCellValueFactory(
+                new PropertyValueFactory<Recipe, String>("name")
+        );
+        type.setCellValueFactory(
+                new PropertyValueFactory<Recipe, String>("type")
+        );
+        diet.setCellValueFactory(
+                new PropertyValueFactory<Recipe, String>("diet")
+        );
+        cuisine.setCellValueFactory(
+                new PropertyValueFactory<Recipe, String>("cuisine")
+        );
+        difficulty.setCellValueFactory(
+                new PropertyValueFactory<Recipe, String>("difficulty")
+        );
+        prepTime.setCellValueFactory(
+                new PropertyValueFactory<Recipe, String>("time")
+        );
+
     }
 
     /**
@@ -136,6 +164,46 @@ public class AdvancedSearchController extends NavigationController implements In
         }
         recipeIngredients.setItems(itemList);               //Sets the listview to show the ingredients that matches the search
     }                                                       //Criteria
+
+    public void searchIngredient() {
+        String filterCondition = "";
+        ArrayList<ArrayList<String>> dataSet = new ArrayList<>();
+        ObservableList<Recipe> items = FXCollections.observableArrayList();
+
+        if (addedIngredientTable.getItems() != null)
+           // filterCondition += " AND Name='" + addedIngredientTable.getSelectionModel().getSelectedItem().toString() + "'";
+
+
+        try {
+            dataSet = Query.fetchData("recipes", "*");
+            System.out.println("Select condition");
+            System.out.println(filterCondition + ";");
+
+            for (ArrayList<String> element : dataSet){
+
+                items.add(new Recipe(
+                                element.get(0),
+                                element.get(1),
+                                element.get(2),
+                                element.get(3),
+                                element.get(4),
+                                element.get(5),
+                                element.get(6),
+                                element.get(7),
+                                element.get(8),
+                                element.get(9),
+                                element.get(10)
+                        )
+                );
+            }
+
+            searchResult.setItems(items);
+            searchResult.refresh();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public String getFxml() {

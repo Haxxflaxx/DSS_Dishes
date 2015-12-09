@@ -195,10 +195,7 @@ public class MainController implements Initializable {
         System.out.println("Load My Recipes");
     }
 
-    public void advSearchclick(){
-        VistaNavigator.loadVista(VistaNavigator.ADVSEARCH);
-        System.out.println("Load Advanced Search");
-    }
+
 
     public void exit(){
         System.exit(0);

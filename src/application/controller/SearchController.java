@@ -10,6 +10,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
@@ -41,6 +42,8 @@ public class SearchController extends NavigationController implements Initializa
     @FXML private ChoiceBox difficultyChoicebox;
     @FXML private ChoiceBox timeChoicebox;
     @FXML private ChoiceBox dietChoicebox;
+
+    @FXML private Button searchIngredient;
 
     //Search conditions
     String search;
@@ -212,6 +215,11 @@ public class SearchController extends NavigationController implements Initializa
 
     public void clearChoicebox(){
         VistaNavigator.loadVista(VistaNavigator.SEARCH);
+    }
+
+    public void searchIngredientclick(){
+        VistaNavigator.loadVista(VistaNavigator.ADVSEARCH);
+        System.out.println("Load Advanced Search");
     }
 
     @Override
