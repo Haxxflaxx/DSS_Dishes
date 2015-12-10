@@ -85,6 +85,7 @@ public class EditRecipesController extends NavigationController implements Initi
         Unit.setCellValueFactory(
                 new PropertyValueFactory<Ingredient, String>("unit")
         );
+        recipeDescription.setEditable(false);
         System.out.println("- End of Initialize EditRecipesController");
     }
 
