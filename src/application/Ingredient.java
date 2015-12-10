@@ -9,6 +9,7 @@ public class Ingredient {
     String name;
     String amount;
     String unit;
+    String id;
 
     public Ingredient(String name, String amount, String unit){
         this.name = name;
@@ -20,6 +21,18 @@ public class Ingredient {
         this.name = name;
     }
 
+    public Ingredient(String name, String id){
+        this.name = name;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

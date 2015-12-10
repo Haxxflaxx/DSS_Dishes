@@ -87,12 +87,28 @@
                                  </font>
                               </Label>
                               <Region HBox.hgrow="ALWAYS" />
+                              <ChoiceBox fx:id="dietChoicebox1" prefWidth="150.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Rating">
+                                 <font>
+                                    <Font name="System Bold Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Region HBox.hgrow="ALWAYS" />
                               <ChoiceBox fx:id="dietChoicebox" prefWidth="150.0" />
                            </children>
                         </HBox>
+                     </children>
+                  </VBox>
+                  <Region prefWidth="50.0" />
+                  <VBox spacing="10.0">
+                     <children>
+                        <Region prefHeight="200.0" prefWidth="200.0" />
                         <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                            <children>
-                              <Region HBox.hgrow="ALWAYS" />
                               <Button fx:id="searchresultButton" mnemonicParsing="false" onAction="#updateResultTable" prefWidth="100.0" text="Search">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
@@ -105,12 +121,11 @@
                               </Button>
                            </children>
                         </HBox>
-                     </children>
-                  </VBox>
-                  <VBox>
-                     <children>
-                        <Region prefHeight="200.0" prefWidth="200.0" />
-                        <Region prefHeight="200.0" prefWidth="200.0" />
+                        <Button fx:id="searchIngredient" mnemonicParsing="false" onAction="#searchIngredientclick" prefHeight="100.0" prefWidth="200.0" text="Search by ingredient">
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Button>
                      </children>
                   </VBox>
                   <Region prefWidth="50.0" HBox.hgrow="ALWAYS" />

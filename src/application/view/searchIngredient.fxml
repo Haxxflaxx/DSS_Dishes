@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.AdvancedSearchController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.IngredientSearchController">
    <center>
       <Pane BorderPane.alignment="CENTER">
          <children>
-            <HBox>
+            <HBox prefHeight="200.0">
                <children>
-                  <VBox>
+                  <VBox prefHeight="200.0">
                      <children>
                         <TextField fx:id="ingredientSearch" onKeyPressed="#updateIngredientSearch" promptText="Search ingredients" />
                         <ListView fx:id="recipeIngredients" prefWidth="250.0" />
                      </children>
                   </VBox>
                   <Region prefWidth="50.0" HBox.hgrow="ALWAYS" />
-                  <VBox>
+                  <VBox spacing="10.0">
                      <children>
-                        <Region prefHeight="200.0" />
-                        <Button fx:id="addIngredients" mnemonicParsing="false" onAction="#addIngredientButton" text="Add Ingredient" />
-                        <Region prefHeight="200.0">
+                        <Region prefHeight="100.0" />
+                        <Button fx:id="addIngredients" mnemonicParsing="false" onAction="#addIngredientButton" prefWidth="100.0" text="Add " />
+                        <Button fx:id="removeIngredients" layoutX="10.0" layoutY="98.0" mnemonicParsing="false" onAction="#removeIngredientButton" prefWidth="100.0" text="Remove" />
+                        <Region prefHeight="100.0">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -30,9 +32,9 @@
                      </children>
                   </VBox>
                   <Region prefWidth="50.0" />
-                  <TableView fx:id="addedIngredientTable" editable="true">
+                  <TableView fx:id="addedIngredientTable" editable="true" prefHeight="200.0">
                      <columns>
-                        <TableColumn fx:id="Name" maxWidth="-1.0" minWidth="250.0" prefWidth="-1.0" text="Name" />
+                        <TableColumn fx:id="ingredientName" maxWidth="-1.0" minWidth="250.0" prefWidth="-1.0" text="Name" />
                      </columns>
                   </TableView>
                </children>
@@ -51,12 +53,29 @@
       <Region prefWidth="50.0" BorderPane.alignment="CENTER" />
    </left>
    <bottom>
-      <HBox>
+      <VBox>
          <children>
-            <Region prefHeight="50.0" BorderPane.alignment="CENTER" HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" text="Search" />
-            <Region prefHeight="50.0" prefWidth="50.0" />
+            <HBox>
+               <children>
+                  <Region prefHeight="50.0" BorderPane.alignment="CENTER" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="searchIngredientbutton" mnemonicParsing="false" onAction="#searchIngredient" prefWidth="100.0" text="Search" />
+                  <Region layoutX="10.0" layoutY="10.0" prefWidth="10.0" />
+                  <Button fx:id="clearIngredientbutton" layoutX="708.0" layoutY="10.0" mnemonicParsing="false" onAction="#clearIngredient" prefWidth="100.0" text="Clear" />
+                  <Region prefWidth="100.0" />
+               </children>
+            </HBox>
+            <TableView fx:id="searchResult" prefHeight="250.0">
+               <columns>
+                  <TableColumn fx:id="id" prefWidth="50.0" text="ID" />
+                  <TableColumn fx:id="name" prefWidth="250.0" text="Name" />
+                  <TableColumn fx:id="type" prefWidth="100.0" text="Type" />
+                  <TableColumn fx:id="diet" prefWidth="100.0" text="Diet" />
+                  <TableColumn fx:id="cuisine" prefWidth="125.0" text="Cuisine" />
+                  <TableColumn fx:id="difficulty" prefWidth="125.0" text="Difficulty" />
+                  <TableColumn fx:id="prepTime" prefWidth="100.0" text="Prep Time" />
+               </columns>
+            </TableView>
          </children>
-      </HBox>
+      </VBox>
    </bottom>
 </BorderPane>
