@@ -48,6 +48,7 @@ public class RecipeController extends NavigationController implements Initializa
         recipe = Recipe.getSelected();
         updateContent();
         updateIngredientList();
+        recipeDescription.setEditable(false);
 
         System.out.println("- End of Initialize RecipeController");
 
