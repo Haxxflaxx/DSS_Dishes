@@ -123,7 +123,7 @@ public class IngredientSearchController extends NavigationController implements 
                 new PropertyValueFactory<Recipe, String>("time")
         );
 
-
+        searchIngredient();
     }
 
     /**
@@ -234,7 +234,7 @@ public class IngredientSearchController extends NavigationController implements 
             }
         System.out.println(condition + ";");
         try {
-            dataSet = Query.fetchData("recipes, rui", "*", condition);
+            dataSet = Query.fetchDistinct("recipes, rui", "ID, Name, Type, Cuisine, Difficulty, Ratings, Diet, Time, TimeUnit, Description, DateAdded, Creator", condition);
             System.out.println("Select condition");
 
 
@@ -266,7 +266,9 @@ public class IngredientSearchController extends NavigationController implements 
     }
 
     public void clearIngredient(){
-        VistaNavigator.loadVista(VistaNavigator.ADVSEARCH);
+        ingredientItems.clear();
+        addedIngredientTable.setItems(ingredientItems);
+        searchIngredient();
     }
 
     @Override
