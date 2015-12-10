@@ -17,6 +17,7 @@
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
+                              <Label fx:id="recipeCreator" text="Label" />
                               <Label fx:id="recipeName" text="Name">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="95.0" />

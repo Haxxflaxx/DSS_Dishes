@@ -33,7 +33,7 @@ public class RecipeController extends NavigationController implements Initializa
     @FXML    private TextArea recipeDescription;
     @FXML    private ListView recipeIngredients;
     @FXML    private Button editRecipe;
-
+    @FXML    private Label recipeCreator;
 
 
     /**
@@ -48,6 +48,7 @@ public class RecipeController extends NavigationController implements Initializa
         recipe = Recipe.getSelected();
         updateContent();
         updateIngredientList();
+
         System.out.println("- End of Initialize RecipeController");
 
         if (User.getPrivilege() == 0 || User.getPrivilege() == 1){
@@ -74,6 +75,7 @@ public class RecipeController extends NavigationController implements Initializa
         recipeTime.setText(recipe.getTime());
         recipeDiet.setText(recipe.getDiet());
         recipeDescription.setText(recipe.getDescription());
+        recipeCreator.setText("Created By: " + recipe.getCreator());
 
         System.out.println("- End of Recipe updateContent");
 

@@ -1,5 +1,6 @@
 package application.controller;
 
+import application.User;
 import application.dbTools.Query;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +20,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import static application.dbTools.Query.fetchData;
 import static application.dbTools.Query.insertInto;
 
 /**
@@ -29,6 +31,14 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("- Intialize mainController");
+        /**
+        if (User.getPrivilege() == 0 || User.getPrivilege() == 1){
+            addRecipe.setVisible(false);
+        }
+        if (User.getPrivilege() == 0) {
+            myRecipes.setVisible(false);
+        }
+         */
         updateRecipList();
         recipList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             VistaNavigator.loadVista(
@@ -51,6 +61,10 @@ public class MainController implements Initializable {
     @FXML private StackPane loginHolder;
 
     @FXML private TableView recipeTable;
+
+    @FXML public Label addRecipe;
+
+    @FXML public Label myRecipes;
 
     public String selectionSort = "";
 
@@ -136,9 +150,17 @@ public class MainController implements Initializable {
 
         try {
             System.out.println("- addNewRecipeButton");
-            insertInto("Recipes", "Name", "'--New--'");
-            updateRecipList();
-            recipList.getSelectionModel().select("--New--");
+            String checkRecipe = fetchData("Recipes", "Name", "NAME='--New--'").toString();
+            checkRecipe = checkRecipe.replaceAll("\\[", "").replaceAll("\\]", "");
+            System.out.println("CHECK RECIPE" + checkRecipe);
+
+            if (!checkRecipe.equals("--New--")) {
+                insertInto("Recipes", "Name, Creator", "'--New--','" + User.getName() + "'");
+                System.out.println(User.getName());
+                VistaNavigator.loadVista(VistaNavigator.RECIPE);
+                VistaNavigator.loadVista(VistaNavigator.EDITRECIPES);
+            }
+
             System.out.println("- End of addNewRecipeButton");
     }
         catch (SQLException e) {

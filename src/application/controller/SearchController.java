@@ -156,7 +156,8 @@ public class SearchController extends NavigationController implements Initializa
                         element.get(7),
                         element.get(8),
                         element.get(9),
-                        element.get(10)
+                        element.get(10),
+                        element.get(11)
                     )
                 );
             }

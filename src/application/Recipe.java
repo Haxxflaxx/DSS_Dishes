@@ -24,8 +24,9 @@ public class Recipe {
     String timeUnit;
     String description;
     String date;
+    String creator;
 
-    public Recipe(String id, String name, String type, String cuisine, String difficulty, String ratings, String diet, String time, String timeUnit, String description, String date) {
+    public Recipe(String id, String name, String type, String cuisine, String difficulty, String ratings, String diet, String time, String timeUnit, String description, String date, String creator) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -37,6 +38,7 @@ public class Recipe {
         this.timeUnit = timeUnit;
         this.description = description;
         this.date = date;
+        this.creator = creator;
     }
 
     public static Recipe getSelected() {
@@ -67,7 +69,8 @@ public class Recipe {
                     dataSet.get(0).get(7),
                     dataSet.get(0).get(8),
                     dataSet.get(0).get(9),
-                    dataSet.get(0).get(10)
+                    dataSet.get(0).get(10),
+                    dataSet.get(0).get(11)
             );
         } catch (SQLException e) {
             e.printStackTrace();
@@ -115,4 +118,8 @@ public class Recipe {
     }
 
     public String getDate() {return date;}
+
+    public String getCreator() {return creator;}
+
+    public void setCreator(String creator) {this.creator = creator;}
 }

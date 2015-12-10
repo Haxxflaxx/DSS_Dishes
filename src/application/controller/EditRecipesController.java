@@ -64,6 +64,7 @@ public class EditRecipesController extends NavigationController implements Initi
     @FXML
     private TableColumn Unit;
 
+
     /**
      * Updates updateEditRecipeList and UpdateIngredients when loading vista.
      * Sets cellValueFactory with the column names for the tableview.
@@ -125,6 +126,7 @@ public class EditRecipesController extends NavigationController implements Initi
             String criteria = "ID='" + fetchData("Recipes", "ID", "Name ='" + recipeName.getText() + "'") + "'";
             criteria = criteria.replaceAll("\\[", "").replaceAll("\\]", "");
             deleteFrom("Recipes", criteria);            //Delete recipes where name == selected recipe
+            VistaNavigator.loadVista(VistaNavigator.SEARCH);
 
 
             System.out.println("- End of DeleteRecipe");
@@ -168,6 +170,7 @@ public class EditRecipesController extends NavigationController implements Initi
                 insertInto("RUI", "RID, IID, Quantity, Unit", "'" + recipeID + "','" + currentId + "','" + iAmount + "','" + iUnit + "'");
                                                                                     //Inserts recipe id, current id,
             }                                                                       //amount, and unit
+            VistaNavigator.loadVista(VistaNavigator.RECIPE);
             }
          catch (SQLException e) {
             e.printStackTrace();
