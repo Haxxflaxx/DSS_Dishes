@@ -5,10 +5,12 @@ import application.Recipe;
 import application.dbTools.Query;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -78,6 +80,26 @@ public class IngredientSearchController extends NavigationController implements 
                 }
             });
             return row;
+        });
+
+        addedIngredientTable.setRowFactory(tv -> {
+            TableRow<Recipe> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    removeIngredientButton();
+                }
+            });
+            return row;
+        });
+
+        recipeIngredients.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent click) {
+
+                if (click.getClickCount() == 2){
+                    addIngredientButton();
+                }
+            }
         });
         id.setCellValueFactory(
                 new PropertyValueFactory<Recipe, String>("id")
