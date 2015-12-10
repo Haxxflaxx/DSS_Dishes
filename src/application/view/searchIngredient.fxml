@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -18,10 +19,11 @@
                      </children>
                   </VBox>
                   <Region prefWidth="50.0" HBox.hgrow="ALWAYS" />
-                  <VBox>
+                  <VBox spacing="10.0">
                      <children>
                         <Region prefHeight="100.0" />
-                        <Button fx:id="addIngredients" mnemonicParsing="false" onAction="#addIngredientButton" text="Add Ingredient" />
+                        <Button fx:id="addIngredients" mnemonicParsing="false" onAction="#addIngredientButton" prefWidth="100.0" text="Add " />
+                        <Button fx:id="removeIngredients" layoutX="10.0" layoutY="98.0" mnemonicParsing="false" onAction="#removeIngredientButton" prefWidth="100.0" text="Remove" />
                         <Region prefHeight="100.0">
                            <VBox.margin>
                               <Insets />
@@ -32,7 +34,7 @@
                   <Region prefWidth="50.0" />
                   <TableView fx:id="addedIngredientTable" editable="true" prefHeight="200.0">
                      <columns>
-                        <TableColumn fx:id="Name" maxWidth="-1.0" minWidth="250.0" prefWidth="-1.0" text="Name" />
+                        <TableColumn fx:id="ingredientName" maxWidth="-1.0" minWidth="250.0" prefWidth="-1.0" text="Name" />
                      </columns>
                   </TableView>
                </children>
@@ -56,7 +58,9 @@
             <HBox>
                <children>
                   <Region prefHeight="50.0" BorderPane.alignment="CENTER" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="searchIngredientbutton" mnemonicParsing="false" onAction="#searchIngredient" text="Search" />
+                  <Button fx:id="searchIngredientbutton" mnemonicParsing="false" onAction="#searchIngredient" prefWidth="100.0" text="Search" />
+                  <Region layoutX="10.0" layoutY="10.0" prefWidth="10.0" />
+                  <Button fx:id="clearIngredientbutton" layoutX="708.0" layoutY="10.0" mnemonicParsing="false" onAction="#clearIngredient" prefWidth="100.0" text="Clear" />
                   <Region prefWidth="100.0" />
                </children>
             </HBox>

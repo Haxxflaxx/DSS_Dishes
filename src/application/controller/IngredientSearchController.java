@@ -27,13 +27,13 @@ public class IngredientSearchController extends NavigationController implements 
 
     MainController mainController;
     private String recipeID;
-    private ObservableList<Ingredient> items = FXCollections.observableArrayList();
+    private ObservableList<Ingredient> ingredientItems = FXCollections.observableArrayList();
 
 
     @FXML
     private ListView recipeIngredients;
     @FXML
-    private Button recipeSubmit;
+    private Button removeIngredients;
     @FXML
     private TextField ingredientSearch;
     @FXML
@@ -52,7 +52,7 @@ public class IngredientSearchController extends NavigationController implements 
     @FXML TableColumn prepTime;
 
     @FXML
-    private TableColumn Name;
+    private TableColumn ingredientName;
     @FXML
     private Button searchIngredientbutton;
 
@@ -65,8 +65,8 @@ public class IngredientSearchController extends NavigationController implements 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     updateIngredients();
-        Name.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("name"));
-
+        ingredientName.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("name"));
+        addedIngredientTable.setItems(ingredientItems);
         searchResult.setRowFactory(tv -> {
             TableRow<Recipe> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
@@ -101,6 +101,7 @@ public class IngredientSearchController extends NavigationController implements 
                 new PropertyValueFactory<Recipe, String>("time")
         );
 
+
     }
 
     /**
@@ -131,15 +132,48 @@ public class IngredientSearchController extends NavigationController implements 
      * ButtonMethod for add ingredients from the ingredientList into the tableview
      */
     public void addIngredientButton() {
-
+        ArrayList<ArrayList<String>> dataSet;
         String selectedIngredient = recipeIngredients.getSelectionModel().getSelectedItems().toString();
         selectedIngredient = selectedIngredient.replaceAll("\\[", "").replaceAll("\\]", "");
 
-        items.add(new Ingredient(selectedIngredient));    //Creates new
+        String condition = "Name='"+selectedIngredient+"'";
 
-        addedIngredientTable.setItems(items);               //Object of the type Ingredient and adds it to the tableView.
-        System.out.println();
 
+        try {
+            dataSet = Query.fetchData("ingredients", "*", condition);
+
+            ingredientItems.add(new Ingredient(
+                    dataSet.get(0).get(1),
+                    dataSet.get(0).get(0)
+
+            ));
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        addedIngredientTable.setItems(ingredientItems);               //Object of the type Ingredient and adds it to the tableView.
+
+
+    }
+
+    public void removeIngredientButton() {
+
+        final int selected = addedIngredientTable.getSelectionModel().getSelectedIndex();
+        if (selected != -1) {
+            Object itemToRemove = addedIngredientTable.getSelectionModel().getSelectedItem();
+
+            final int newSelectedIdx =
+                    (selected == addedIngredientTable.getItems().size() - 1)
+                            ? selected - 1
+                            : selected;
+
+            addedIngredientTable.getItems().remove(selected);
+            addedIngredientTable.getSelectionModel().select(newSelectedIdx);
+
+
+        }
     }
 
     /**
@@ -166,18 +200,21 @@ public class IngredientSearchController extends NavigationController implements 
     }                                                       //Criteria
 
     public void searchIngredient() {
-        String filterCondition = "";
+        String condition = "";
         ArrayList<ArrayList<String>> dataSet = new ArrayList<>();
         ObservableList<Recipe> items = FXCollections.observableArrayList();
 
-        if (addedIngredientTable.getItems() != null)
-           // filterCondition += " AND Name='" + addedIngredientTable.getSelectionModel().getSelectedItem().toString() + "'";
 
-
+        condition += "recipes.id = rui.rid";
+        if (ingredientItems!=null)
+            for (Ingredient ingredient : ingredientItems){
+                condition += " and rui.iid='" + ingredient.getId() + "'";
+            }
+        System.out.println(condition + ";");
         try {
-            dataSet = Query.fetchData("recipes", "*");
+            dataSet = Query.fetchData("recipes, rui", "*", condition);
             System.out.println("Select condition");
-            System.out.println(filterCondition + ";");
+
 
             for (ArrayList<String> element : dataSet){
 
@@ -203,6 +240,10 @@ public class IngredientSearchController extends NavigationController implements 
         catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void clearIngredient(){
+        VistaNavigator.loadVista(VistaNavigator.ADVSEARCH);
     }
 
     @Override
