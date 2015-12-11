@@ -55,27 +55,25 @@
                      </children>
                   </HBox>
                   <Region prefHeight="20.0" />
-                  <Line endX="300.0" startX="-100.0" strokeWidth="3.0">
-                     <stroke>
-                        <LinearGradient endX="1.0" endY="1.0">
-                           <stops>
-                              <Stop color="BLACK" />
-                              <Stop color="WHITE" offset="1.0" />
-                           </stops>
-                        </LinearGradient>
-                     </stroke>
-                  </Line>
-                  <VBox spacing="10.0">
+                  <Line endX="311.0" startX="-100.0" VBox.vgrow="ALWAYS" />
+                  <HBox prefHeight="16.0" prefWidth="413.0">
                      <children>
-                        <Label contentDisplay="CENTER" text="Not a member? Register here." textAlignment="CENTER">
+                        <Region prefHeight="30.0" prefWidth="80.0" HBox.hgrow="ALWAYS" />
+                        <Label contentDisplay="CENTER" prefHeight="30.0" prefWidth="304.0" text="Not a member? Register here." textAlignment="RIGHT" textOverrun="CLIP" HBox.hgrow="NEVER">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
+                        <Region prefHeight="30.0" prefWidth="63.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <VBox spacing="10.0">
+                     <children>
                         <TextField fx:id="registerusernameField" promptText="Username" />
                         <HBox spacing="10.0">
                            <children>
                               <PasswordField fx:id="registerPasswordField" promptText="Choose your password" />
+                              <Region prefHeight="25.0" prefWidth="74.0" />
                               <PasswordField fx:id="confirmPasswordField" promptText="Confirm password" />
                            </children>
                            <VBox.margin>

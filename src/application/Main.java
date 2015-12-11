@@ -102,7 +102,7 @@ public class Main extends Application {
         Scene scene = new Scene(
                 mainPane
         );
-        scene.getStylesheets().add("dark.css");
+        scene.getStylesheets().add("theme.css");
 
         return scene;
     }
