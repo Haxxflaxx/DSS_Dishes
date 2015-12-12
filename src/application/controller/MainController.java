@@ -10,8 +10,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.Label;
+import javafx.stage.*;
 
 import javax.swing.text.TableView;
 import java.awt.*;
@@ -65,6 +68,14 @@ public class MainController implements Initializable {
     @FXML public Label addRecipe;
 
     @FXML public Label myRecipes;
+
+    /** Ioannis Gkikas extraction of main stage
+     *
+     */
+    @FXML private Stage mainStage;
+    public void setStage(Stage stage) {
+        this.mainStage = stage;
+    }
 
     public String selectionSort = "";
 
@@ -217,6 +228,19 @@ public class MainController implements Initializable {
         System.out.println("Load My Recipes");
     }
 
+    /** custom  minimize,resize and close buttons,manipulating the main stage */
+
+    public void minimize(){
+     mainStage.setIconified(true);
+    }
+
+    public void resize() {
+       if(mainStage.isFullScreen()) {
+           mainStage.setFullScreen(false);
+       } else {
+           mainStage.setFullScreen(true);
+       }
+    }
 
 
     public void exit(){

@@ -14,19 +14,35 @@ mail : gusgkiio@gu.se
     -fx-selection-bar: #404040;
 }
 
+#AppIcon {
+-fx-image: url("/icons/AppIconSmall.png");
+
+}
+#logo {
+-fx-image: url("/icons/MealTimeLogoSmall.png");
+}
+
 /*
 Code for Choicebox on SearchVista
 */
 .choice-box {
     -fx-text-fill: #a0a0a0;
-    -fx-border-color: #333333;
+    -fx-border-color: #404040;
     -fx-border-radius: 20;
     -fx-background-color: #282828;
     }
+.choice-box:hover {
+    -fx-background-radius: 20;
+    -fx-background-color: #404040;
+}
 .choice-box .context-menu {
     -fx-background-color: #282828;
     -fx-text-fill: #a0a0a0;
     }
+.choice-box .label .text:hover {
+    -fx-background-color: #404040;
+    -fx-text-fill: #ffffff;
+}
 .choice-box .open-button .arrow {
 -fx-background-color: #a0a0a0;
 }
@@ -86,11 +102,23 @@ table view
 
 .menu-bar .label {
 
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
-    -fx-opacity: 0.9;
-}
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #a0a0a0;
 
+
+}
+.menu-bar .label:hover {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #404040;
+}
+.menu-button .menu:hover {
+    -fx-text-fill: #ffffff;
+        -fx-background-color: #404040;
+        }
+.menu-item:hover {
+    -fx-fill: #ffffff;
+    -fx-background-color: #404040;
+        }
 
 /*
 Textfields
@@ -165,6 +193,18 @@ Textfields
 .button:default:hover {
     -fx-background-color: derive(-fx-focus-color,30%);
 }
+
+#minimize, #resize, #close {
+ -fx-background-color: #282828;
+    -fx-background-radius: 0;
+    -fx-font-family: "Segoe UI Semibold", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #a0a0a0;
+}
+#minimize:hover, #resize:hover, #close:hover {
+ -fx-text-fill: #ffffff;
+ -fx-background-color: #404040;
+ }
 
 
 /*

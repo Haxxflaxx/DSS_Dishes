@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
@@ -10,7 +11,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.LoginController">
    <top>
-      <Region prefHeight="100.0" BorderPane.alignment="CENTER" />
+      <Region prefHeight="63.0" prefWidth="613.0" BorderPane.alignment="CENTER" />
    </top>
    <left>
       <Region prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
@@ -19,11 +20,18 @@
       <Region prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </bottom>
    <center>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="413.0" BorderPane.alignment="CENTER">
          <children>
             <StackPane fx:id="vistaHolder" />
             <VBox spacing="10.0">
                <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <ImageView id="logo" fitHeight="150.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER" />
+                        <Region prefHeight="150.0" prefWidth="10.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
                   <HBox spacing="5.0">
                      <children>
                         <TextField fx:id="usernameField" promptText="username">

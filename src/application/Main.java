@@ -8,6 +8,7 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -22,11 +23,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception{
-
         /**
          * StageStyle set to UNDECORETED to remove system window
          */
-        //stage.initStyle(StageStyle.UNDECORATED);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("DSS Dishes");
 
         stage.setScene(
@@ -36,6 +36,11 @@ public class Main extends Application {
         );
         stage.setResizable(true);
         stage.show();
+
+        /*
+        transfer stage to mainController
+         */
+
     }
 
     /**
@@ -51,6 +56,7 @@ public class Main extends Application {
     private static double yOffset = 0;
 
     private Pane loadMainPane(final Stage stage) throws IOException {
+        stage.getIcons().add(new Image(this.getClass().getResourceAsStream("../icons/AppIcon.png"))); /** custom taskbar icon*/
         FXMLLoader loader = new FXMLLoader();
 
         Pane mainPane = (Pane) loader.load(
@@ -66,6 +72,7 @@ public class Main extends Application {
         );
 
         MainController mainController = loader.getController();
+        mainController.setStage(stage); //IoannisGkikas,making stage ready for extraction
 
         VistaNavigator.setMainController(mainController);
         VistaNavigator.loadVista(
@@ -86,6 +93,7 @@ public class Main extends Application {
                 stage.setX(event.getScreenX() + xOffset);
                 stage.setY(event.getScreenY() + yOffset);
             }
+
         });
 
         return mainPane;
@@ -99,6 +107,7 @@ public class Main extends Application {
      * @return the created scene.
      */
     private Scene createScene(Pane mainPane) {
+
         Scene scene = new Scene(
                 mainPane
         );

@@ -569,6 +569,9 @@ is being used to size a border should also be in pixels.
     -fx-label-padding: 0.0em 0.0em 0.0em 0.416667em; /* 0 0 0 5 */
     -fx-text-fill: -fx-text-background-color;
 }
+.check-box:hover {
+    -fx-
+    }
 .check-box > .box {
     -fx-background-radius: 3, 2, 1;
     -fx-padding: 0.666667em; /* 16x16 = 8+8 */
