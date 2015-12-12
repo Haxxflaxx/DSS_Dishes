@@ -222,21 +222,22 @@ public class IngredientSearchController extends NavigationController implements 
     }                                                       //Criteria
 
     public void searchIngredient() {
+        boolean first = true;
         String condition = "";
         ArrayList<ArrayList<String>> dataSet = new ArrayList<>();
         ObservableList<Recipe> items = FXCollections.observableArrayList();
 
-
-        condition += "recipes.id = rui.rid";
-        if (ingredientItems!=null)
-            for (Ingredient ingredient : ingredientItems){
-                condition += " and rui.iid='" + ingredient.getId() + "'";
-            }
-        System.out.println(condition + ";");
         try {
-            dataSet = Query.fetchDistinct("recipes, rui", "ID, Name, Type, Cuisine, Difficulty, Ratings, Diet, Time, TimeUnit, Description, DateAdded, Creator", condition);
-            System.out.println("Select condition");
+            if (ingredientItems.size() == 0) dataSet = Query.fetchData("recipes", "*");
 
+            else {
+                for (Ingredient ingredient : ingredientItems) {
+                    if (!first) condition += " and ";
+                    condition += "id IN (SELECT rid FROM rui WHERE iid = '" + ingredient.getId() + "')";
+                    first = false;
+                }
+                dataSet = Query.fetchDistinct("recipes", "*", condition);
+            }
 
             for (ArrayList<String> element : dataSet){
 
