@@ -7,7 +7,9 @@ import java.util.ArrayList;
 
 
 /**
- * Created by haxxflaxx on 2015-10-01.
+ * Created by Daniel.
+ *
+ * A class containing methods for handling the connection to the DB.
  */
 public class Connection {
 

@@ -4,7 +4,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Created by haxxflaxx on 2015-10-29.
+ * Created by Daniel.
+ *
+ * A class containing methods for building queries to interface with the DB.
  */
 public class Query {
     /**
