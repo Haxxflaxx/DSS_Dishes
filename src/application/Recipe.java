@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Created by haxxflaxx on 2015-11-09.
+ * Created by Daniel.
  *
  * Container for holding a recipe.
  */
