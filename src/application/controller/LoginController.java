@@ -23,7 +23,7 @@ import static application.dbTools.Query.insertInto;
  * Created by Pierre on 2015-11-06.
  */
 
-public class LoginController implements Initializable {
+public class LoginController extends NavigationController implements Initializable {
     ArrayList<ArrayList<String>> userData;
 
     MainController mainController;
@@ -226,6 +226,10 @@ public class LoginController implements Initializable {
         registerChoiceBox.getSelectionModel().select("Standard user");
     }
 
+    @Override
+    public String getFxml() {
+        return VistaNavigator.LOGINVISTA;
+    }
 
 
 }
