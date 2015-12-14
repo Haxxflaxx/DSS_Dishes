@@ -18,7 +18,7 @@ import static application.dbTools.Query.*;
 
 
 /**
- * Created by haxxflaxx on 2015-11-03.
+ * Created by Fredrik Rissanen on 2015-11-03.
  */
 
 public class EditRecipesController extends NavigationController implements Initializable{
@@ -159,13 +159,8 @@ public class EditRecipesController extends NavigationController implements Initi
                 String iAmount = Amount.getCellData(o).toString();                  //iAmount = ingredientAmount
                 String iUnit = Unit.getCellData(o).toString();                      //iUnit = ingredientUnit
 
-                System.out.println("TESTING" + iName);
-
                 String currentId = fetchData("Ingredients", "ID", "Name='" + iName + "'").toString();   //Fetches id where name
                 currentId = currentId.replaceAll("\\[", "").replaceAll("\\]", "");                      //is column-name
-
-                System.out.println("RECIPE ID"+ recipeID);
-                System.out.println("Current ID"+ currentId);
 
                 insertInto("RUI", "RID, IID, Quantity, Unit", "'" + recipeID + "','" + currentId + "','" + iAmount + "','" + iUnit + "'");
                                                                                     //Inserts recipe id, current id,
