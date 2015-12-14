@@ -65,6 +65,8 @@ public class RecipeController extends NavigationController implements Initializa
     /**
      * Fetches data from the database based on selected item in
      * MainController.recipList and puts the data into the fields for the view.
+     *
+     * Created by Daniel.
      */
     private void updateContent(){
 
