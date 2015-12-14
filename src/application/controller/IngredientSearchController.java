@@ -221,6 +221,12 @@ public class IngredientSearchController extends NavigationController implements 
         recipeIngredients.setItems(itemList);               //Sets the listview to show the ingredients that matches the search
     }                                                       //Criteria
 
+    /**
+     * Builds a search condition based on selected ingredients and
+     * fetch the data from the DB.
+     *
+     * Created by Daniel.
+     */
     public void searchIngredient() {
         boolean first = true;
         String condition = "";

@@ -27,6 +27,8 @@ import static application.dbTools.Query.fetchData;
 import static application.dbTools.Query.insertInto;
 
 /**
+ * Created by Daniel.
+ *
  * Main controller class for the layout.
  */
 public class MainController implements Initializable {
