@@ -11,7 +11,6 @@ Code for Choicebox on SearchVista
 .choice-box {
     -fx-text-fill: white;
     }
-
 .choice-box .context-menu {
        -fx-background-color: #1d1d1d;
     }
@@ -113,19 +112,6 @@ Code for Choicebox on SearchVista
 Code for Textfields. Such as search and edit recipe.
 */
 
-.text-area {
-    -fx-font-size: 10pt;
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: white;
-}
-
-.input[type="text"], text-area {
-
-  background-color : #d1d1d1;
-
-}
-
-
 
 .text-field {
     -fx-font-size: 10pt;
@@ -133,6 +119,9 @@ Code for Textfields. Such as search and edit recipe.
     -fx-text-fill: black;
     -fx-background-color: white;
     }
+
+}
+
 
 
 /*
