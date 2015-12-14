@@ -34,14 +34,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("- Intialize mainController");
-        /**
-        if (User.getPrivilege() == 0 || User.getPrivilege() == 1){
-            addRecipe.setVisible(false);
-        }
-        if (User.getPrivilege() == 0) {
-            myRecipes.setVisible(false);
-        }
-         */
+        loginStatus();
         updateRecipList();
         recipList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             VistaNavigator.loadVista(
@@ -65,9 +58,9 @@ public class MainController implements Initializable {
 
     @FXML private TableView recipeTable;
 
-    @FXML public Label addRecipe;
+    @FXML public  Label addRecipe;
 
-    @FXML public Label myRecipes;
+    @FXML public  Label myRecipes;
 
     /** Ioannis Gkikas extraction of main stage
      *
@@ -242,6 +235,22 @@ public class MainController implements Initializable {
        }
     }
 
+    public void loginStatus() {
+        if (User.getPrivilege() == 1) {
+            addRecipe.setVisible(false);
+            myRecipes.setVisible(true);
+        } else if (User.getPrivilege() == 2) {
+            addRecipe.setVisible(true);
+            myRecipes.setVisible(true);
+        } else if (User.getPrivilege() == 5) {
+            addRecipe.setVisible(true);
+            myRecipes.setVisible(true);
+        }
+        else{
+            addRecipe.setVisible(false);
+            myRecipes.setVisible(false);
+        }
+    }
 
     public void exit(){
         System.exit(0);

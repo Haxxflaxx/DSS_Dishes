@@ -52,12 +52,13 @@ public class RecipeController extends NavigationController implements Initializa
 
         System.out.println("- End of Initialize RecipeController");
 
-        if (User.getPrivilege() == 0 || User.getPrivilege() == 1){
-            editRecipe.setVisible(false);
+         if (User.getPrivilege() == 5){
+            editRecipe.setVisible(true);
         }
 
-
-
+        else if (User.getPrivilege() == 0 || User.getPrivilege() == 1 || !User.getName().equals(recipe.getCreator())){
+            editRecipe.setVisible(false);
+        }
     }
 
 

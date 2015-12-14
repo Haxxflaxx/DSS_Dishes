@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
- * Created by Frank on 07/12/15.
+ * Created by Fredrik Rissanen on 07/12/15.
  */
 public class MyRecipeController extends SearchController implements Initializable {
     @FXML
@@ -25,6 +26,19 @@ public class MyRecipeController extends SearchController implements Initializabl
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         myUsername.setText(User.getName() + " recipes");
+
+        searchResult.setRowFactory(tv -> {
+            TableRow<Recipe> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    Recipe.setSelected(row.getItem());
+                    VistaNavigator.loadVista(
+                            VistaNavigator.RECIPE
+                    );
+                }
+            });
+            return row;
+        });
 
         id.setCellValueFactory(
                 new PropertyValueFactory<Recipe, String>("id")
@@ -60,7 +74,7 @@ public class MyRecipeController extends SearchController implements Initializabl
 
         try {
             dataSet = Query.fetchData("recipes", "*", userRecipe);
-            System.out.println("testing " + dataSet);
+
 
             for (ArrayList<String> element : dataSet){
                 items.add(new Recipe(
