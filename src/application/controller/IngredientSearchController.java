@@ -259,7 +259,9 @@ public class IngredientSearchController extends NavigationController implements 
                                 element.get(8),
                                 element.get(9),
                                 element.get(10),
-                                element.get(11)
+                                element.get(11),
+                                element.get(12),
+                                element.get(13)
                         )
                 );
             }

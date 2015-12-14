@@ -5,14 +5,18 @@ import application.User;
 import application.dbTools.Query;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import sun.font.TrueTypeFont;
 
+import javafx.event.*;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -35,7 +39,10 @@ public class RecipeController extends NavigationController implements Initializa
     @FXML    private ListView recipeIngredients;
     @FXML    private Button editRecipe;
     @FXML    private Label recipeCreator;
-
+    @FXML    private Button r1,r2,r3,r4,r5;
+    @FXML    private Label ratings,totalRatings;
+    private  String  scoreSum;
+    private int button;
 
     /**
      * On view creation:
@@ -50,16 +57,12 @@ public class RecipeController extends NavigationController implements Initializa
         updateContent();
         updateIngredientList();
         recipeDescription.setEditable(false);
+        privilegeCheck();
+        initializeRating();
 
         System.out.println("- End of Initialize RecipeController");
 
-         if (User.getPrivilege() == 5){
-            editRecipe.setVisible(true);
-        }
 
-        else if (User.getPrivilege() == 0 || User.getPrivilege() == 1 || !User.getName().equals(recipe.getCreator())){
-            editRecipe.setVisible(false);
-        }
     }
 
 
@@ -81,11 +84,28 @@ public class RecipeController extends NavigationController implements Initializa
         recipeDiet.setText(recipe.getDiet());
         recipeDescription.setText(recipe.getDescription());
         recipeCreator.setText("Created By: " + recipe.getCreator());
+        ratings.setText(recipe.getRatings());
+        totalRatings.setText(recipe.getTotalRatings());
+        scoreSum = recipe.getScoreSum();
 
         System.out.println("- End of Recipe updateContent");
 
     }
+    /**
+     * Method for checking user privilege and applying according settings
+     */
+    private void privilegeCheck() {
+        if (User.getPrivilege() == 5){
+            editRecipe.setVisible(true);
+        }
 
+        else if (User.getPrivilege() == 0 || User.getPrivilege() == 1 || !User.getName().equals(recipe.getCreator())){
+            editRecipe.setVisible(false);
+        }
+        if (User.getPrivilege() == 0 || hasRated()) { //disable buttons
+            disableRating();
+        }
+    }
     /**
      *  Method for updating the Ingredients in the RecipeView
      */
@@ -116,6 +136,122 @@ public class RecipeController extends NavigationController implements Initializa
         VistaNavigator.loadVista(
                 VistaNavigator.EDITRECIPES);                       //Load editRecipesView
         System.out.println("- end of Load editRecipeview");
+    }
+    /**
+     *
+     * Method for updating rating values
+     * created by Ioannis Gkikas
+     */
+    public void rate(int button) {
+        //update the database (user with this ID rated recipe with this ID)
+        //refresh values on score and total labels
+        DecimalFormat df = new DecimalFormat("0.0");
+
+        String condition = "RID = '" + recipe.getId() + "' AND UID = '" + User.getId() + "'";
+        try {
+            Query.updateData("RaUU", "hr", "true", condition);
+            System.out.println(condition);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Query.updateData("Recipes", "TotalRatings", String.valueOf(Integer.parseInt(recipe.getTotalRatings())+1), "ID = " + recipe.getId());
+            totalRatings.setText(String.valueOf(Integer.parseInt(recipe.getTotalRatings())+1));
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            Query.updateData("Recipes", "SumRatings", String.valueOf(Integer.parseInt(recipe.getScoreSum())+button), "ID = " + recipe.getId());
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            double SS = (double)(Integer.parseInt(recipe.getScoreSum()+button));
+            double TT = (double)(Integer.parseInt(recipe.getTotalRatings()+1));
+            Query.updateData("Recipes", "Ratings", Double.toString(SS/TT), "ID = " + recipe.getId());
+            ratings.setText(Double.toString(SS/TT));
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        disableRating();
+    }
+
+    /**
+     * Method for checking if user has rated
+     * created by Ioannis Gkikas
+     */
+    public boolean hasRated() {
+        ArrayList<ArrayList<String>> dataSet;
+        String hasRated = "";
+        boolean hasRatedBool = false;
+        String condition = "RID = '" + recipe.getId() + "' AND UID = '" + User.getId() + "'";
+        try {
+            dataSet = Query.fetchData("RaUU", "hr", condition);
+            hasRated = dataSet.get(0).get(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if (hasRated.equals("false") ) {
+            hasRatedBool = false;
+        } else if (hasRated.equals("true")) {
+            hasRatedBool = true;
+        }
+        return hasRatedBool;
+    }
+
+    /**
+     * Method for disabling buttons
+     * Created by Ioannis Gkikas
+     */
+    public void disableRating() {
+        r1.setDisable(true);
+        r2.setDisable(true);
+        r3.setDisable(true);
+        r4.setDisable(true);
+        r5.setDisable(true);
+    }
+
+    /**
+     * Method for starting up rating buttons
+     * Created by Ioannis Gkikas
+     */
+    public void initializeRating() {
+        r1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                rate(1);
+            }
+        });
+        r2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                rate(2);
+            }
+        });
+        r3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                rate(3);
+            }
+        });
+        r4.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                rate(4);
+            }
+        });
+        r5.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                rate(5);
+            }
+        });
     }
 
     @Override

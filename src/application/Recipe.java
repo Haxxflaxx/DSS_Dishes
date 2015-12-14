@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Daniel.
- *
+ *some elements added by Ioannis Gkikas
  * Container for holding a recipe.
  */
 public class Recipe {
@@ -25,8 +25,10 @@ public class Recipe {
     String description;
     String date;
     String creator;
+    String totalRatings;
+    String scoreSum;
 
-    public Recipe(String id, String name, String type, String cuisine, String difficulty, String ratings, String diet, String time, String timeUnit, String description, String date, String creator) {
+    public Recipe(String id, String name, String type, String cuisine, String difficulty, String ratings, String diet, String time, String timeUnit, String description, String date, String creator, String totalRatings, String scoreSum) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -39,6 +41,8 @@ public class Recipe {
         this.description = description;
         this.date = date;
         this.creator = creator;
+        this.totalRatings = totalRatings;
+        this.scoreSum = scoreSum;
     }
 
     public static Recipe getSelected() {
@@ -70,7 +74,9 @@ public class Recipe {
                     dataSet.get(0).get(8),
                     dataSet.get(0).get(9),
                     dataSet.get(0).get(10),
-                    dataSet.get(0).get(11)
+                    dataSet.get(0).get(11),
+                    dataSet.get(0).get(12),
+                    dataSet.get(0).get(13)
             );
         } catch (SQLException e) {
             e.printStackTrace();
@@ -122,4 +128,8 @@ public class Recipe {
     public String getCreator() {return creator;}
 
     public void setCreator(String creator) {this.creator = creator;}
+
+    public String getTotalRatings() {return totalRatings;}
+
+    public String getScoreSum() {return scoreSum;}
 }

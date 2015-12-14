@@ -1,7 +1,6 @@
-/*Author Ioannis Gkikas,Pierre Leveau
-
+/*
+authors : Ioannis Gkikas,Pierre Leveau
 */
-
 
 .root{
     -fx-font-family: "System";
@@ -22,8 +21,18 @@
 -fx-image: url("/icons/MealTimeLogoSmall.png");
 }
 
+#rate {
+-fx-background-image: url("/icons/DishBWSmall.png");
+-fx-background-radius: 0;
+}
+#rate:hover {
+-fx-background-image: url("/icons/DishShinySmall.png");
+-fx-background-radius: 0;
+-fx-background-color: transparent;
+}
 /*
 Code for Choicebox on SearchVista
+by Pierre Leveau
 */
 .choice-box {
     -fx-text-fill: #a0a0a0;
@@ -53,6 +62,7 @@ Code for Choicebox on SearchVista
 
 /*
 labels
+by Ioannis Gkikas
 */
 
 .label {
@@ -76,12 +86,10 @@ labels
 
 }
 
-/*
-list view
-*/
 
 /*
 table view
+by Ioannis Gkikas
 */
 
 
@@ -122,6 +130,7 @@ table view
 
 /*
 Textfields
+by Ioannis Gkikas
 */
 
 
@@ -156,6 +165,7 @@ Textfields
 
 /*
  * Buttons
+ by Ioannis Gkikas
  */
 
 
@@ -209,6 +219,7 @@ Textfields
 
 /*
 separator
+by Ioannis Gkikas
 */
 
 .separator:horizontal .line,
@@ -220,6 +231,7 @@ separator
 
 /*
 MenuBar
+by Ioannis Gkikas
 */
 
 .menu-bar {
@@ -252,6 +264,7 @@ MenuBar
 
 /*
  MenuItem
+ by Ioannis Gkikas
  */
 
 .menu-item {
@@ -284,6 +297,7 @@ MenuBar
 }
 /*
  ListView and ListCell
+ by Ioannis Gkikas
 */
 .list-view {
 -fx-background-color: #282828;
@@ -309,6 +323,11 @@ MenuBar
     -fx-background-color: #282828;
 }
 .list-view .virtual-flow .scroll-bar:vertical .thumb {
+    -fx-background-color: #404040;
+    -fx-pref-width: 20;
+    -fx-pref-height: 20;
+    }
+.list-view .virtual-flow .scroll-bar:horizontal .thumb {
     -fx-background-color: #404040;
     -fx-pref-width: 20;
     -fx-pref-height: 20;
@@ -345,6 +364,7 @@ MenuBar
 
 /*
 TableView
+by Ioannis Gkikas
  */
 
 .table-view,
@@ -373,6 +393,11 @@ TableView
     -fx-background-insets: 0, 1 0 0 1;
 }
 .table-view .virtual-flow .scroll-bar:vertical .thumb {
+                -fx-background-color: #404040;
+                -fx-pref-width: 20;
+                -fx-pref-height: 20;
+                }
+.table-view .virtual-flow .scroll-bar:horizontal .thumb {
                 -fx-background-color: #404040;
                 -fx-pref-width: 20;
                 -fx-pref-height: 20;
@@ -520,6 +545,7 @@ TableView
 
 /*
  Table Cells
+ by Ioannis Gkikas
 */
 .check-box-table-cell {
     -fx-alignment: center;
