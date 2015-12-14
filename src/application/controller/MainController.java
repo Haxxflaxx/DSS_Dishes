@@ -156,7 +156,6 @@ public class MainController implements Initializable {
             System.out.println("- addNewRecipeButton");
             String checkRecipe = fetchData("Recipes", "Name", "NAME='--New--'").toString();
             checkRecipe = checkRecipe.replaceAll("\\[", "").replaceAll("\\]", "");
-            System.out.println("CHECK RECIPE" + checkRecipe);
 
             if (!checkRecipe.equals("--New--")) {
                 insertInto("Recipes", "Name, Creator", "'--New--','" + User.getName() + "'");

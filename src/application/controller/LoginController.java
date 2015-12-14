@@ -62,7 +62,6 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("SUPER MEGA MEGA TEST");
         updateRegisterChoiceBox();
         mainController = VistaNavigator.getMainController();
 
@@ -83,8 +82,6 @@ public class LoginController implements Initializable {
             User.setId(userData.get(0).get(2));
             User.setName(userData.get(0).get(0));
             User.setPrivilege(userData.get(0).get(4).replaceAll("\\[", "").replaceAll("\\]", ""));
-            System.out.println("TESTING PRIVILEGE IN LOGIN "+ User.getPrivilege());
-            System.out.println("TESTING USER ID IN LOGIN " + userData.get(0).get(0).toString());
             mainController.loginStatus();
             VistaNavigator.loadVista(VistaNavigator.MYPAGE);
             LoginNavigator.loadLogin(LoginNavigator.LOGGEDIN);
@@ -145,7 +142,6 @@ public class LoginController implements Initializable {
                     insertInto("Users", columns, values);
                 } else if (registerChoiceBox.getSelectionModel().getSelectedItem() == "Chef") {
                     values += ",'2'";
-                    System.out.println("TESTING VALUES " + values);
                     insertInto("Users", columns, values);
                 } else if (registerChoiceBox.getSelectionModel().getSelectedItem() == "Admin") {
                     values += ",'5'";
