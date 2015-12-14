@@ -17,12 +17,16 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
- * Created by Fredrik Rissanen on 07/12/15.
+ * Created by Fredrik Rissanen
+ * Responsible programmer Fredrik Rissanen
  */
 public class MyRecipeController extends SearchController implements Initializable {
     @FXML
     private Label myUsername;
 
+    /**
+     * Initialize loads the tableView
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         myUsername.setText(User.getName() + " recipes");
@@ -63,10 +67,11 @@ public class MyRecipeController extends SearchController implements Initializabl
         );
 
         updateResultTable();
-
-
     }
 
+    /**
+     * Loads the values for the tableView
+     */
     public void updateResultTable() {
         ArrayList<ArrayList<String>> dataSet = new ArrayList<>();
         ObservableList<Recipe> items = FXCollections.observableArrayList();

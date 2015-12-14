@@ -1,7 +1,8 @@
 package application;
 
 /**
- * Created by Frank on 06/12/15.
+ * Created by Fredrik Rissanen
+ * Responsible programmer Fredrik Rissanen
  */
 public class User {
 

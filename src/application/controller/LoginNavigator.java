@@ -89,14 +89,26 @@ public class LoginNavigator {
         }
     }
 
+    /**
+     * Method that loads the loginVista
+     * By Fredrik Rissanen
+     */
     public void loginviewButtonclick () {
         VistaNavigator.loadVista(VistaNavigator.LOGINVISTA);
     }
 
+    /**
+     * Method that loads the signoutView
+     * By Fredrik Rissanen
+     */
     public void signoutView(){
         VistaNavigator.loadVista(VistaNavigator.LOGOUT);
     }
 
+    /**
+     * Method for signing out
+     * By Fredrik Rissanen
+     */
     public void signoutButton(){
         mainController = VistaNavigator.getMainController();
         User.setName("");
@@ -107,6 +119,10 @@ public class LoginNavigator {
         LoginNavigator.loadLogin(LoginNavigator.LOGIN);
     }
 
+    /**
+     * Method for canceling sign out
+     * By Fredrik Rissanen
+     */
     public void cancelSignout(){
         VistaNavigator.loadVista(VistaNavigator.SEARCH);
     }

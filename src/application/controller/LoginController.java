@@ -21,6 +21,7 @@ import static application.dbTools.Query.insertInto;
 
 /**
  * Created by Pierre on 2015-11-06.
+ * Responsible programmers Shiwei Li and Nikos Sasopoulos
  */
 
 public class LoginController extends NavigationController implements Initializable {
@@ -52,14 +53,10 @@ public class LoginController extends NavigationController implements Initializab
 
     @FXML private Button registerButton;
 
-
-
-
-    /*public boolean buttonSignout() {
-        return true;
-
-    }*/
-
+    /**
+     * Initialize method that loads a choicebox with login parameters.
+     * Fredrik Rissanen
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         updateRegisterChoiceBox();
@@ -73,6 +70,7 @@ public class LoginController extends NavigationController implements Initializab
 
         if (isValidCredentials()) {
             String currentUser = "Username='" + usernameField.getText() +"'";
+            //Start Fredrik Rissanen
             try {
                 userData = fetchData("Users","*", currentUser);
                 System.out.println("userDATA " + userData);
@@ -85,6 +83,7 @@ public class LoginController extends NavigationController implements Initializab
             mainController.loginStatus();
             VistaNavigator.loadVista(VistaNavigator.MYPAGE);
             LoginNavigator.loadLogin(LoginNavigator.LOGGEDIN);
+            //End Fredrik Rissanen
 
         }
 
@@ -135,6 +134,7 @@ public class LoginController extends NavigationController implements Initializab
             CheckMessage.setText("Your passwords must match");
             }
             else {
+            //By Fredrik Rissanen
             try {
                 System.out.println("- UpdateNewUser");
                 if (registerChoiceBox.getSelectionModel().getSelectedItem() == "Standard user") {
@@ -166,6 +166,7 @@ public class LoginController extends NavigationController implements Initializab
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            //End Fredrik Rissanen
         }
                     }
 
@@ -220,6 +221,9 @@ public class LoginController extends NavigationController implements Initializab
 
         return log_in;}
 
+    /**
+     * Method for loading the choicebox by Fredrik Rissanen
+     */
     public void updateRegisterChoiceBox(){
         ObservableList<String> registerList = FXCollections.observableArrayList("Standard user", "Chef", "Admin");
         registerChoiceBox.setItems(registerList);

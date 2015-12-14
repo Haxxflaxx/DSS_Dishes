@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 
 /**
  * Created by haxxflaxx on 2015-11-03.
+ * Responsible programmer Fredrik Rissanen
  */
 public class RecipeController extends NavigationController implements Initializable {
 

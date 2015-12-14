@@ -150,9 +150,11 @@ public class MainController implements Initializable {
     }
 
     /**
-     * Button for adding new Recipes.
+     *
+     * ButtonMethod for adding new Recipes.
+     * By Fredrik Rissanen
      */
-    public void addNewRecipeclick(){
+    public void addNewRecipeClick(){
 
         try {
             System.out.println("- addNewRecipeButton");

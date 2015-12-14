@@ -1,8 +1,8 @@
 package application;
 
 /**
- * Created by Fredrik on 2015-11-15.
- *
+ * Created by Fredrik
+ * Responsible programmer Fredrik Rissanen
  * Container for holding a ingredient.
  */
 public class Ingredient {

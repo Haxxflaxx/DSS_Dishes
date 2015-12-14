@@ -118,7 +118,7 @@
                            <Insets left="10.0" />
                         </padding>
                      </Label>
-                     <Label fx:id="addRecipe" layoutX="10.0" layoutY="137.0" onMouseClicked="#addNewRecipeclick" text="+ Add Recipe">
+                     <Label fx:id="addRecipe" layoutX="10.0" layoutY="137.0" onMouseClicked="#addNewRecipeClick" text="+ Add Recipe">
                         <font>
                            <Font size="16.0" />
                         </font>

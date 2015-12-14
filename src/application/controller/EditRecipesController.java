@@ -18,7 +18,7 @@ import static application.dbTools.Query.*;
 
 
 /**
- * Created by Fredrik Rissanen on 2015-11-03.
+ * Responsible programmer Fredrik Rissanen
  */
 
 public class EditRecipesController extends NavigationController implements Initializable{
