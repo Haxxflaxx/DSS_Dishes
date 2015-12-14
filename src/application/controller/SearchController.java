@@ -21,7 +21,11 @@ import java.util.ResourceBundle;
 import static application.dbTools.Query.fetchDistinct;
 
 /**
- * Created by Haxxflaxx on 2015-11-06.
+ * Created by Daniel.
+ *
+ * Controller for the searchResultVista.fxml.
+ * Fetches the input from the main controller and uses that as a search condition for name.
+ * Choice boxes adds more conditions to the search.
  */
 public class SearchController extends NavigationController implements Initializable {
 

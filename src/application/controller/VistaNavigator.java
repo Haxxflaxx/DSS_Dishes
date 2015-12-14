@@ -6,15 +6,9 @@ import java.io.IOException;
 import java.util.Stack;
 
 /**
- * Created by Haxxflaxx on 2015-11-02.
- */
-
-
-/**
- * Utility class for controlling navigation between vistas.
+ * Created by Daniel.
  *
- * All methods on the navigator are static to facilitate
- * simple access from anywhere in the application.
+ * Utility class for controlling navigation between vistas.
  */
 public class VistaNavigator {
 
@@ -123,7 +117,7 @@ public class VistaNavigator {
         FXMLLoader fxmlLoader = new FXMLLoader();
 
         fxmlLoader.setControllerFactory(type -> {
-            return activeController; // Let the FXMLLoader handle construction...
+            return activeController; // Let the FXMLLoader handle construction.
         });
 
         fxmlLoader.setLocation(

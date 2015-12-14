@@ -23,8 +23,10 @@ import static application.dbTools.Query.insertInto;
  * Created by Pierre on 2015-11-06.
  */
 
-public class LoginController implements Initializable {
+public class LoginController extends NavigationController implements Initializable {
     ArrayList<ArrayList<String>> userData;
+
+    MainController mainController;
 
     @FXML private Label CheckMessage;
 
@@ -60,8 +62,8 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("SUPER MEGA MEGA TEST");
         updateRegisterChoiceBox();
+        mainController = VistaNavigator.getMainController();
 
     }
 
@@ -80,8 +82,7 @@ public class LoginController implements Initializable {
             User.setId(userData.get(0).get(2));
             User.setName(userData.get(0).get(0));
             User.setPrivilege(userData.get(0).get(4).replaceAll("\\[", "").replaceAll("\\]", ""));
-            System.out.println("TESTING PRIVILEGE IN LOGIN "+ User.getPrivilege());
-            System.out.println("TESTING USER ID IN LOGIN " + userData.get(0).get(0).toString());
+            mainController.loginStatus();
             VistaNavigator.loadVista(VistaNavigator.MYPAGE);
             LoginNavigator.loadLogin(LoginNavigator.LOGGEDIN);
 
@@ -141,7 +142,6 @@ public class LoginController implements Initializable {
                     insertInto("Users", columns, values);
                 } else if (registerChoiceBox.getSelectionModel().getSelectedItem() == "Chef") {
                     values += ",'2'";
-                    System.out.println("TESTING VALUES " + values);
                     insertInto("Users", columns, values);
                 } else if (registerChoiceBox.getSelectionModel().getSelectedItem() == "Admin") {
                     values += ",'5'";
@@ -158,6 +158,7 @@ public class LoginController implements Initializable {
                 User.setId(userData.get(0).get(2));
                 User.setName(userData.get(0).get(0));
                 User.setPrivilege(userData.get(0).get(4).replaceAll("\\[", "").replaceAll("\\]", ""));
+                mainController.loginStatus();
 
                 VistaNavigator.loadVista(VistaNavigator.MYPAGE);
                 LoginNavigator.loadLogin(LoginNavigator.LOGGEDIN);
@@ -223,6 +224,11 @@ public class LoginController implements Initializable {
         ObservableList<String> registerList = FXCollections.observableArrayList("Standard user", "Chef", "Admin");
         registerChoiceBox.setItems(registerList);
         registerChoiceBox.getSelectionModel().select("Standard user");
+    }
+
+    @Override
+    public String getFxml() {
+        return VistaNavigator.LOGINVISTA;
     }
 
 

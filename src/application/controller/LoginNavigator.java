@@ -98,9 +98,11 @@ public class LoginNavigator {
     }
 
     public void signoutButton(){
+        mainController = VistaNavigator.getMainController();
         User.setName("");
         User.setId("");
         User.setPrivilege("0");
+        mainController.loginStatus();
         VistaNavigator.loadVista(VistaNavigator.SEARCH);
         LoginNavigator.loadLogin(LoginNavigator.LOGIN);
     }

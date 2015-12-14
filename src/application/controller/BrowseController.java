@@ -18,7 +18,11 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
- * Created by Pierre on 2015-11-18.
+ * Created by Daniel.
+ *
+ * Controller for the browseTopVista.fxml.
+ * Fetches the chosen state from the main controller.
+ * Displays a top list of recipes based on chosen state.
  */
 public class BrowseController extends NavigationController implements Initializable {
 
@@ -32,6 +36,7 @@ public class BrowseController extends NavigationController implements Initializa
     @FXML TableColumn difficulty;
     @FXML TableColumn prepTime;
 
+    // Number of items to display in list.
     private final int selectNr = 20;
 
 

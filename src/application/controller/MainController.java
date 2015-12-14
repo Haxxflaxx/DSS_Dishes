@@ -10,8 +10,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.Label;
+import javafx.stage.*;
 
 import javax.swing.text.TableView;
 import java.awt.*;
@@ -24,6 +27,8 @@ import static application.dbTools.Query.fetchData;
 import static application.dbTools.Query.insertInto;
 
 /**
+ * Created by Daniel.
+ *
  * Main controller class for the layout.
  */
 public class MainController implements Initializable {
@@ -31,14 +36,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("- Intialize mainController");
-        /**
-        if (User.getPrivilege() == 0 || User.getPrivilege() == 1){
-            addRecipe.setVisible(false);
-        }
-        if (User.getPrivilege() == 0) {
-            myRecipes.setVisible(false);
-        }
-         */
+        loginStatus();
         updateRecipList();
         recipList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             VistaNavigator.loadVista(
@@ -62,9 +60,17 @@ public class MainController implements Initializable {
 
     @FXML private TableView recipeTable;
 
-    @FXML public Label addRecipe;
+    @FXML public  Label addRecipe;
 
-    @FXML public Label myRecipes;
+    @FXML public  Label myRecipes;
+
+    /** Ioannis Gkikas extraction of main stage
+     *
+     */
+    @FXML private Stage mainStage;
+    public void setStage(Stage stage) {
+        this.mainStage = stage;
+    }
 
     public String selectionSort = "";
 
@@ -152,7 +158,6 @@ public class MainController implements Initializable {
             System.out.println("- addNewRecipeButton");
             String checkRecipe = fetchData("Recipes", "Name", "NAME='--New--'").toString();
             checkRecipe = checkRecipe.replaceAll("\\[", "").replaceAll("\\]", "");
-            System.out.println("CHECK RECIPE" + checkRecipe);
 
             if (!checkRecipe.equals("--New--")) {
                 insertInto("Recipes", "Name, Creator", "'--New--','" + User.getName() + "'");
@@ -217,7 +222,36 @@ public class MainController implements Initializable {
         System.out.println("Load My Recipes");
     }
 
+    /** custom  minimize,resize and close buttons,manipulating the main stage */
 
+    public void minimize(){
+     mainStage.setIconified(true);
+    }
+
+    public void resize() {
+       if(mainStage.isFullScreen()) {
+           mainStage.setFullScreen(false);
+       } else {
+           mainStage.setFullScreen(true);
+       }
+    }
+
+    public void loginStatus() {
+        if (User.getPrivilege() == 1) {
+            addRecipe.setVisible(false);
+            myRecipes.setVisible(true);
+        } else if (User.getPrivilege() == 2) {
+            addRecipe.setVisible(true);
+            myRecipes.setVisible(true);
+        } else if (User.getPrivilege() == 5) {
+            addRecipe.setVisible(true);
+            myRecipes.setVisible(true);
+        }
+        else{
+            addRecipe.setVisible(false);
+            myRecipes.setVisible(false);
+        }
+    }
 
     public void exit(){
         System.exit(0);

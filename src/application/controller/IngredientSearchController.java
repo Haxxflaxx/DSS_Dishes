@@ -123,7 +123,7 @@ public class IngredientSearchController extends NavigationController implements 
                 new PropertyValueFactory<Recipe, String>("time")
         );
 
-
+        searchIngredient();
     }
 
     /**
@@ -221,22 +221,29 @@ public class IngredientSearchController extends NavigationController implements 
         recipeIngredients.setItems(itemList);               //Sets the listview to show the ingredients that matches the search
     }                                                       //Criteria
 
+    /**
+     * Builds a search condition based on selected ingredients and
+     * fetch the data from the DB.
+     *
+     * Created by Daniel.
+     */
     public void searchIngredient() {
+        boolean first = true;
         String condition = "";
         ArrayList<ArrayList<String>> dataSet = new ArrayList<>();
         ObservableList<Recipe> items = FXCollections.observableArrayList();
 
-
-        condition += "recipes.id = rui.rid";
-        if (ingredientItems!=null)
-            for (Ingredient ingredient : ingredientItems){
-                condition += " and rui.iid='" + ingredient.getId() + "'";
-            }
-        System.out.println(condition + ";");
         try {
-            dataSet = Query.fetchData("recipes, rui", "*", condition);
-            System.out.println("Select condition");
+            if (ingredientItems.size() == 0) dataSet = Query.fetchData("recipes", "*");
 
+            else {
+                for (Ingredient ingredient : ingredientItems) {
+                    if (!first) condition += " and ";
+                    condition += "id IN (SELECT rid FROM rui WHERE iid = '" + ingredient.getId() + "')";
+                    first = false;
+                }
+                dataSet = Query.fetchDistinct("recipes", "*", condition);
+            }
 
             for (ArrayList<String> element : dataSet){
 
@@ -266,7 +273,9 @@ public class IngredientSearchController extends NavigationController implements 
     }
 
     public void clearIngredient(){
-        VistaNavigator.loadVista(VistaNavigator.ADVSEARCH);
+        ingredientItems.clear();
+        addedIngredientTable.setItems(ingredientItems);
+        searchIngredient();
     }
 
     @Override
