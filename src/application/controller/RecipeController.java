@@ -146,30 +146,13 @@ public class RecipeController extends NavigationController implements Initializa
         //update the database (user with this ID rated recipe with this ID)
         //refresh values on score and total labels
         DecimalFormat df = new DecimalFormat("0.0");
-
         String condition = "RID = '" + recipe.getId() + "' AND UID = '" + User.getId() + "'";
-        try {
-            Query.updateData("RaUU", "hr", "true", condition);
-            System.out.println(condition);
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
 
         try {
+            Query.insertInto("RaUU", "RID, UID","" + recipe.getId() + ", " + User.getId() + "");
             Query.updateData("Recipes", "TotalRatings", String.valueOf(Integer.parseInt(recipe.getTotalRatings())+1), "ID = " + recipe.getId());
             totalRatings.setText(String.valueOf(Integer.parseInt(recipe.getTotalRatings())+1));
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
             Query.updateData("Recipes", "SumRatings", String.valueOf(Integer.parseInt(recipe.getScoreSum())+button), "ID = " + recipe.getId());
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
             double SS = (double)(Integer.parseInt(recipe.getScoreSum()+button));
             double TT = (double)(Integer.parseInt(recipe.getTotalRatings()+1));
             Query.updateData("Recipes", "Ratings", Double.toString(SS/TT), "ID = " + recipe.getId());
@@ -188,21 +171,20 @@ public class RecipeController extends NavigationController implements Initializa
      */
     public boolean hasRated() {
         ArrayList<ArrayList<String>> dataSet;
-        String hasRated = "";
-        boolean hasRatedBool = false;
+        boolean hasRated = false;
         String condition = "RID = '" + recipe.getId() + "' AND UID = '" + User.getId() + "'";
         try {
-            dataSet = Query.fetchData("RaUU", "hr", condition);
-            hasRated = dataSet.get(0).get(0);
+            dataSet = Query.fetchData("RaUU", "RID", condition);
+            if (dataSet.size() == 0) {
+                hasRated = false;
+            }
+            else {
+                hasRated = true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if (hasRated.equals("false") ) {
-            hasRatedBool = false;
-        } else if (hasRated.equals("true")) {
-            hasRatedBool = true;
-        }
-        return hasRatedBool;
+        return hasRated;
     }
 
     /**

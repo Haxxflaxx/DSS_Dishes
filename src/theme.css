@@ -176,6 +176,8 @@ by Ioannis Gkikas
     -fx-font-size: 10pt;
     -fx-text-fill: #a0a0a0;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-border-color: #404040;
+    -fx-border-radius: 20;
 }
 
 .button:hover {
@@ -210,6 +212,7 @@ by Ioannis Gkikas
     -fx-font-family: "Segoe UI Semibold", Helvetica, Arial, sans-serif;
     -fx-font-size: 10pt;
     -fx-text-fill: #a0a0a0;
+    -fx-border-radius: 0;
 }
 #minimize:hover, #resize:hover, #close:hover {
  -fx-text-fill: #ffffff;
