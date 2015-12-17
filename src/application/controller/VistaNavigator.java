@@ -20,7 +20,6 @@ public class VistaNavigator {
     public static final String WELCOME = "/application/view/welcomeVista.fxml";
     public static final String SEARCH = "/application/view/searchResultVista.fxml";
     public static final String EDITRECIPES = "/application/view/editRecipesView.fxml";
-    public static final String REGISTER = "/application/view/registerVista.fxml";
     public static final String LOGINVISTA = "/application/view/loginVista.fxml";
     public static final String WELCOMEPAGE = "/application/view/WELCOMEPAGE.fxml";
     public static final String MYPAGE = "/application/view/myVista.fxml";
@@ -28,6 +27,7 @@ public class VistaNavigator {
     public static final String BROWSE = "/application/view/browseTopVista.fxml";
     public static final String LOGOUT = "/application/view/logoutView.fxml";
     public static final String NEWRECIPE = "/application/view/NewRecipesView.fxml";
+
 
 
 
@@ -59,6 +59,11 @@ public class VistaNavigator {
 
     public static void clearForward() {
         if (!historyForward.empty()) historyForward.clear();
+    }
+
+    public static void clearHistory() {
+        if (!historyBack.empty()) historyBack.clear();
+        clearForward();
     }
 
     public static NavigationController getActiveController() {

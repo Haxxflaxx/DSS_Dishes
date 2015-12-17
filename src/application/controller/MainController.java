@@ -10,14 +10,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.Label;
 import javafx.stage.*;
 
-import javax.swing.text.TableView;
-import java.awt.*;
+
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -55,14 +56,13 @@ public class MainController implements Initializable {
     /** Field for entering search criteria. */
     @FXML private TextField recipSearch;
 
-    /** Holder of Login view */
-    @FXML private StackPane loginHolder;
-
-    @FXML private TableView recipeTable;
-
     @FXML public  Label addRecipe;
 
     @FXML public  Label myRecipes;
+
+    @FXML public Button loginButton;
+
+    @FXML public MenuButton buttonLoggedin;
 
     /** Ioannis Gkikas extraction of main stage
      *
@@ -81,10 +81,6 @@ public class MainController implements Initializable {
      */
     public void setVista(Node node) {
         vistaHolder.getChildren().setAll(node);
-    }
-
-    public void setLogin(Node node){
-        loginHolder.getChildren().setAll(node);
     }
 
     public String getSearch(){
@@ -255,10 +251,48 @@ public class MainController implements Initializable {
             addRecipe.setVisible(false);
             myRecipes.setVisible(false);
         }
+
+        if (User.getPrivilege() > 0) {
+            loginButton.setVisible(false);
+            buttonLoggedin.setVisible(true);
+            buttonLoggedin.setText(User.getName());
+        }
+        else {
+            loginButton.setVisible(true);
+            buttonLoggedin.setVisible(false);
+        }
     }
 
     public void exit(){
         System.exit(0);
+    }
+
+    /**
+     * Method that loads the loginVista
+     * By Fredrik Rissanen
+     */
+    public void loginButtonclick () {
+        VistaNavigator.loadVista(VistaNavigator.LOGINVISTA);
+    }
+
+    /**
+     * Method for signing out
+     * By Fredrik Rissanen
+     */
+    public void signoutButton(){
+        User.setName("");
+        User.setId("");
+        User.setPrivilege("0");
+        loginStatus();
+        VistaNavigator.loadVista(VistaNavigator.SEARCH);
+    }
+
+    /**
+     * Method for canceling sign out
+     * By Fredrik Rissanen
+     */
+    public void cancelSignout(){
+        VistaNavigator.loadVista(VistaNavigator.SEARCH);
     }
 }
 
