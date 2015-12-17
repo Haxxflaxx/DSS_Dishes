@@ -55,11 +55,10 @@ public class Recipe {
 
     /**
      * Updates the info in selected with a recipe based on ID.
-     * @param ID The ID of the chosen recipe.
      */
-    public static void setSelectedById(String ID) {
+    public static void setSelectedByName(String Name) {
         try {
-            String condition = "ID='" + ID + "'";
+            String condition = "Name='" + Name + "'";
             ArrayList<ArrayList<String>> dataSet = Query.fetchData("recipes", "*", condition);
 
             selected = new Recipe(

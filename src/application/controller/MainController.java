@@ -155,6 +155,8 @@ public class MainController implements Initializable {
      * By Fredrik Rissanen
      */
     public void addNewRecipeClick(){
+        VistaNavigator.loadVista(VistaNavigator.NEWRECIPE);
+        /**
 
         try {
             System.out.println("- addNewRecipeButton");
@@ -172,7 +174,7 @@ public class MainController implements Initializable {
     }
         catch (SQLException e) {
             e.printStackTrace();
-        }
+        }     */
     }
 
     /**

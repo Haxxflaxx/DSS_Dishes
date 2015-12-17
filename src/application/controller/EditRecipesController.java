@@ -165,11 +165,12 @@ public class EditRecipesController extends NavigationController implements Initi
                 insertInto("RUI", "RID, IID, Quantity, Unit", "'" + recipeID + "','" + currentId + "','" + iAmount + "','" + iUnit + "'");
                                                                                     //Inserts recipe id, current id,
             }                                                                       //amount, and unit
-            VistaNavigator.loadVista(VistaNavigator.RECIPE);
             }
          catch (SQLException e) {
             e.printStackTrace();
         }
+        Recipe.setSelectedByName(recipeName.getText());
+        VistaNavigator.loadVista(VistaNavigator.RECIPE);
     }
 
     /**

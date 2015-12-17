@@ -23,6 +23,27 @@ public class Query {
     }
 
     /**
+     * Builds and executes a query to insert a tuple into the DB.
+     * @param table Select table for data to be inserted into.
+     * @param column Columns to receive values, e.g. "column1, column2,...columnN"
+     * @param value Values to be inserted, e.g. "value1, value2,...valueN"
+     * @exception SQLException if a database access error occurs.
+     */
+    public static void insertInto(String table, String column[], String value[]) throws SQLException {
+        String sql = "INSERT INTO " + table + " (" + column + ") " +
+                "VALUES (" + value + ");";
+
+        if (column.length == value.length) {
+            for (int i = 0; i < column.length; i++) {
+                sql += column[i] + " = '" + value[i] + "'";
+                if (i != column.length - 1) sql += ", ";
+            }
+
+            Connection.runUpdate(sql);
+        }
+    }
+
+    /**
      * Builds and executes a query to delete a tuple from the DB.
      * @param table Select table for removing data from.
      * @param criteria Select info for which tuple to delete. e.g. "ID=1"
