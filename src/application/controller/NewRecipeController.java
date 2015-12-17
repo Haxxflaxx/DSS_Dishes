@@ -1,10 +1,14 @@
 package application.controller;
 
+import application.Ingredient;
 import application.Recipe;
 import application.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -19,6 +23,7 @@ import static application.dbTools.Query.updateData;
  */
 public class NewRecipeController extends EditRecipesController implements Initializable {
 
+    private ObservableList<Ingredient> items = FXCollections.observableArrayList();
     Recipe recipe;
     String recipeID;
     @FXML
@@ -59,7 +64,16 @@ public class NewRecipeController extends EditRecipesController implements Initia
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        updateIngredients();
+        Name.setCellValueFactory(
+                new PropertyValueFactory<Ingredient, String>("name")
+        );
+        Amount.setCellValueFactory(
+                new PropertyValueFactory<Ingredient, String>("amount")
+        );
+        Unit.setCellValueFactory(
+                new PropertyValueFactory<Ingredient, String>("unit")
+        );
     }
 
     public void SubmitButtonAction() {
@@ -90,5 +104,18 @@ public class NewRecipeController extends EditRecipesController implements Initia
         }
         Recipe.setSelectedByName(recipeName.getText());
         VistaNavigator.loadVista(VistaNavigator.RECIPE);
+    }
+
+    /**
+     * ButtonMethod for add ingredients from the ingredientList into the tableview
+     */
+    public void addIngredientButton() {
+
+        String selectedIngredient = recipeIngredients.getSelectionModel().getSelectedItems().toString();
+        selectedIngredient = selectedIngredient.replaceAll("\\[", "").replaceAll("\\]", "");
+
+        items.add(new Ingredient(selectedIngredient, ingredientAmount.getText(), ingredientUnit.getText()));    //Creates new
+        addedIngredientTable.setItems(items);               //Object of the type Ingredient and adds it to the tableView.
+
     }
 }
