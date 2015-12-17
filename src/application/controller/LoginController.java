@@ -81,8 +81,8 @@ public class LoginController extends NavigationController implements Initializab
             User.setName(userData.get(0).get(0));
             User.setPrivilege(userData.get(0).get(4).replaceAll("\\[", "").replaceAll("\\]", ""));
             mainController.loginStatus();
+            VistaNavigator.clearHistory();
             VistaNavigator.loadVista(VistaNavigator.MYPAGE);
-            LoginNavigator.loadLogin(LoginNavigator.LOGGEDIN);
             //End Fredrik Rissanen
 
         }
@@ -161,7 +161,6 @@ public class LoginController extends NavigationController implements Initializab
                 mainController.loginStatus();
 
                 VistaNavigator.loadVista(VistaNavigator.MYPAGE);
-                LoginNavigator.loadLogin(LoginNavigator.LOGGEDIN);
 
             } catch (SQLException e) {
                 e.printStackTrace();

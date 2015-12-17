@@ -20,7 +20,7 @@
                               <Insets left="5.0" top="5.0" />
                            </HBox.margin>
                         </ImageView>
-                         <MenuBar prefHeight="25.0" prefWidth="871.0" HBox.hgrow="NEVER">
+                         <MenuBar HBox.hgrow="NEVER">
                              <menus>
                                  <Menu mnemonicParsing="false" text="File">
                                      <items>
@@ -54,7 +54,13 @@
                         </children>
                      </VBox>
                            <Region HBox.hgrow="ALWAYS" />
-                           <StackPane fx:id="loginHolder" />
+                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginButtonclick" text="Login" />
+                        <MenuButton id="user" fx:id="buttonLoggedin" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="25.0" text="User">
+                           <items>
+                              <MenuItem fx:id="buttonSettings" mnemonicParsing="false" text="Settings" />
+                              <MenuItem fx:id="signoutView" mnemonicParsing="false" onAction="#signoutButton" text="Sign out" />
+                           </items>
+                        </MenuButton>
                        </children>
                   <VBox.margin>
                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
