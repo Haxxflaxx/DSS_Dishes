@@ -27,6 +27,11 @@
                                          <MenuItem mnemonicParsing="false" onAction="#exit" text="Close" />
                                      </items>
                                  </Menu>
+                              <Menu fx:id="editMenu" mnemonicParsing="false" text="Edit">
+                                <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#loadIngredientManager" text="Ingredient Manager" />
+                                </items>
+                              </Menu>
                                  <Menu mnemonicParsing="false" text="Help">
                                      <items>
                                          <MenuItem mnemonicParsing="false" text="About" />
