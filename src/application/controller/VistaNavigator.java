@@ -27,6 +27,7 @@ public class VistaNavigator {
     public static final String BROWSE = "/application/view/browseTopVista.fxml";
     public static final String LOGOUT = "/application/view/logoutView.fxml";
     public static final String NEWRECIPE = "/application/view/NewRecipesView.fxml";
+    public static final String INGREDIENTMGR = "/application/view/ingredientManagementView.fxml";
 
 
 

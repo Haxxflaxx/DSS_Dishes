@@ -10,6 +10,7 @@ public class Ingredient {
     String amount;
     String unit;
     String id;
+    String type;
 
     public Ingredient(String name, String amount, String unit){
         this.name = name;
@@ -24,6 +25,13 @@ public class Ingredient {
     public Ingredient(String name, String id){
         this.name = name;
         this.id = id;
+    }
+
+    public Ingredient(String id, String name, String type, String unit) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.unit = unit;
     }
 
     public String getId() {
@@ -58,5 +66,11 @@ public class Ingredient {
         this.unit = unit;
     }
 
+    public String getType() {
+        return type;
+    }
 
+    public void setType(String type) {
+        this.type = type;
+    }
 };
