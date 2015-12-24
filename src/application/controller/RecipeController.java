@@ -21,6 +21,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import static application.dbTools.Query.insertInto;
+
 /**
  * Created by haxxflaxx on 2015-11-03.
  * Responsible programmer Fredrik Rissanen
@@ -41,6 +43,7 @@ public class RecipeController extends NavigationController implements Initializa
     @FXML    private Label recipeCreator;
     @FXML    private Button r1,r2,r3,r4,r5;
     @FXML    private Label ratings,totalRatings;
+    @FXML    private Button favouriteButton;
     private  String  scoreSum;
     private int button;
 
@@ -234,6 +237,15 @@ public class RecipeController extends NavigationController implements Initializa
                 rate(5);
             }
         });
+    }
+
+    public void addToFavourite(){
+
+        try {
+            insertInto();
+    }
+
+
     }
 
     @Override

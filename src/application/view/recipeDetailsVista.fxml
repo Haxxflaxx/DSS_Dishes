@@ -24,6 +24,7 @@
                                           <Region prefHeight="62.0" prefWidth="18.0" />
                                           <Region prefHeight="62.0" prefWidth="18.0" />
                                           <Label fx:id="recipeCreator" prefHeight="31.0" prefWidth="218.0" text="Label" />
+                                          <Button fx:id="favouriteButton" mnemonicParsing="false" onAction="#addToFavourite" text="Add to favourites" />
                                        </children>
                                     </HBox>
                                     <HBox prefHeight="34.0" prefWidth="462.0">
