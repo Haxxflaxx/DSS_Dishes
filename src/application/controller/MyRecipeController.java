@@ -22,14 +22,14 @@ import java.util.ResourceBundle;
  */
 public class MyRecipeController extends SearchController implements Initializable {
     @FXML
-    private Label myUsername;
+
 
     /**
      * Initialize loads the tableView
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        myUsername.setText(User.getName() + " recipes");
+
 
         searchResult.setRowFactory(tv -> {
             TableRow<Recipe> row = new TableRow<>();

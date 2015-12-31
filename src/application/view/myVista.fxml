@@ -32,7 +32,7 @@
                      <children>
                         <HBox prefWidth="200.0">
                            <children>
-                              <Label fx:id="myUsername" text="Username">
+                              <Label fx:id="myUsername" text="My Recipes">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
