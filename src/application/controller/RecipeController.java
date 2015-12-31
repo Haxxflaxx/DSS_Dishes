@@ -153,8 +153,8 @@ public class RecipeController extends NavigationController implements Initializa
             Query.updateData("Recipes", "TotalRatings", String.valueOf(Integer.parseInt(recipe.getTotalRatings())+1), "ID = " + recipe.getId());
             totalRatings.setText(String.valueOf(Integer.parseInt(recipe.getTotalRatings())+1));
             Query.updateData("Recipes", "SumRatings", String.valueOf(Integer.parseInt(recipe.getScoreSum())+button), "ID = " + recipe.getId());
-            double SS = (double)(Integer.parseInt(recipe.getScoreSum()+button));
-            double TT = (double)(Integer.parseInt(recipe.getTotalRatings()+1));
+            double SS = (double)(Integer.parseInt(recipe.getScoreSum()) * Integer.parseInt(recipe.getTotalRatings()) + button);
+            double TT = (double)(Integer.parseInt(recipe.getTotalRatings())+1);
             Query.updateData("Recipes", "Ratings", Double.toString(SS/TT), "ID = " + recipe.getId());
             ratings.setText(Double.toString(SS/TT));
         }

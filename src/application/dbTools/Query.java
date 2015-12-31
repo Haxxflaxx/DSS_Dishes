@@ -23,6 +23,27 @@ public class Query {
     }
 
     /**
+     * Builds and executes a query to insert a tuple into the DB.
+     * @param table Select table for data to be inserted into.
+     * @param column Columns to receive values, e.g. "column1, column2,...columnN"
+     * @param value Values to be inserted, e.g. "value1, value2,...valueN"
+     * @exception SQLException if a database access error occurs.
+     */
+    public static void insertInto(String table, String column[], String value[]) throws SQLException {
+        String sql = "INSERT INTO " + table + " (" + column + ") " +
+                "VALUES (" + value + ");";
+
+        if (column.length == value.length) {
+            for (int i = 0; i < column.length; i++) {
+                sql += column[i] + " = '" + value[i] + "'";
+                if (i != column.length - 1) sql += ", ";
+            }
+
+            Connection.runUpdate(sql);
+        }
+    }
+
+    /**
      * Builds and executes a query to delete a tuple from the DB.
      * @param table Select table for removing data from.
      * @param criteria Select info for which tuple to delete. e.g. "ID=1"
@@ -93,6 +114,20 @@ public class Query {
      */
     public static ArrayList<ArrayList<String>> fetchSorted(String table, String column, String sortBy) throws SQLException {
         String sql = "SELECT " + column + " FROM " + table + " ORDER BY " + sortBy + ";";
+        return Connection.runQuery(sql);
+    }
+
+    /**
+     * Builds and executes a query to fetch a sorted set of tuples.
+     * @param table Table for data selection.
+     * @param column Column for data selection. e.g. "column1, column2,...columnN" and "*" for select all.
+     * @param sortBy Column for sorting data selection.
+     * @param condition Conditions for which tuple to fetch. e.g. "ID=1"
+     * @return String Array List with the fetched data set.
+     * @exception SQLException if a database access error occurs.
+     */
+    public static ArrayList<ArrayList<String>> fetchSorted(String table, String column, String sortBy, String condition) throws SQLException {
+        String sql = "SELECT " + column + " FROM " + table + " WHERE " + condition + " ORDER BY " + sortBy + ";";
         return Connection.runQuery(sql);
     }
 

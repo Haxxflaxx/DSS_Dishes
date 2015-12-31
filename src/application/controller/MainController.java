@@ -8,14 +8,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.control.Label;
 import javafx.stage.*;
 
 
@@ -63,6 +59,8 @@ public class MainController implements Initializable {
     @FXML public Button loginButton;
 
     @FXML public MenuButton buttonLoggedin;
+
+    @FXML public Menu editMenu;
 
     /** Ioannis Gkikas extraction of main stage
      *
@@ -151,6 +149,8 @@ public class MainController implements Initializable {
      * By Fredrik Rissanen
      */
     public void addNewRecipeClick(){
+        VistaNavigator.loadVista(VistaNavigator.NEWRECIPE);
+        /**
 
         try {
             System.out.println("- addNewRecipeButton");
@@ -168,7 +168,7 @@ public class MainController implements Initializable {
     }
         catch (SQLException e) {
             e.printStackTrace();
-        }
+        }     */
     }
 
     /**
@@ -238,16 +238,20 @@ public class MainController implements Initializable {
         if (User.getPrivilege() == 1) {
             addRecipe.setVisible(false);
             myRecipes.setVisible(true);
+            editMenu.setVisible(false);
         } else if (User.getPrivilege() == 2) {
             addRecipe.setVisible(true);
             myRecipes.setVisible(true);
+            editMenu.setVisible(false);
         } else if (User.getPrivilege() == 5) {
             addRecipe.setVisible(true);
             myRecipes.setVisible(true);
+            editMenu.setVisible(true);
         }
         else{
             addRecipe.setVisible(false);
             myRecipes.setVisible(false);
+            editMenu.setVisible(false);
         }
 
         if (User.getPrivilege() > 0) {
@@ -259,6 +263,12 @@ public class MainController implements Initializable {
             loginButton.setVisible(true);
             buttonLoggedin.setVisible(false);
         }
+    }
+
+    public void loadIngredientManager() {
+        VistaNavigator.loadVista(
+                VistaNavigator.INGREDIENTMGR
+        );
     }
 
     public void exit(){
