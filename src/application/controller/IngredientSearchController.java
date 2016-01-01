@@ -21,6 +21,10 @@ import static application.dbTools.Query.*;
 
 
 /**
+ *
+ * Controller class for ingredient search.
+ * Allows the user to search for for recipes based on ingredients.
+ *
  * Created by Pierre on 2015-11-03.
  */
 
@@ -43,8 +47,8 @@ public class IngredientSearchController extends NavigationController implements 
     @FXML
     private TableView addedIngredientTable;
     @FXML
-
     private TableView searchResult;
+
     @FXML TableColumn id;
     @FXML TableColumn name;
     @FXML TableColumn type;
@@ -60,8 +64,9 @@ public class IngredientSearchController extends NavigationController implements 
 
 
     /**
-     * Updates updateEditRecipeList and UpdateIngredients when loading vista.
+     * Updates searchIngredient and updateIngredients when loading vista.
      * Sets cellValueFactory with the column names for the tableview.
+     * Added mouse event to add and remove recipes with double click.
      */
 
     @Override
@@ -129,6 +134,7 @@ public class IngredientSearchController extends NavigationController implements 
     /**
      * Loads the name of all ingredients and puts them in ingredientlist.
      */
+
     public void updateIngredients() {
         ArrayList<ArrayList<String>> dataSet;
         ObservableList<String> itemList = FXCollections.observableArrayList();      //Observable arraylist for the listview
@@ -149,10 +155,10 @@ public class IngredientSearchController extends NavigationController implements 
         recipeIngredients.setItems(itemList);                                       //Sets the Listview to show the obs arraylist
     }
 
-
     /**
-     * ButtonMethod for add ingredients from the ingredientList into the tableview
+     * ButtonMethod for adding ingredients from the ingredientList into the tableview
      */
+
     public void addIngredientButton() {
         ArrayList<ArrayList<String>> dataSet;
         String selectedIngredient = recipeIngredients.getSelectionModel().getSelectedItems().toString();
@@ -175,10 +181,13 @@ public class IngredientSearchController extends NavigationController implements 
             e.printStackTrace();
         }
 
-        addedIngredientTable.setItems(ingredientItems);               //Object of the type Ingredient and adds it to the tableView.
-
+        addedIngredientTable.setItems(ingredientItems);
 
     }
+
+    /**
+     * Removes ingredients from tableview.
+     */
 
     public void removeIngredientButton() {
 
@@ -201,6 +210,7 @@ public class IngredientSearchController extends NavigationController implements 
     /**
      * Searchfield for searching ingredients in the ingredientList
      */
+
     public void updateIngredientSearch(){
         ArrayList<ArrayList<String>> dataSet;
         ObservableList<String> itemList = FXCollections.observableArrayList();
@@ -273,6 +283,10 @@ public class IngredientSearchController extends NavigationController implements 
             e.printStackTrace();
         }
     }
+
+    /**
+     * Clear all the ingredients from the table view.
+     */
 
     public void clearIngredient(){
         ingredientItems.clear();
