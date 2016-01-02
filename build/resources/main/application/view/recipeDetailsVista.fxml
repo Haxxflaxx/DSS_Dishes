@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane prefHeight="485.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.RecipeController">
+   <children>
+      <BorderPane prefHeight="485.0" prefWidth="741.0">
+         <center>
+            <VBox prefHeight="536.0" prefWidth="754.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox>
+                     <children>
+                        <VBox prefHeight="365.0" prefWidth="475.0">
+                           <children>
+                              <VBox prefHeight="76.0" prefWidth="462.0">
+                                 <children>
+                                    <HBox prefHeight="41.0" prefWidth="462.0">
+                                       <children>
+                                          <Region prefHeight="62.0" prefWidth="18.0" />
+                                          <Region prefHeight="62.0" prefWidth="18.0" />
+                                          <Label fx:id="recipeCreator" prefHeight="31.0" prefWidth="218.0" text="Label" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="34.0" prefWidth="462.0">
+                                       <children>
+                                          <Region prefHeight="62.0" prefWidth="18.0" />
+                                          <Label fx:id="recipeName" prefHeight="30.0" prefWidth="409.0" text="Name" textAlignment="RIGHT">
+                                             <font>
+                                                <Font name="System Bold" size="20.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <Separator prefWidth="200.0" />
+                              <Region prefHeight="32.0" prefWidth="475.0" />
+                              <HBox prefHeight="62.0" prefWidth="475.0">
+                                 <children>
+                                    <Region prefHeight="62.0" prefWidth="18.0" />
+                                    <Label prefHeight="35.0" prefWidth="50.0" text="Rating" />
+                                    <Region prefHeight="62.0" prefWidth="16.0" />
+                                    <Button id="rate" fx:id="r1" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" />
+                                    <Button id="rate" fx:id="r2" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" />
+                                    <Button id="rate" fx:id="r3" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" />
+                                    <Button id="rate" fx:id="r4" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" />
+                                    <Button id="rate" fx:id="r5" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" />
+                                    <Region prefHeight="62.0" prefWidth="23.0" />
+                                    <VBox prefHeight="62.0" prefWidth="101.0">
+                                       <children>
+                                          <Label prefHeight="17.0" prefWidth="101.0" text="Average Score" />
+                                          <Label prefHeight="17.0" prefWidth="101.0" text="Total Ratings" />
+                                       </children>
+                                    </VBox>
+                                    <Region prefHeight="62.0" prefWidth="49.0" />
+                                    <VBox prefHeight="62.0" prefWidth="46.0">
+                                       <children>
+                                          <Label fx:id="ratings" text="#" />
+                                          <Label fx:id="totalRatings" text="#" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <TextArea fx:id="recipeDescription" prefHeight="263.0" prefWidth="467.0" wrapText="true" VBox.vgrow="ALWAYS">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </TextArea>
+                              <Button fx:id="editRecipe" mnemonicParsing="false" onAction="#editRecipeView" prefHeight="25.0" prefWidth="145.0" text="Edit Recipe" />
+                              <HBox prefHeight="0.0" prefWidth="475.0" VBox.vgrow="NEVER">
+                                 <children>
+                                    <Region prefHeight="25.0" prefWidth="146.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <Separator orientation="VERTICAL" prefHeight="200.0" />
+                        <VBox>
+                           <children>
+                              <HBox spacing="10.0">
+                                 <children>
+                                    <Label fx:id="recipeType" text="Type" />
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Label fx:id="recipeType" text="#" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox spacing="10.0">
+                                 <children>
+                                    <Label fx:id="recipeCuisine" text="Cuisine" />
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Label fx:id="recipeCuisine" text="#" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox spacing="10.0">
+                                 <children>
+                                    <Label fx:id="recipeDifficulty" text="Difficulty" />
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Label fx:id="recipeDifficulty" text="#" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox spacing="10.0">
+                                 <children>
+                                    <Label fx:id="recipeTime" text="Prep time" />
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Label fx:id="recipeTime" text="#" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox spacing="10.0">
+                                 <children>
+                                    <Label fx:id="recipeDiet" text="Diet" />
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Label fx:id="recipeDiet" text="#" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                              <ListView fx:id="recipeIngredients">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" />
+                                 </VBox.margin>
+                              </ListView>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox />
+               </children>
+            </VBox>
+         </center>
+         <top>
+            <Region prefHeight="14.0" prefWidth="741.0" BorderPane.alignment="CENTER" />
+         </top>
+         <left>
+            <Region prefHeight="516.0" prefWidth="15.0" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <Region prefHeight="516.0" prefWidth="14.0" BorderPane.alignment="CENTER" />
+         </right>
+      </BorderPane>
+   </children>
+</Pane>

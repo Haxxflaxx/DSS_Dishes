@@ -150,7 +150,7 @@ public class MainController implements Initializable {
      */
     public void addNewRecipeClick(){
         VistaNavigator.loadVista(VistaNavigator.NEWRECIPE);
-        /**
+        /*
 
         try {
             System.out.println("- addNewRecipeButton");

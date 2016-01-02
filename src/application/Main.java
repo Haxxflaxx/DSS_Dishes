@@ -55,7 +55,7 @@ public class Main extends Application {
     private static double yOffset = 0;
 
     private Pane loadMainPane(final Stage stage) throws IOException {
-        stage.getIcons().add(new Image(this.getClass().getResourceAsStream("../icons/AppIcon.png"))); /** custom taskbar icon*/
+        stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/icons/AppIcon.png"))); /** custom taskbar icon*/
         FXMLLoader loader = new FXMLLoader();
 
         Pane mainPane = (Pane) loader.load(
@@ -104,7 +104,7 @@ public class Main extends Application {
         Scene scene = new Scene(
                 mainPane
         );
-        scene.getStylesheets().add("theme.css");
+        scene.getStylesheets().add("/theme.css");
 
         return scene;
     }
