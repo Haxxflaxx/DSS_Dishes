@@ -178,9 +178,11 @@ public class LoginController extends NavigationController implements Initializab
         String loginCondition = usernameField.getText(); //user input in the username field
         loginCondition = "Username='" + loginCondition + "'";
 
+
         try {
 
             String testlogin = fetchData("Users", "Username", loginCondition).toString(); //fetching data from username column in database
+            String bannedlogin = fetchData("BannedUsers", "Username", loginCondition).toString();
 
 
             dataSet = fetchData("Users", "*", loginCondition);
@@ -203,6 +205,20 @@ public class LoginController extends NavigationController implements Initializab
                     usernameField.clear();
                     passwordField.clear();
                     CheckMessage.setText("Invalid credentials, please try again");}
+
+
+            }
+
+           else if (!bannedlogin.equals("[]")) {
+                dataSet = fetchData("BannedUsers", "*",loginCondition);
+                String username = (dataSet.get(0).get(0));
+
+                if (checkUsername.equals(username)) {
+                    usernameField.clear();
+                    passwordField.clear();
+                    CheckMessage.setText("This user have been banned");
+
+            }
             }
             else {
                 usernameField.clear();
