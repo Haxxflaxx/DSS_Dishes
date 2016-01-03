@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.AdminView">
+   <children>
+      <ListView fx:id="activeUsers" layoutX="14.0" layoutY="57.0" prefHeight="286.0" prefWidth="174.0" />
+      <Label layoutX="57.0" layoutY="23.0" prefHeight="18.0" prefWidth="88.0" text="Active Users">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label layoutX="454.0" layoutY="23.0" text="Banned Users">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ListView fx:id="adminbannedUsers" layoutX="412.0" layoutY="57.0" prefHeight="286.0" prefWidth="174.0" />
+      <Button fx:id="banButton" layoutX="269.0" layoutY="188.0" mnemonicParsing="false" onAction="#bannedusersList" text="Ban User" />
+   </children>
+</Pane>

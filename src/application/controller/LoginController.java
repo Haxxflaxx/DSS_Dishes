@@ -5,9 +5,6 @@ import application.dbTools.Query;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-
-import javafx.scene.control.*;
-
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
@@ -69,10 +66,12 @@ public class LoginController extends NavigationController implements Initializab
     public void loginScreen () {
 
         if (isValidCredentials()) {
-            String currentUser = "Username='" + usernameField.getText() +"'";
             //Start Fredrik Rissanen
+            String currentUser = "Username='" + usernameField.getText() + "'";
+
+
             try {
-                userData = fetchData("Users","*", currentUser);
+                userData = fetchData("Users", "*", currentUser);
                 System.out.println("userDATA " + userData);
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -80,10 +79,28 @@ public class LoginController extends NavigationController implements Initializab
             User.setId(userData.get(0).get(2));
             User.setName(userData.get(0).get(0));
             User.setPrivilege(userData.get(0).get(4).replaceAll("\\[", "").replaceAll("\\]", ""));
-            mainController.loginStatus();
-            VistaNavigator.clearHistory();
-            VistaNavigator.loadVista(VistaNavigator.MYPAGE);
             //End Fredrik Rissanen
+
+            //Admin user
+            if (User.getPrivilege() == 5) {
+                VistaNavigator.loadVista(VistaNavigator.ADMINVIEW);
+
+            }
+            //Banned user
+            else if ((User.getPrivilege()==9)) {
+                usernameField.clear();
+                passwordField.clear();
+                CheckMessage.setText("Locked account");
+
+            }
+
+            else{
+                System.out.println("TESTING PRIVILEGE IN LOGIN " + User.getPrivilege());
+                System.out.println("TESTING USER ID IN LOGIN " + userData.get(0).get(0).toString());
+                VistaNavigator.loadVista(VistaNavigator.MYPAGE);
+
+            }
+
 
         }
 
