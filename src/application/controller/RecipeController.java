@@ -22,7 +22,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
- * Created by haxxflaxx on 2015-11-03.
+ * Created by Daniel on 2015-11-03.
+ * This class is the controller for the recipeDetailsVista.
  * Responsible programmer Fredrik Rissanen
  */
 public class RecipeController extends NavigationController implements Initializable {

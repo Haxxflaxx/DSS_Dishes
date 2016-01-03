@@ -171,6 +171,7 @@ public class MainController implements Initializable {
         }     */
     }
 
+    // History navigation
     /**
      * Navigation method for going back to a previous view
      */
