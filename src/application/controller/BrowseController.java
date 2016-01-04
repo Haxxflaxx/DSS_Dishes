@@ -56,9 +56,7 @@ public class BrowseController extends NavigationController implements Initializa
             return row;
         });
 
-        id.setCellValueFactory(
-                new PropertyValueFactory<Recipe, String>("id")
-        );
+
         rating.setCellValueFactory(
                 new PropertyValueFactory<Recipe, String>("ratings")
         );

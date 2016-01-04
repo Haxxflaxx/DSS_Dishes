@@ -21,7 +21,7 @@
                                     <TextField fx:id="recipeCuisine" promptText="Cuisine" />
                                     <TextField fx:id="recipeType" promptText="Type of Dish" />
                                     <TextField fx:id="recipeDiet" promptText="Diet" />
-                                    <TextField fx:id="recipeTime" promptText="Time to make" />
+                                    <TextField fx:id="recipeTime" promptText="Time to make (min)" />
                                     <TextField fx:id="recipeDifficulty" promptText="Difficulty" />
                                  </children>
                               </VBox>
