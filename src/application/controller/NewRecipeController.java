@@ -87,6 +87,8 @@ public class NewRecipeController extends EditRecipesController implements Initia
             updateData("Recipes", columns, values, "Name='" + recipeName.getText() + "'");                   //Update data in columns with values
             System.out.println("- End of SubmitButtonAction");
 
+            Recipe.setSelectedByName(recipeName.getText());
+
             for (Object o : addedIngredientTable.getItems()) {                      //Foreach object in the list, getItems
                 String iName = Name.getCellData(o).toString();                      //iName = ingredientName
                 String iAmount = Amount.getCellData(o).toString();                  //iAmount = ingredientAmount
@@ -95,7 +97,7 @@ public class NewRecipeController extends EditRecipesController implements Initia
                 String currentId = fetchData("Ingredients", "ID", "Name='" + iName + "'").toString();   //Fetches id where name
                 currentId = currentId.replaceAll("\\[", "").replaceAll("\\]", "");                      //is column-name
 
-                insertInto("RUI", "RID, IID, Quantity, Unit", "'" + recipeID + "','" + currentId + "','" + iAmount + "','" + iUnit + "'");
+                insertInto("RUI", "RID, IID, Quantity, Unit", "'" + Recipe.getSelected().getId() + "','" + currentId + "','" + iAmount + "','" + iUnit + "'");
                 //Inserts recipe id, current id,
             }                                                                       //amount, and unit
         }
