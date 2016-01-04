@@ -58,6 +58,7 @@
                         </children>
                      </VBox>
                            <Region HBox.hgrow="ALWAYS" />
+                        <Button fx:id="userConsole" mnemonicParsing="false" onAction="#consoleButton" text="Edit Users" />
                         <StackPane>
                            <children>
                               <Button fx:id="loginButton" minWidth="60.0" mnemonicParsing="false" onAction="#loginButtonclick" prefHeight="25.0" text="Login" />

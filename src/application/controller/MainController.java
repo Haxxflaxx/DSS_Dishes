@@ -55,6 +55,8 @@ public class MainController implements Initializable {
 
     @FXML public Menu editMenu;
 
+    @FXML private Button userConsole;
+
     /** Ioannis Gkikas extraction of main stage
      *
      */
@@ -231,16 +233,19 @@ public class MainController implements Initializable {
     public void loginStatus() {
         if (User.getPrivilege() == 1) {
             VistaNavigator.loadVista(VistaNavigator.SEARCH);
+            userConsole.setVisible(false);
             addRecipe.setVisible(false);
             myRecipes.setVisible(true);
             editMenu.setVisible(false);
         } else if (User.getPrivilege() == 2) {
             VistaNavigator.loadVista(VistaNavigator.MYPAGE);
+            userConsole.setVisible(false);
             addRecipe.setVisible(true);
             myRecipes.setVisible(true);
             editMenu.setVisible(false);
         } else if (User.getPrivilege() == 5) {
             VistaNavigator.loadVista(VistaNavigator.ADMINVIEW);
+            userConsole.setVisible(true);
             addRecipe.setVisible(true);
             myRecipes.setVisible(true);
             editMenu.setVisible(true);
@@ -248,6 +253,7 @@ public class MainController implements Initializable {
         }
 
         else{
+            userConsole.setVisible(false);
             addRecipe.setVisible(false);
             myRecipes.setVisible(false);
             editMenu.setVisible(false);
@@ -292,6 +298,10 @@ public class MainController implements Initializable {
         User.setPrivilege("0");
         loginStatus();
         VistaNavigator.loadVista(VistaNavigator.SEARCH);
+    }
+
+    public void consoleButton () {
+        VistaNavigator.loadVista(VistaNavigator.ADMINVIEW);
     }
 
     /**
