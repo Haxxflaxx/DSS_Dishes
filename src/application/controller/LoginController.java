@@ -79,33 +79,14 @@ public class LoginController extends NavigationController implements Initializab
             User.setId(userData.get(0).get(2));
             User.setName(userData.get(0).get(0));
             User.setPrivilege(userData.get(0).get(4).replaceAll("\\[", "").replaceAll("\\]", ""));
+            mainController.loginStatus();
+            VistaNavigator.clearHistory();
             //End Fredrik Rissanen
-
-            //Admin user
-            if (User.getPrivilege() == 5) {
-                VistaNavigator.loadVista(VistaNavigator.ADMINVIEW);
-
-            }
-            //Banned user
-            else if ((User.getPrivilege()==9)) {
-                usernameField.clear();
-                passwordField.clear();
-                CheckMessage.setText("Locked account");
-
-            }
-
-            else{
-                System.out.println("TESTING PRIVILEGE IN LOGIN " + User.getPrivilege());
-                System.out.println("TESTING USER ID IN LOGIN " + userData.get(0).get(0).toString());
-                VistaNavigator.loadVista(VistaNavigator.MYPAGE);
-
-            }
-
 
         }
 
         else {
-            System.out.println("Invalid Credentials");
+            //System.out.println("Invalid Credentials");
         }
 
     }
@@ -211,12 +192,19 @@ public class LoginController extends NavigationController implements Initializab
 
                 String username = (dataSet.get(0).get(0)); //checking the username column in table users
                 String password = (dataSet.get(0).get(1)); //checking the password column in table users
+                String privilege = (dataSet.get(0).get(4));
 
                 if (checkUsername.equals(username) && checkPassword.equals(password))//if credentials are correct, user logs in
                 {
 
-                    System.out.println("You are logged in!");
-                    log_in = true;
+                    if (privilege.equals("9")){
+                        usernameField.clear();
+                        passwordField.clear();
+                        CheckMessage.setText("Account Locked");
+
+                    }
+                    else {System.out.println("You are logged in!");
+                    log_in = true;}
 
                 } else if (!checkUsername.equals(username) || !checkPassword.equals(password)) {
                     usernameField.clear();
@@ -227,13 +215,13 @@ public class LoginController extends NavigationController implements Initializab
             }
 
            else if (!bannedlogin.equals("[]")) {
-                dataSet = fetchData("BannedUsers", "*",loginCondition);
+                dataSet = fetchData("Users", "Username",loginCondition);
                 String username = (dataSet.get(0).get(0));
 
-                if (checkUsername.equals(username)) {
+                if (User.getPrivilege()==9) {
                     usernameField.clear();
                     passwordField.clear();
-                    CheckMessage.setText("This user have been banned");
+                    CheckMessage.setText("Account Locked");
 
             }
             }

@@ -5,23 +5,16 @@ import application.dbTools.Query;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.*;
-
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import static application.dbTools.Query.fetchData;
-import static application.dbTools.Query.insertInto;
 
 /**
  * Created by Daniel.
@@ -171,6 +164,7 @@ public class MainController implements Initializable {
         }     */
     }
 
+    // History navigation
     /**
      * Navigation method for going back to a previous view
      */
@@ -236,25 +230,30 @@ public class MainController implements Initializable {
 
     public void loginStatus() {
         if (User.getPrivilege() == 1) {
+            VistaNavigator.loadVista(VistaNavigator.SEARCH);
             addRecipe.setVisible(false);
             myRecipes.setVisible(true);
             editMenu.setVisible(false);
         } else if (User.getPrivilege() == 2) {
+            VistaNavigator.loadVista(VistaNavigator.MYPAGE);
             addRecipe.setVisible(true);
             myRecipes.setVisible(true);
             editMenu.setVisible(false);
         } else if (User.getPrivilege() == 5) {
+            VistaNavigator.loadVista(VistaNavigator.ADMINVIEW);
             addRecipe.setVisible(true);
             myRecipes.setVisible(true);
             editMenu.setVisible(true);
+
         }
+
         else{
             addRecipe.setVisible(false);
             myRecipes.setVisible(false);
             editMenu.setVisible(false);
         }
 
-        if (User.getPrivilege() > 0) {
+        if (User.getPrivilege() > 0 && User.getPrivilege()<9) {
             loginButton.setVisible(false);
             buttonLoggedin.setVisible(true);
             buttonLoggedin.setText(User.getName());
