@@ -126,6 +126,7 @@ public class EditRecipesController extends NavigationController implements Initi
             String criteria = "ID='" + fetchData("Recipes", "ID", "Name ='" + recipeName.getText() + "'") + "'";
             criteria = criteria.replaceAll("\\[", "").replaceAll("\\]", "");
             deleteFrom("Recipes", criteria);            //Delete recipes where name == selected recipe
+            deleteFrom("RUI", "RID='" + recipeID + "'");
             VistaNavigator.loadVista(VistaNavigator.SEARCH);
 
 

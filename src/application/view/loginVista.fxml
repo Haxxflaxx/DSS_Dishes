@@ -40,7 +40,7 @@
                            </HBox.margin>
                         </TextField>
                         <Region />
-                        <PasswordField fx:id="passwordField" promptText="password">
+                        <PasswordField fx:id="passwordField" onAction="#loginScreen" promptText="password">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>

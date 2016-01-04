@@ -41,7 +41,6 @@
                          </MenuBar>
                         <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="92.0" HBox.hgrow="ALWAYS" />
                      <Button id="minimize" mnemonicParsing="false" onAction="#minimize" text="_" HBox.hgrow="NEVER" />
-                     <Button id="resize" mnemonicParsing="false" onAction="#resize" prefHeight="25.0" prefWidth="50.0" text="O" HBox.hgrow="NEVER" />
                      <Button id="close" mnemonicParsing="false" onAction="#exit" text="X" HBox.hgrow="NEVER" />
                   </children>
                </HBox>
@@ -100,14 +99,6 @@
                         </padding>
                      </Label>
                      <Label fx:id="topRated" layoutX="10.0" layoutY="40.0" onMouseClicked="#topRatedclick" text="Top Rated">
-                        <font>
-                           <Font size="20.0" />
-                        </font>
-                        <padding>
-                           <Insets left="10.0" />
-                        </padding>
-                     </Label>
-                     <Label fx:id="newRecipes" layoutX="10.0" layoutY="10.0" onMouseClicked="#topDateClick" text="Newest">
                         <font>
                            <Font size="20.0" />
                         </font>
