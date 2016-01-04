@@ -122,6 +122,12 @@ by Ioannis Gkikas
     -fx-text-fill: #ffffff;
         -fx-background-color: #404040;
         }
+
+.menu-button .context-menu {
+            -fx-background-color: #282828;
+            -fx-text-fill: #a0a0a0;
+            }
+
 .menu-item:hover {
     -fx-fill: #ffffff;
     -fx-background-color: #404040;
