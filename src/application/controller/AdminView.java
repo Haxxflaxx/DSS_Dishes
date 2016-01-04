@@ -23,6 +23,7 @@ public class AdminView implements Initializable{
     @FXML private ListView activeUsers;
     @FXML private ListView adminbannedUsers;
     @FXML private Button banButton;
+    @FXML private Button activateUsers;
 
     //List of active usernames
     public void activeusersList(){
@@ -77,6 +78,22 @@ public class AdminView implements Initializable{
        } catch (SQLException e) {
            e.printStackTrace();
        }
+
+    }
+
+    //Button for activating users
+    public void activateusersList(){
+        try {
+            String condition = "Username = '" + adminbannedUsers.getSelectionModel().getSelectedItem().toString() + "'";
+            updateData("Users","Privilege","1", condition);
+            //insertInto("BannedUsers","Username", "'" + activeUsers.getSelectionModel().getSelectedItem().toString() + "'");
+            //deleteFrom("Users","Username = '" + activeUsers.getSelectionModel().getSelectedItem().toString() + "'");
+
+            testList();
+            activeusersList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
